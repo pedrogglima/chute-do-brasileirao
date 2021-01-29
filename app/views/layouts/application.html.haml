@@ -1,0 +1,23 @@
+!!!
+%html{lang: "pt-br"}
+  %head
+    %title Futebol Chute
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %header
+      -# = render partial: 'layouts/header' 
+    %main
+      .container
+        = yield 
+    %footer
+      .container.inner-border-style
+        .row
+          .col-md-12
+            .copy-right
+              %span
+                %small pedrogglima • © • 2020
+              

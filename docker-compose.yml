@@ -1,0 +1,61 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/www/app
+      - gem_cache_app:/gems
+    env_file:
+      - .env/development
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=webpack_dev_server
+
+  scrapper:
+    build:
+      context: ../scrapper/.
+      dockerfile: Dockerfile
+    ports:
+      - "3050:3050"
+    volumes:
+      - ../scrapper/:/var/www/app
+      - gem_cache_scrapper:/gems
+    env_file:
+      - .env/development
+
+  webpack_dev_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ./bin/webpack-dev-server
+    ports:
+      - 3035:3035
+    volumes:
+      - .:/var/www/app
+      - gem_cache_app:/gems
+    env_file:
+      - .env/development
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+  redis_cache:
+    image: redis
+    volumes:
+      - redis_cache_data:/docker/redis-cache-data
+
+  database:
+    image: postgres
+    env_file:
+      - .env/development
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  gem_cache_app:
+  gem_cache_scrapper:
+  redis_cache_data:
