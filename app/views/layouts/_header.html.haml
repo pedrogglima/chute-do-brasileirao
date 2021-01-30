@@ -1,0 +1,41 @@
+.border-style
+  .container.inner-border-style
+    %nav.navbar.nav-custom.navbar-custom.navbar-expand-lg.navbar-light
+      %a.navbar-brand{href: ""}
+        %i.fab.fa-cuttlefish.fa-2x 
+        %span.text hute Brasileirão
+      %ul.ml-auto.navbar-nav
+        %li.nav-item.menu-item
+          %span
+            = link_to "#" do
+              Sair
+              %i.fas.fa-sign-out-alt.fa-1x 
+    %nav.navbar.nav-custom.navbar-custom.navbar-expand-lg.navbar-light
+      %button.navbar-toggler.mx-auto{type: "button",
+        data: { toggle: "collapse",
+                target: "#navbar"},
+        aria: { controls: "navbar", 
+                expanded: "false", 
+                label: "Toggle navigation"}
+      }
+        %span.navbar-toggler-icon
+      .collapse.navbar-collapse#navbar
+        %ul.navbar-nav.mx-auto
+          %li.nav-item.menu-item
+            %span
+              = link_to "Jogos de Hoje", "#"
+          %li.nav-item.menu-item
+            %span
+              = link_to "Tabela", "#"
+          %li.nav-item.menu-item
+            %span
+              = link_to "Rodadas", "#"
+          %li.nav-item.menu-item
+            %span
+              = link_to "Minhas Apostas", "#" 
+          %li.nav-item.menu-item
+            %span
+              = link_to "#" do
+                %i.fas.fa-user-lock 
+            
+                
