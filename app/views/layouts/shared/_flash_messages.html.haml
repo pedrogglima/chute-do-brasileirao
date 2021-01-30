@@ -1,0 +1,8 @@
+- flash.each do |key, value|
+  -# fix devise timeoutable
+  - unless key == 'timedout'
+    %div{ class: "flash-message-pid-#{flash_class(key.to_s)}", 
+          data: { controller: "flash-message",
+                  "flash-message-pid": "" } 
+        }
+      = value

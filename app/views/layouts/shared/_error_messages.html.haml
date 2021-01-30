@@ -1,0 +1,7 @@
+- if object.errors.any?
+    #id="error_explanation"
+      %h2 "Erros encontrados no preenchimento do formulário:"
+    %ul
+      - object.errors.full_messages.each do |msg|
+        %li #{msg}
+      
