@@ -1,0 +1,163 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+
+$main-color: #fafafa;
+$component-color: #f8f9fa;
+
+$text-color: #444444;
+$text-color-light: #666666;
+$text-color-lighter: #999999;
+
+$border-color: #ccc;
+$border-color-light: #dee2e6;
+$border-color-dark: #444444;
+
+// tables, headers, rows
+$header: #e8e8e8;
+$header-text: #5f6f6f;
+$even-row: #f4f4f4;
+
+// lbl colors
+$green-success: #5cb85c;
+$green-success-border: #4cae4c;
+
+$red-danger: #d9534f;
+$red-danger-border: #d43f3a;
+
+$blue-primary: #007bff;
+
+$yellow-warn: #fff3cd;
+$yellow-warn-border: #ffeeba;
+
+$btn-gray: #e1e1e1;
+$btn-gray-border: #ccc;
+$btn-gray-hover: #ccc;
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%; /* set footer on bottom for scrolled height */
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background-color: #eeeeee;
+}
+
+// fix footer on page's bottom
+body::after {
+  content: "";
+  display: block;
+  height: 30px; /* Set same as footer's height */
+}
+
+header {
+  width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+  background-color: $component-color;
+  border-radius: calc(0.25rem - 1px);
+
+  .border-style {
+    border-bottom: 1px solid $border-color;
+    border-radius: calc(0.25rem - 1px);
+  }
+
+  .inner-border-style {
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+  }
+
+  // navbar bootstrap
+  .nav-custom {
+    padding: 0.5rem;
+    z-index: 9999;
+
+    .navbar-brand {
+      .text {
+        margin-left: -0.2rem;
+      }
+    }
+
+    .navbar-nav {
+      .menu-item {
+        margin-right: 3rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        a {
+          color: #666;
+
+          &:hover {
+            color: #222;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  /* change the background color */
+  // .navbar-custom {
+  //   background-color: #ff5500;
+  // }
+
+  // /* change the brand and text color */
+  // .navbar-custom .navbar-brand,
+  // .navbar-custom .navbar-text {
+  //   color: rgba(255,255,255,.8);
+  // }
+
+  // /* change the link color */
+  // .navbar-custom .navbar-nav .nav-link {
+  //   color: $gl-color;
+  // }
+
+  // /* change the color of active or hovered links */
+  // .navbar-custom .nav-item.active .nav-link,
+  // .navbar-custom .nav-item:focus .nav-link,
+  // .navbar-custom .nav-item:hover .nav-link {
+  //   color: $gl-hover-color;
+  // }
+
+  /* change the color for navbar-light theme */
+  // .navbar-light .nav-item.active .nav-link,
+  // .navbar-light .nav-item:focus .nav-link,
+  // .navbar-light .nav-item:hover .nav-link {
+  //         color: #ffffff;
+  // }
+}
+
+main {
+  margin-bottom: 1rem;
+  // bg-color for the main
+  .content-style {
+    background-color: $main-color;
+    border: 1px solid $border-color;
+    border-radius: calc(0.25rem - 1px);
+  }
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background-color: $component-color;
+  border-top: 1px solid $border-color;
+  border-radius: calc(0.25rem - 1px);
+
+  .inner-border-style {
+    border-left: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+  }
+
+  .copy-right {
+    margin: auto;
+    text-align: center;
+  }
+}
