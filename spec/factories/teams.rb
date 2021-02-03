@@ -3,7 +3,7 @@ require 'securerandom'
 
 FactoryBot.define do
   factory :team do
-    name { Faker::Name.first_name }
+    name { Faker::Sports::Football.team }
     state { Faker::Address.country_code }
   end
 end
