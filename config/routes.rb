@@ -2,4 +2,6 @@
 Rails.application.routes.draw do
   get '/', to: 'index#home'
   get 'sidebar', to: 'index#sidebar'
+
+  devise_for :users
 end
