@@ -33,7 +33,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: services_teste
+  database: chute_brasileirao_test
 
 production:
   adapter: postgresql
