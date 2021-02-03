@@ -6,4 +6,96 @@
   .col-md-9
     = title_row "Jogos de Hoje"
 
+    .component-jogos-hoje
+      .row
+        .col-12.col-xs-12.col-sm-12.col-md-6.col-lg-6
+          .card
+            .teams
+              .row
+                .col-4
+                  = image_tag('sp.jpg')
+                .col-4
+                  .time 
+                    %span 16h00
+                .col-4
+                  = image_tag('bh.jpg')
+            .info
+              .row
+                .col-md-12
+                  São Januário - Rio de Janeiro - RJ
+            .btn-group{ role: "group", aria: { label: "Second group" } }
+              = link_to "Chutar", "", class: "btn btn-success"
+        .col-12.col-xs-12.col-sm-12.col-md-6.col-lg-6
+          .card
+            .teams
+              .row
+                .col-4
+                  = image_tag('sp.jpg')
+                .col-4
+                  16h00
+                .col-4
+                  = image_tag('bh.jpg')
+              .info
+                .row
+                  .col-md-12
+                    São Januário - Rio de Janeiro - RJ
+              .btn-group{ role: "group", aria: { label: "Second group" } }
+                = link_to "Chutar", "", class: "btn btn-success"
+
+    = title_row "Jogos ..."
+
+    .component-partidas
+      .row
+        .col-12
+          %div{id: "carouselPartidas", 
+              class: "carousel slide",
+              data: { ride: "carousel" } }
+            .carousel-inner
+              .carousel-item.active
+                .row
+                  .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                  .col-xs-12.col-sm-12.col-md-6.col-lg-6                  
+                    .card
+                      .date
+                        Qua, 03/02/2021 16:00
+                      .teams
+                        .row
+                          .col-4
+                            = image_tag('bh.jpg')
+                          .col-4
+                            .time 
+                              %span 16h00
+                          .col-4
+                            = image_tag('bh.jpg')
+                      .local
+                        .row
+                          .col-md-12
+                        São Januário - Rio de Janeiro - RJ
+                      .btn-group{ role: "group", aria: { label: "Second group" } }
+                        = link_to "Detalhes", "", class: "btn btn-link"
+                  .col-xs-12.col-sm-12.col-md-3.col-lg-3
+              .carousel-item
+                .row
+                  .col-xs-12.col-sm-12.col-md-3.col-lg-3
+                  .col-xs-12.col-sm-12.col-md-6.col-lg-6                  
+                    .card
+                      .date
+                        Qua, 03/02/2021 16:00
+                      .teams
+                        .row
+                          .col-4
+                            = image_tag('sp.jpg')
+                          .col-4
+                            .time 
+                              %span 16h00
+                          .col-4
+                            = image_tag('sp.jpg')
+                      .local
+                        .row
+                          .col-md-12
+                        São Januário - Rio de Janeiro - RJ
+                      .btn-group{ role: "group", aria: { label: "Second group" } }
+                        = link_to "Detalhes", "", class: "btn btn-link"
+                  .col-xs-12.col-sm-12.col-md-3.col-lg-3
+            
   = sidebar
