@@ -23,12 +23,17 @@
             = f.text_field :last_name, class: "form-control"
 
           .form-group
-            = f.label :password, "Senha"
+            = f.label :password, "Nova senha"
             = f.password_field :password, autocomplete: "new-password", class: "form-control"
+            %small (Deixe em branco caso não queira alterar sua senha atual)
 
           .form-group
-            = f.label :password_confirmation, "Confirmação Senha"
+            = f.label :password_confirmation, "Confirmação nova senha"
             = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
-          
+
+          .form-group
+            = f.label :current_password, "Atual Senha"
+            = f.password_field :current_password, autocomplete: "current-password", class: "form-control"
+                      
           = f.submit "Salvar", class: "btn btn-success btn-sm btn-block" 
   .col-md-3
