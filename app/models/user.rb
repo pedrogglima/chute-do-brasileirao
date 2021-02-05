@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class User < ApplicationRecord
+  has_many :bets
+
   validates :email, uniqueness: true, length: { maximum: 100 }
   validates :first_name, length: { within: 1..100 }
   validates :last_name, length: { within: 1..100 }

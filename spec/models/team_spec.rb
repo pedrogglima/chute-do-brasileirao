@@ -4,6 +4,15 @@ require 'rails_helper'
 RSpec.describe(Team, type: :model) do
   let!(:team) { create :team }
 
+  describe 'associations' do
+    context 'have_many' do
+      it { should have_many(:matches) }
+      it { should have_many(:opponents) }
+      it { should have_many(:next_opponents) }
+      it { should have_many(:rankings) }
+    end
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:state) }

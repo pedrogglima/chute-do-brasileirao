@@ -4,6 +4,12 @@ require 'rails_helper'
 RSpec.describe(League, type: :model) do
   let!(:league) { create :league }
 
+  describe 'associations' do
+    context 'have_many' do
+      it { should have_many(:championships) }
+    end
+  end
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name).scoped_to(:division) }
