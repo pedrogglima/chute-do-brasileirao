@@ -7,6 +7,14 @@ pt-BR:
     nav:
       prev: Anterior
       next: Próximo
+  activerecord:
+    attributes:
+      user:
+        password: Senha
+        password_confirmation: Senha de confirmação
+        current_password: Senha atual
+        confirmation_token: Link para confirmação de email
+        reset_password_token: Link para resetar senha
     errors:
       messages:
         record_invalid: "A validação falhou: %{errors}"
