@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_204233) do
+ActiveRecord::Schema.define(version: 2021_02_05_135210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 2021_02_03_204233) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name", "division"], name: "index_leagues_on_name_and_division", unique: true
+  end
+
+  create_table "tables", force: :cascade do |t|
+    t.bigint "league_id", null: false
+    t.date "year"
+    t.integer "number_of_participants"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["league_id", "year"], name: "index_tables_on_league_id_and_year", unique: true
+    t.index ["league_id"], name: "index_tables_on_league_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -51,4 +61,5 @@ ActiveRecord::Schema.define(version: 2021_02_03_204233) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "tables", "leagues"
 end
