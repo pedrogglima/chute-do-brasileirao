@@ -12,12 +12,14 @@
           = f.hidden_field :reset_password_token
 
           .form-group
-            = f.label :password, "Nova Senha"
+            = required_label f, :password, "Nova Senha"
             = f.password_field :password, autocomplete: "new-password", class: "form-control"
 
           .form-group
-            = f.label :password_confirmation, "Confirmação Nova Senha"
+            = required_label f, :password_confirmation, "Confirmação Nova Senha"
             = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+
+          = required_fields
 
           = f.submit "Salvar", class: "btn btn-success btn-sm btn-block" 
           = render "devise/shared/links"

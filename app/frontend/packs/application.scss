@@ -127,6 +127,11 @@ main {
     }
   }
 
+  // Used by forms to require input be filled up
+  .required-fields {
+    color: red;
+  }
+
   // error style used on forms
   #error_explanation {
     border-radius: 15px;

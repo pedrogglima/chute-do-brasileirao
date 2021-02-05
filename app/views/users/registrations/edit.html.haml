@@ -34,6 +34,7 @@
           .form-group
             = f.label :current_password, "Atual Senha"
             = f.password_field :current_password, autocomplete: "current-password", class: "form-control"
+            %small (Adicione sua senha atual para realizar as alterações)
                       
           = f.submit "Salvar", class: "btn btn-success btn-sm btn-block" 
   .col-md-3

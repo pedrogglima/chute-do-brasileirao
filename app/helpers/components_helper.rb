@@ -38,4 +38,21 @@ module ComponentsHelper
       end
     end
   end
+
+  def required_label(f, name, text)
+    content_tag :label, for: "#{f.object_name}_#{name}" do
+      raw "#{text} <span class='required-fields'>*</span>"
+    end
+  end
+
+  def required_fields
+    content_tag :div, class: "mb-3" do
+      content_tag :small do
+        '( <span class="required-fields">*</span> )' \
+        '<span class="required-fields">' \
+          ' Preenchimento obrigatório' \
+        '</span>'.html_safe
+      end
+    end
+  end
 end

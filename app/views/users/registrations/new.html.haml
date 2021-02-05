@@ -11,24 +11,26 @@
           = render "layouts/shared/error_messages", resource: resource
 
           .form-group
-            = f.label :email, "Email"
+            = required_label f, :email, "Email"
             = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
 
           .form-group
-            = f.label :first_name, "Nome"
+            = required_label f, :first_name, "Nome"
             = f.text_field :first_name, class: "form-control"
 
           .form-group
-            = f.label :last_name, "Sobrenome"
+            = required_label f, :last_name, "Sobrenome"
             = f.text_field :last_name, class: "form-control"
 
           .form-group
-            = f.label :password, "Senha"
+            = required_label f, :password, "Senha"
             = f.password_field :password, autocomplete: "new-password", class: "form-control"
 
           .form-group
-            = f.label :password_confirmation, "Confirmação Senha"
+            = required_label f, :password_confirmation, "Confirmação Senha"
             = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+
+            = required_fields
           
           = f.submit "Entrar", class: "btn btn-success btn-sm btn-block" 
           = render "devise/shared/links"
