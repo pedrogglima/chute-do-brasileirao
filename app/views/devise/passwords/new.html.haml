@@ -1,0 +1,19 @@
+= flash_message_row
+
+.row
+  .col-md-3
+  .col-md-6
+    .card
+      .card-header
+        %span Esqueceu sua senha?
+      .card-body
+        = form_for(resource, as: resource_name, url: password_path(resource_name)) do |f|
+          = render "layouts/shared/error_messages", resource: resource
+
+          .form-group
+            = f.label :email, "Email"
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+
+          = f.submit "Enviar e-mail com nova senha", class: "btn btn-success btn-sm btn-block" 
+          = render "devise/shared/links"
+  .col-md-3

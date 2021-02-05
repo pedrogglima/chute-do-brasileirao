@@ -105,6 +105,7 @@ main {
   margin-bottom: 1rem;
   // bg-color for the main
   .content-style {
+    padding-top: 1rem;
     background-color: $main-color;
     border: 1px solid $border-color;
     border-radius: calc(0.25rem - 1px);
@@ -123,6 +124,21 @@ main {
 
     .text {
       padding: 1rem 0 0 1rem;
+    }
+  }
+
+  .card {
+    margin-bottom: 1rem;
+
+    .card-body {
+      // wraps links after the submit button
+      .link-wrapper {
+        padding-top: 1.5rem;
+
+        .link-block {
+          display: block;
+        }
+      }
     }
   }
 
@@ -162,7 +178,7 @@ main {
       .carousel-inner {
         .carousel-item {
           .card {
-            padding: .5rem .5rem 0 .5rem;
+            padding: 0.5rem 0.5rem 0 0.5rem;
             margin-bottom: 1rem;
 
             .date {
@@ -174,7 +190,7 @@ main {
             .teams {
               text-align: center;
               vertical-align: middle;
-              margin-bottom: .5rem;
+              margin-bottom: 0.5rem;
 
               .time {
                 margin-top: 1rem;
