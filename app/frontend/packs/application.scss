@@ -127,6 +127,23 @@ main {
     }
   }
 
+  // error style used on forms
+  #error_explanation {
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: red;
+    color: white;
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    ul {
+      color: white;
+    }
+  }
+
   .card {
     margin-bottom: 1rem;
 
