@@ -8,6 +8,8 @@ RSpec.describe(Championship, type: :model) do
     it { should validate_presence_of(:year) }
     it { should validate_uniqueness_of(:year).scoped_to(:league_id) }
     it { should validate_presence_of(:number_of_participants) }
+    it { should validate_numericality_of(:number_of_participants) }
+    it { should validate_inclusion_of(:number_of_participants).in_range(1..1000) }
   end
 
   describe 'attributes' do
@@ -35,12 +37,6 @@ RSpec.describe(Championship, type: :model) do
       before do
         championship.number_of_participants = nil
       end
-
-      it { is_expected.to_not(be_valid) }
-    end
-
-    context 'when out of range' do
-      before { championship.number_of_participants = 1001 }
 
       it { is_expected.to_not(be_valid) }
     end
