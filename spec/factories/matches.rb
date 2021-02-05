@@ -3,7 +3,7 @@ require 'securerandom'
 
 FactoryBot.define do
   factory :match do
-    association :table
+    association :championship
     association :team, name: "team"
     association :opponent, factory: :team, name: "opponent"
     identification { "Jogo: 100" }

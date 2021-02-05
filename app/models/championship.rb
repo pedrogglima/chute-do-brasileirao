@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Table < ApplicationRecord
+class Championship < ApplicationRecord
   belongs_to :league
 
   validates :year, presence: true, uniqueness: { scope: :league_id }

@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_164928) do
+ActiveRecord::Schema.define(version: 2021_02_05_175346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "championships", force: :cascade do |t|
+    t.bigint "league_id", null: false
+    t.date "year"
+    t.integer "number_of_participants"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["league_id", "year"], name: "index_championships_on_league_id_and_year", unique: true
+    t.index ["league_id"], name: "index_championships_on_league_id"
+  end
 
   create_table "leagues", force: :cascade do |t|
     t.string "name", null: false
@@ -24,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_164928) do
   end
 
   create_table "matches", force: :cascade do |t|
-    t.bigint "table_id", null: false
+    t.bigint "championship_id", null: false
     t.bigint "team_id", null: false
     t.bigint "opponent_id", null: false
     t.string "identification", null: false
@@ -34,20 +44,10 @@ ActiveRecord::Schema.define(version: 2021_02_05_164928) do
     t.string "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["championship_id"], name: "index_matches_on_championship_id"
     t.index ["date"], name: "index_matches_on_date"
     t.index ["opponent_id"], name: "index_matches_on_opponent_id"
-    t.index ["table_id"], name: "index_matches_on_table_id"
     t.index ["team_id"], name: "index_matches_on_team_id"
-  end
-
-  create_table "tables", force: :cascade do |t|
-    t.bigint "league_id", null: false
-    t.date "year"
-    t.integer "number_of_participants"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["league_id", "year"], name: "index_tables_on_league_id_and_year", unique: true
-    t.index ["league_id"], name: "index_tables_on_league_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2021_02_05_164928) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "matches", "tables"
+  add_foreign_key "championships", "leagues"
+  add_foreign_key "matches", "championships"
   add_foreign_key "matches", "teams"
   add_foreign_key "matches", "teams", column: "opponent_id"
-  add_foreign_key "tables", "leagues"
 end
