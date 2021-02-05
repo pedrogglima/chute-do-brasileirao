@@ -6,10 +6,16 @@
         %span.text hute Brasileirão
       %ul.ml-auto.navbar-nav
         %li.nav-item.menu-item
-          %span
-            = link_to "#" do
-              Sair
-              %i.fas.fa-sign-out-alt.fa-1x 
+          - if current_user
+            %span
+              = link_to destroy_user_session_path, method: :delete do
+                Sair
+                %i.fas.fa-sign-out-alt.fa-1x 
+          - else
+            %span
+              = link_to new_user_session_path do
+                Entrar
+                %i.fas.fa-sign-in-alt.fa-1x 
     %nav.navbar.nav-custom.navbar-custom.navbar-expand-lg.navbar-light
       %button.navbar-toggler.mx-auto{type: "button",
         data: { toggle: "collapse",
@@ -30,12 +36,13 @@
           %li.nav-item.menu-item
             %span
               = link_to "Rodadas", "#"
-          %li.nav-item.menu-item
-            %span
-              = link_to "Minhas Apostas", "#" 
-          %li.nav-item.menu-item
-            %span
-              = link_to "#" do
-                %i.fas.fa-user-lock 
-            
+          - if current_user
+            %li.nav-item.menu-item
+              %span
+                = link_to "Meus Chutes", "#" 
+            %li.nav-item.menu-item
+              %span
+                = link_to edit_user_registration_path(current_user) do
+                  %i.fas.fa-user-lock 
+              
                 
