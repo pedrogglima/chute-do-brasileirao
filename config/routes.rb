@@ -19,6 +19,11 @@ Rails.application.routes.draw do
       }
   end
 
+  resources :tabelas,
+            controller: 'rankings',
+            as: 'rankings',
+            only: [:index]
+
   resources :partidas,
             controller: 'matches',
             as: 'matches',
