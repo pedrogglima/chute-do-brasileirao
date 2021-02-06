@@ -19,16 +19,6 @@ Rails.application.routes.draw do
       }
   end
 
-  resources :tabelas,
-            controller: 'rankings',
-            as: 'rankings',
-            only: [:index]
-
-  resources :partidas,
-            controller: 'matches',
-            as: 'matches',
-            only: [:show]
-
   scope(path: 'serie-a/', path_names: {
     new: 'novo',
     edit: 'editar',
@@ -36,6 +26,21 @@ Rails.application.routes.draw do
     update: 'atualizar',
     destroy: 'deletar',
   }) do
+    resources :tabelas,
+            controller: 'rankings',
+            as: 'rankings',
+            only: [:index]
+
+    resources :rodadas,
+              controller: 'rounds',
+              as: 'rounds',
+              only: [:index]
+
+    resources :partidas,
+              controller: 'matches',
+              as: 'matches',
+              only: [:show]
+
     resources :chutes,
               controller: 'bets',
               as: 'bets',
