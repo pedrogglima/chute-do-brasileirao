@@ -5,11 +5,9 @@ RSpec.describe(Ranking, type: :model) do
   let!(:ranking) { create :ranking }
 
   describe 'associations' do
-    context 'belongs_to' do
-      it { should belong_to(:championship) }
-      it { should belong_to(:team) }
-      it { should belong_to(:next_opponent) }
-    end
+    it { should belong_to(:championship) }
+    it { should belong_to(:team) }
+    it { should belong_to(:next_opponent) }
   end
 
   describe 'validations' do

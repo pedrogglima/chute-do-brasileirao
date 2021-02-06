@@ -5,9 +5,7 @@ RSpec.describe(User, type: :model) do
   let!(:user) { create :user }
 
   describe 'associations' do
-    context 'have_many' do
-      it { should have_many(:bets) }
-    end
+    it { should have_many(:bets) }
   end
 
   describe 'validations' do

@@ -5,9 +5,7 @@ RSpec.describe(League, type: :model) do
   let!(:league) { create :league }
 
   describe 'associations' do
-    context 'have_many' do
-      it { should have_many(:championships) }
-    end
+    it { should have_many(:championships) }
   end
 
   describe 'validations' do
