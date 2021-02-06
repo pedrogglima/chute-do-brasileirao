@@ -8,7 +8,7 @@ class IndexController < ApplicationController
   def sidebar
     respond_to do |format|
       format.html do
-        render partial: 'index/sidebar'
+        render partial: 'index/partials/sidebar'
       end
     end
   end
