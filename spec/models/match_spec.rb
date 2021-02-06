@@ -6,6 +6,7 @@ RSpec.describe(Match, type: :model) do
 
   describe 'associations' do
     it { should belong_to(:championship) }
+    it { should belong_to(:round) }
     it { should belong_to(:team) }
     it { should belong_to(:opponent) }
   end
