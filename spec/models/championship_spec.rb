@@ -14,6 +14,8 @@ RSpec.describe(Championship, type: :model) do
   describe 'validations' do
     it { should validate_presence_of(:year) }
     it { should validate_uniqueness_of(:year).scoped_to(:league_id) }
+    it { should validate_numericality_of(:year) }
+    it { should validate_inclusion_of(:year).in_range(2020..3000) }
     it { should validate_presence_of(:number_of_participants) }
     it { should validate_numericality_of(:number_of_participants) }
     it { should validate_inclusion_of(:number_of_participants).in_range(1..1000) }
