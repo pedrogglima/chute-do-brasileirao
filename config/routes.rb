@@ -19,6 +19,11 @@ Rails.application.routes.draw do
       }
   end
 
+  resources :partidas,
+            controller: 'matches',
+            as: 'matches',
+            only: [:show]
+
   scope(path: 'serie-a/', path_names: {
     new: 'novo',
     edit: 'editar',

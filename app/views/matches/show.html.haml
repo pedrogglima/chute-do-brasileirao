@@ -1,0 +1,16 @@
+= flash_message_row
+
+.row
+  .col-md-9
+    = title_row "Resultado da partida..."
+
+    .row
+      .col-12.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .card
+          .card-header
+            %span Partida
+          .card-body
+            .form-group
+              = label_tag :score_team, "Resultado"
+              = number_field_tag :score_team, @resource.score, class: "form-control"
+  = sidebar
