@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_06_175229) do
+ActiveRecord::Schema.define(version: 2021_02_06_181238) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,8 @@ ActiveRecord::Schema.define(version: 2021_02_06_175229) do
     t.string "recentes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "[:championship_id, :position]_id"
+    t.index ["[:championship_id, :position]_id"], name: "index_rankings_on_[:championship_id, :position]_id"
     t.index ["championship_id"], name: "index_rankings_on_championship_id"
     t.index ["next_opponent_id"], name: "index_rankings_on_next_opponent_id"
     t.index ["team_id"], name: "index_rankings_on_team_id"
