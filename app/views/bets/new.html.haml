@@ -1,0 +1,25 @@
+= flash_message_row
+
+.row
+  .col-md-9
+    = title_row "Preparando para chutar..."
+
+    .row
+      .col-12.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        .card
+          .card-header
+            %span Chutar
+          .card-body
+            = form_with model: @resource, url: bets_path do |f| 
+              = render "layouts/shared/error_messages", resource: @resource
+
+              .form-group
+                = f.label :score_team, "Time da Casa"
+                = f.number_field :score_team, autofocus: true, class: "form-control"
+
+              .form-group
+                = f.label :score_opponent, "Time Oponente"
+                = f.number_field :score_opponent, class: "form-control"
+
+              = f.submit "Chutar", class: "btn btn-success btn-block"
+  = sidebar

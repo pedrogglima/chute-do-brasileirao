@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  get '/', to: 'index#home'
+  root to: 'index#home'
   get 'sidebar', to: 'index#sidebar'
 
   scope(path_names: { new: 'novo', edit: 'editar', password: 'senha' }) do
@@ -17,5 +17,18 @@ Rails.application.routes.draw do
         sign_up: 'cadastrar-se',
         confirmation: 'verificacao-email',
       }
+  end
+
+  scope(path: 'serie-a/', path_names: {
+    new: 'novo',
+    edit: 'editar',
+    create: 'criar',
+    update: 'atualizar',
+    destroy: 'deletar',
+  }) do
+    resources :chutes,
+              controller: 'bets',
+              as: 'bets',
+              only: [:index, :new, :create]
   end
 end

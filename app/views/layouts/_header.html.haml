@@ -29,7 +29,7 @@
         %ul.navbar-nav.mx-auto
           %li.nav-item.menu-item
             %span
-              = link_to "Jogos de Hoje", "#"
+              = link_to "Jogos de Hoje", root_path
           %li.nav-item.menu-item
             %span
               = link_to "Tabela", "#"
@@ -39,7 +39,7 @@
           - if current_user
             %li.nav-item.menu-item
               %span
-                = link_to "Meus Chutes", "#" 
+                = link_to "Meus Chutes", bets_path
             %li.nav-item.menu-item
               %span
                 = link_to edit_user_registration_path(current_user) do
