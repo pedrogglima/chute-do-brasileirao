@@ -1,0 +1,17 @@
+.col-12.col-xs-12.col-sm-12.col-md-6.col-lg-6
+  .card
+    .teams
+      .row
+        .col-4
+          = image_tag('sp.jpg')
+        .col-4
+          .time 
+            %span 16h00
+        .col-4
+          = image_tag('bh.jpg')
+    .info
+      .row
+        .col-md-12
+          São Januário - Rio de Janeiro - RJ
+    .btn-group{ role: "group", aria: { label: "Second group" } }
+      = link_to "Chutar", new_bet_path, class: "btn btn-success"
