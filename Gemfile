@@ -22,6 +22,12 @@ gem('jbuilder', '~> 2.7')
 gem('redis', '~> 4.0')
 # Lib for Redis connection
 gem("hiredis", "~> 0.6.0")
+# Use Sidekiq as background scheduler
+gem('sidekiq', '~> 6.0.7')
+# Dependency for Sidekiq
+gem('connection_pool', '~> 2.2.0')
+# Mimicking cron utility.
+gem('sidekiq-scheduler', '~> 3.0.1')
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
