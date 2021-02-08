@@ -12,7 +12,10 @@ RSpec.describe(Match, type: :model) do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:identification) }
+    it { should validate_presence_of(:id_match) }
+    it { should validate_uniqueness_of(:id_match).scoped_to(:championship_id) }
+    it { should validate_numericality_of(:id_match) }
+    it { should validate_inclusion_of(:id_match).in_range(1..380) }
   end
 
   describe 'attributes' do
@@ -21,12 +24,12 @@ RSpec.describe(Match, type: :model) do
     end
   end
 
-  describe 'identification' do
+  describe 'id_match' do
     subject { match }
 
     context 'when empty' do
       before do
-        match.identification = nil
+        match.id_match = nil
       end
 
       it { is_expected.to_not(be_valid) }

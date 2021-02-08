@@ -7,7 +7,7 @@ FactoryBot.define do
     association :round
     association :team, name: "team"
     association :opponent, factory: :team, name: "opponent"
-    identification { "Jogo: 100" }
+    id_match { 100 }
     date do
       Faker::Time.between(
         from: Time.now - 360,
