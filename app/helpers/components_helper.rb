@@ -14,7 +14,7 @@ module ComponentsHelper
   end
 
   def sidebar
-    content_tag :div, class: "col-md-3 d-none d-md-block" do
+    content_tag :div, class: "col-md-4 d-none d-md-block" do
       content_tag :div,
         data: {
           controller: "content-loader",
