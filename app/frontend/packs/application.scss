@@ -1,8 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
+// used by stimulus-carousel
+@import "~swiper/swiper-bundle";
 
-$main-color: #fafafa;
-$component-color: #f8f9fa;
+$bg-color: #fff;
+$text-light-color: #666;
+$text-bold-color: #113311;
 
 $text-color: #444444;
 $text-color-light: #666666;
@@ -17,22 +20,6 @@ $header: #e8e8e8;
 $header-text: #5f6f6f;
 $even-row: #f4f4f4;
 
-// lbl colors
-$green-success: #5cb85c;
-$green-success-border: #4cae4c;
-
-$red-danger: #d9534f;
-$red-danger-border: #d43f3a;
-
-$blue-primary: #007bff;
-
-$yellow-warn: #fff3cd;
-$yellow-warn-border: #ffeeba;
-
-$btn-gray: #e1e1e1;
-$btn-gray-border: #ccc;
-$btn-gray-hover: #ccc;
-
 html {
   height: 100%;
 }
@@ -42,7 +29,8 @@ body {
   padding: 0;
   margin: 0;
   position: relative;
-  background-color: #eeeeee;
+  background-image: url(images/bg-img.svg);
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 // fix footer on page's bottom
@@ -55,8 +43,8 @@ body::after {
 header {
   width: 100%;
   height: auto;
-  margin-bottom: 1rem;
-  background-color: $component-color;
+  margin-bottom: 2rem;
+  background-color: $bg-color;
   border-radius: calc(0.25rem - 1px);
 
   .border-style {
@@ -83,13 +71,16 @@ header {
     .navbar-nav {
       .menu-item {
         margin-right: 3rem;
+        text-transform: uppercase;
+        font-weight: 800;
+        font-size: 0.9rem;
 
         &:last-child {
           margin-right: 0;
         }
 
         a {
-          color: #666;
+          color: #556270;
 
           &:hover {
             color: #222;
@@ -106,7 +97,7 @@ main {
   // bg-color for the main
   .content-style {
     padding-top: 1rem;
-    background-color: $main-color;
+    background-color: $bg-color;
     border: 1px solid $border-color;
     border-radius: calc(0.25rem - 1px);
   }
@@ -118,12 +109,12 @@ main {
   .title {
     display: flex;
     align-items: center;
-    font-size: 4vh;
+    font-size: 3vh;
     margin-bottom: 1rem;
     border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 
     .text {
-      padding: 1rem 0 0 1rem;
+      padding-left: 1rem;
     }
   }
 
@@ -164,33 +155,58 @@ main {
     }
   }
 
-  .component-jogos-hoje {
+  .component-today-matches {
     .card {
-      padding: 1rem 1rem 0 1rem;
+      padding: 0.5rem;
       margin-bottom: 1rem;
-      .teams {
-        text-align: center;
-        vertical-align: middle;
-        margin-bottom: 1rem;
-
-        .time {
-          margin-top: 1rem;
-        }
-
-        img {
-          max-width: 45px;
-          max-height: 45px;
-        }
-      }
+      text-align: center;
 
       .info {
-        text-align: center;
-        margin-bottom: 1rem;
-        color: #666;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        color: $text-light-color;
+
+        margin-bottom: 0.5rem;
       }
 
-      .btn-group {
-        margin-bottom: 1rem;
+      .teams {
+        vertical-align: middle;
+        margin-bottom: 0.5rem;
+
+        .team {
+          .name {
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            color: $text-bold-color;
+            font-weight: 800;
+          }
+
+          img {
+            max-width: 45px;
+            max-height: 45px;
+          }
+        }
+
+        .time {
+          margin-top: 1.5rem;
+
+          .text {
+            color: $text-bold-color;
+            font-size: 1.3rem;
+            font-weight: 800;
+          }
+        }
+      }
+
+      .place {
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+        color: $text-light-color;
+      }
+
+      .btn-custom {
+        border-radius: 1rem;
       }
     }
   }
@@ -242,7 +258,7 @@ footer {
   width: 100%;
   height: 30px;
   line-height: 30px;
-  background-color: $component-color;
+  background-color: $bg-color;
   border-top: 1px solid $border-color;
   border-radius: calc(0.25rem - 1px);
 

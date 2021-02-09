@@ -1,0 +1,28 @@
+.col-12.col-xs-12.col-sm-12.col-md-12.col-lg-6
+  .card
+    .info
+      .row
+        .col-md-12
+          %span.text=MatchDecorator.new(match).display_date
+          %span.text=MatchDecorator.new(match).display_id_match
+    .teams
+      .row
+        .col-4
+          .team
+            .image
+              = image_tag('sp.jpg') 
+            %span.name=TeamDecorator.new(match.team).display_short_name
+        .col-4
+          .time 
+            %span.text=MatchDecorator.new(match).display_time
+        .col-4
+          .team
+            .image
+              = image_tag('bh.jpg')
+            %span.name=TeamDecorator.new(match.opponent).display_short_name
+    .place
+      .row
+        .col-md-12
+          %span.text=match.place
+    .btn-bet
+      = link_to "Chutar", new_bet_path, class: "btn btn-success btn-sm btn-custom"

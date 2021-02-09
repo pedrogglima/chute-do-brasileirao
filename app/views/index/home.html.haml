@@ -1,23 +1,40 @@
 = flash_message_row
 
 .row
-  .col-md-9
-    = title_row "Jogos de Hoje"
+  .col-md-8
+    %section.mb-3 
+      = title_row "Jogos de Hoje"
+      - if @today_matches.empty?
+        .match-message
+          .row
+            %span Não há jogos hoje.
+      - else
+        .component-today-matches
+          .row
+            = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: true
+    
+    %section.mb-3
+      - unless @next_matches.empty?
+        = title_row "Próximos Jogos"
+        
+        .row
+          .col-12
+            .swiper-container{ data: {controller: "carousel"} }
+              .swiper-wrapper
+                = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
+              .swiper-button-next
+              .swiper-button-prev
 
-    .component-jogos-hoje
-      .row
-        = render partial: 'index/partials/jogos_hoje', collection: @jogos_hoje, cached: true
+    %section.mb-3
+      - unless @previous_matches.empty?
+        = title_row "Jogos Anteriores"
+        
+        .row
+          .col-12
+            .swiper-container{ data: {controller: "carousel"} }
+              .swiper-wrapper
+                = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: true
+              .swiper-button-next
+              .swiper-button-prev
 
-    = title_row "Jogos passados"
-
-    .component-jogos-passados
-      .row
-        .col-12
-          %div{id: "carouselPartidas", 
-              class: "carousel slide",
-              data: { ride: "carousel" } }
-            .carousel-inner
-              = render partial: 'index/partials/jogos_passados', collection: @jogos_passados, as: :jogo_passado, cached: true
-              
-              
   = sidebar
