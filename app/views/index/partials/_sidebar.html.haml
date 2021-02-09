@@ -1,5 +1,20 @@
 .card.sidebar
   .card-header
+    Sobre
+  .card-body
+    %p Chute do Brasileirão é um site para você acompanhar os resultados dos jogos do Campeonato Brasileiro - Série A. Além disso, você pode também dar um "chute" no placar do jogo do dia. Cadastre-se e divirta-se.
+
+.card.sidebar
+  .card-header
+    \#TOP 6 da Tabela
+  .card-table
+    %ul.links
+      - @top_rankings.each do |ranking|
+        %li
+          = "#{ranking.posicao}º #{ranking.team.name} (#{ranking.pontos})"
+      
+.card.sidebar
+  .card-header
     \#TOP 5 Chutadas (2020)
   .card-table
     %ul.links
