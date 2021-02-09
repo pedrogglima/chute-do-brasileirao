@@ -1,26 +1,28 @@
 = flash_message_row
 
 .row
-  .col-md-9
-    = title_row "Tabela"
-    .row
-      %table
-        %thead
-          %tr
-            %th Posição
-            %th PTS
-            %th J
-            %th V
-            %th E
-            %th D
-            %th GP
-            %th GC
-            %th SG
-            %th CA
-            %th CV
-            %th %
-            %th Recentes
-            %th Próx
-        %tbody
-          = render partial: 'rankings/partials/ranking', collection: @resources, cached: true
+  .col-md-8
+    = title_row "Tabela do Campeonato"
+    .row.justify-content-center
+      .col-auto
+        %table.table.ranking
+          %thead
+            %tr
+              %th Posição
+              %th PTS
+              %th J
+              %th V
+              %th E
+              %th D
+              %th GP
+              %th GC
+              %th SG
+              %th CA
+              %th CV
+              %th %
+              %th Recentes
+              %th Próx
+          %tbody
+            = render partial: 'rankings/partials/ranking', collection: @resources, cached: true
+      
   = sidebar

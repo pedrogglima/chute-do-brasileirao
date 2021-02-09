@@ -102,10 +102,6 @@ main {
     border-radius: calc(0.25rem - 1px);
   }
 
-  .sidebar {
-    margin-top: 1rem;
-  }
-
   .title {
     display: flex;
     align-items: center;
@@ -211,43 +207,16 @@ main {
     }
   }
 
-  .component-jogos-passados {
-    .carousel {
-      .carousel-inner {
-        .carousel-item {
-          .card {
-            padding: 0.5rem 0.5rem 0 0.5rem;
-            margin-bottom: 1rem;
+  // TODO add respo for mobile
+  .ranking {
+    font-size: 14px;
 
-            .date {
-              text-align: center;
-              margin-bottom: 0.5rem;
-              color: #666;
-            }
+    th:nth-last-child(-n + 13) {
+      padding: 0.75rem 0.5rem;
+    }
 
-            .teams {
-              text-align: center;
-              vertical-align: middle;
-              margin-bottom: 0.5rem;
-
-              .time {
-                margin-top: 1rem;
-              }
-
-              img {
-                max-width: 45px;
-                max-height: 45px;
-              }
-            }
-
-            .local {
-              text-align: center;
-              margin-bottom: 1rem;
-              color: #666;
-            }
-          }
-        }
-      }
+    td:nth-last-child(-n + 13) {
+      padding: 0.75rem 0.5rem;
     }
   }
 }

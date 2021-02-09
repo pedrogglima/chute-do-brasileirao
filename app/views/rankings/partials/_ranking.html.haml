@@ -1,6 +1,6 @@
 %tr
-  %td=ranking.posicao
-  %td=ranking.pontos
+  %td=style_posicao(ranking.posicao) + " - #{ranking.team.name}"
+  %td.font-weight-bold=ranking.pontos
   %td=ranking.jogos
   %td=ranking.vitorias
   %td=ranking.empates
@@ -11,5 +11,5 @@
   %td=ranking.cartoes_amarelos
   %td=ranking.cartoes_vermelhos
   %td=ranking.aproveitamento
-  %td=ranking.recentes
+  %td=style_recentes(ranking.recentes)
   %td opon
