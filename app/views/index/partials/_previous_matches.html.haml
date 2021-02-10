@@ -13,7 +13,7 @@
             .col-4
               .team
                 .image
-                  = image_tag('sp.jpg') 
+                  = image_tag(match.team.avatar)
                 %span.name=TeamDecorator.new(match.team).display_short_name
             .col-4
               .time 
@@ -21,7 +21,7 @@
             .col-4
               .team
                 .image
-                  = image_tag('bh.jpg')
+                  = image_tag(match.opponent.avatar)
                 %span.name=TeamDecorator.new(match.opponent).display_short_name
         .place
           .row
