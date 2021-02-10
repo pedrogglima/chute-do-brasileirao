@@ -68,6 +68,7 @@ group :test do
   gem 'database_cleaner', '~> 1.8.5'
   gem 'factory_bot_rails', '~>  5.2.0'
   gem 'shoulda-matchers', '~> 4.4.1'
+  gem 'rspec-sidekiq', '~> 3.1.0'
   gem 'timecop', '~> 0.9.2'
 end
 
