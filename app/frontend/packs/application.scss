@@ -3,20 +3,13 @@
 // used by stimulus-carousel
 @import "~swiper/swiper-bundle";
 
-$bg-color: #fff;
-$text-light-color: #444;
-$text-bold-color: #113311;
-
+$bg-color: #f6f6f6;
+$border-color: #ccc;
 $highlights: #113311;
 
-$border-color: #ccc;
-$border-color-light: #dee2e6;
-$border-color-dark: #444444;
-
-// tables, headers, rows
-$header: #e8e8e8;
-$header-text: #5f6f6f;
-$even-row: #f4f4f4;
+$text-light-color: #444;
+$text-normal-color: #224422;
+$text-bold-color: #113311;
 
 html {
   height: 100%;
@@ -41,7 +34,7 @@ body::after {
 header {
   width: 100%;
   height: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   background-color: $bg-color;
   border-radius: calc(0.25rem - 1px);
 
@@ -61,8 +54,14 @@ header {
     z-index: 9999;
 
     .navbar-brand {
+      svg {
+        color: $text-bold-color;
+      }
+
       .text {
         margin-left: -0.2rem;
+        color: $text-normal-color;
+        font-size: 2vh;
       }
     }
 
@@ -78,11 +77,11 @@ header {
         }
 
         a {
-          color: #556270;
+          color: $text-normal-color;
 
           &:hover {
-            color: #222;
-            text-decoration: none;
+            color: $text-bold-color;
+            text-decoration: underline;
           }
         }
       }
@@ -106,7 +105,7 @@ main {
     margin-bottom: 1rem;
     padding-bottom: 3px;
     font-weight: bold;
-    color: #224422;
+    color: $text-normal-color;
     border-bottom: 1px solid #224422;
   }
 
@@ -175,6 +174,15 @@ main {
             color: #006225;
           }
         }
+      }
+    }
+
+    // wraps links after the submit button
+    .link-wrapper {
+      padding-top: 1.5rem;
+
+      .link-block {
+        display: block;
       }
     }
   }
@@ -272,5 +280,6 @@ footer {
   .copy-right {
     margin: auto;
     text-align: center;
+    color: $text-normal-color;
   }
 }
