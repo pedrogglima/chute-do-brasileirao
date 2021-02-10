@@ -7,6 +7,8 @@ $bg-color: #fff;
 $text-light-color: #666;
 $text-bold-color: #113311;
 
+$highlights: #113311;
+
 $text-color: #444444;
 $text-color-light: #666666;
 $text-color-lighter: #999999;
@@ -139,13 +141,44 @@ main {
   .card {
     margin-bottom: 1rem;
 
-    .card-body {
-      // wraps links after the submit button
-      .link-wrapper {
-        padding-top: 1.5rem;
+    .header-custom {
+      font-size: 1rem;
+      font-weight: bold;
+      line-height: 20px;
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+      background-color: #224422;
+      color: #fff;
+    }
 
-        .link-block {
-          display: block;
+    .card-text {
+      padding: 1rem;
+      text-indent: 1rem;
+      text-align: left;
+    }
+
+    .card-list {
+      padding: 0;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+
+        li {
+          padding: 0.5rem 0 0.5rem 1rem;
+          border-bottom: 1px solid $border-color;
+          color: $text-color-light;
+          img {
+            max-width: 26px;
+            max-height: 26px;
+          }
+
+          .success {
+            color: #006225;
+          }
         }
       }
     }
