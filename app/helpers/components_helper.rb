@@ -25,20 +25,6 @@ module ComponentsHelper
     end
   end
 
-  def title_row(text)
-    content_tag :div, class: "row" do
-      title text
-    end
-  end
-
-  def title(text)
-    content_tag :div, class: "title" do
-      content_tag :span, class: "text" do
-        text
-      end
-    end
-  end
-
   def required_label(f, name, text)
     content_tag :label, for: "#{f.object_name}_#{name}" do
       raw "#{text} <span class='required-fields'>*</span>"

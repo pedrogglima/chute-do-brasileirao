@@ -4,14 +4,10 @@
 @import "~swiper/swiper-bundle";
 
 $bg-color: #fff;
-$text-light-color: #666;
+$text-light-color: #444;
 $text-bold-color: #113311;
 
 $highlights: #113311;
-
-$text-color: #444444;
-$text-color-light: #666666;
-$text-color-lighter: #999999;
 
 $border-color: #ccc;
 $border-color-light: #dee2e6;
@@ -105,15 +101,13 @@ main {
   }
 
   .title {
-    display: flex;
-    align-items: center;
+    width: 100%;
     font-size: 3vh;
     margin-bottom: 1rem;
-    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-
-    .text {
-      padding-left: 1rem;
-    }
+    padding-bottom: 3px;
+    font-weight: bold;
+    color: #224422;
+    border-bottom: 1px solid #224422;
   }
 
   // Used by forms to require input be filled up
@@ -156,6 +150,7 @@ main {
       padding: 1rem;
       text-indent: 1rem;
       text-align: left;
+      color: $text-light-color;
     }
 
     .card-list {
@@ -170,7 +165,7 @@ main {
         li {
           padding: 0.5rem 0 0.5rem 1rem;
           border-bottom: 1px solid $border-color;
-          color: $text-color-light;
+          color: $text-light-color;
           img {
             max-width: 26px;
             max-height: 26px;
