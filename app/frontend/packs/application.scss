@@ -12,6 +12,7 @@ $text-normal-color: #224422;
 $text-bold-color: #113311;
 
 $success-color: #28a745;
+$danger-color: #dc3545;
 
 body {
   min-height: 100%; /* set footer on bottom for scrolled height */
@@ -170,6 +171,10 @@ main {
 
           .success {
             color: $success-color;
+          }
+
+          .danger {
+            color: $danger-color;
           }
         }
       }

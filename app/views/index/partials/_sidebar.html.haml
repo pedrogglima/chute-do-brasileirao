@@ -6,12 +6,25 @@
 
 .card.sidebar
   .card-header.header-custom
-    \#TOP 6 Tabela
+    \#Zona Libertadores
   .card-list
     %ul
       - @top_rankings.each do |ranking|
         %li
           %span.success="#{ranking.posicao}º"
+          %span - 
+          %span=image_tag(ranking.team.avatar)
+          %span=ranking.team.name
+          %span.font-weight-bold="(#{ranking.pontos})"
+
+.card.sidebar
+  .card-header.header-custom
+    \#Zona Rebaixados
+  .card-list
+    %ul
+      - @bottom_rankings.reverse_each do |ranking|
+        %li
+          %span.danger="#{ranking.posicao}º"
           %span - 
           %span=image_tag(ranking.team.avatar)
           %span=ranking.team.name
