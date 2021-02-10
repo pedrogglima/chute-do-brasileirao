@@ -149,6 +149,10 @@ main {
       text-indent: 1rem;
       text-align: left;
       color: $text-light-color;
+
+      .block {
+        display: block;
+      }
     }
 
     .card-list {
