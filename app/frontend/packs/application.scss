@@ -11,9 +11,7 @@ $text-light-color: #444;
 $text-normal-color: #224422;
 $text-bold-color: #113311;
 
-html {
-  height: 100%;
-}
+$success-color: #28a745;
 
 body {
   min-height: 100%; /* set footer on bottom for scrolled height */
@@ -106,7 +104,7 @@ main {
     padding-bottom: 3px;
     font-weight: bold;
     color: $text-normal-color;
-    border-bottom: 1px solid #224422;
+    border-bottom: 1px solid $text-normal-color;
   }
 
   // Used by forms to require input be filled up
@@ -171,7 +169,7 @@ main {
           }
 
           .success {
-            color: #006225;
+            color: $success-color;
           }
         }
       }
