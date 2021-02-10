@@ -1,10 +1,9 @@
 = flash_message_row
 
 .row
-  .col-md-3
-  .col-md-6
+  .col-md-8
     .card
-      .card-header
+      .card-header.header-custom
         %span Minha Conta
       .card-body
         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -37,4 +36,4 @@
             %small (Adicione sua senha atual para realizar as alterações)
                       
           = f.submit "Salvar", class: "btn btn-success btn-sm btn-block" 
-  .col-md-3
+  = sidebar

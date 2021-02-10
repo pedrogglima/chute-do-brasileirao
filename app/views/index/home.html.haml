@@ -2,8 +2,8 @@
 
 .row
   .col-md-8
-    %section.mb-3 
-      = title_row "Jogos de Hoje"
+    %section.mb-5 
+      %h1.title Jogos de Hoje
       - if @today_matches.empty?
         .match-message
           .row
@@ -13,9 +13,9 @@
           .row
             = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: true
     
-    %section.mb-3
+    %section.mb-5
       - unless @next_matches.empty?
-        = title_row "Próximos Jogos"
+        %h1.title Próximos Jogos
         
         .row
           .col-12
@@ -25,9 +25,9 @@
               .swiper-button-next
               .swiper-button-prev
 
-    %section.mb-3
+    %section.mb-5
       - unless @previous_matches.empty?
-        = title_row "Jogos Anteriores"
+        %h1.title Jogos Anteriores
         
         .row
           .col-12
