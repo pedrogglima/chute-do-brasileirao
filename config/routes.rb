@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       controllers: {
         sessions: 'users/sessions',
         registrations: 'users/registrations',
+        passwords: 'users/passwords',
       },
       path_names: {
         sign_in: 'entrar',
