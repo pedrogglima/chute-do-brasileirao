@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
+  # TODO: add auth for access
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: 'index#home'
   get 'sidebar', to: 'index#sidebar'
 

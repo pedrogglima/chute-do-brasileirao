@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'sidekiq/web'
 require 'sidekiq-scheduler'
 
 sidekiq_config = { url: ENV['REDIS_CACHE'] }
