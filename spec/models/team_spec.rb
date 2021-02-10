@@ -15,6 +15,7 @@ RSpec.describe(Team, type: :model) do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:state) }
     it { should validate_uniqueness_of(:name) }
+    it { should validate_presence_of(:avatar_url) }
   end
 
   describe 'attributes' do
@@ -54,6 +55,18 @@ RSpec.describe(Team, type: :model) do
 
     context 'when too long' do
       before { team.state = 'SP' * 2 }
+
+      it { is_expected.to_not(be_valid) }
+    end
+  end
+
+  describe 'avatar_url' do
+    subject { team }
+
+    context 'when empty' do
+      before do
+        team.avatar_url = nil
+      end
 
       it { is_expected.to_not(be_valid) }
     end
