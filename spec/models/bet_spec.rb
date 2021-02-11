@@ -12,12 +12,12 @@ RSpec.describe(Bet, type: :model) do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:score_team) }
-    it { should validate_numericality_of(:score_team) }
-    it { should validate_inclusion_of(:score_team).in_range(0..100) }
-    it { should validate_presence_of(:score_opponent) }
-    it { should validate_numericality_of(:score_team) }
-    it { should validate_inclusion_of(:score_opponent).in_range(0..100) }
+    it { should validate_presence_of(:bet_team_score) }
+    it { should validate_numericality_of(:bet_team_score) }
+    it { should validate_inclusion_of(:bet_team_score).in_range(0..100) }
+    it { should validate_presence_of(:bet_opponent_score) }
+    it { should validate_numericality_of(:bet_opponent_score) }
+    it { should validate_inclusion_of(:bet_opponent_score).in_range(0..100) }
   end
 
   describe 'attributes' do
@@ -26,31 +26,31 @@ RSpec.describe(Bet, type: :model) do
     end
   end
 
-  describe 'score_team' do
+  describe 'bet_team_score' do
     subject { bet }
 
     context 'when empty' do
       before do
-        bet.score_team = nil
+        bet.bet_team_score = nil
       end
 
       it { is_expected.to_not(be_valid) }
     end
   end
 
-  describe 'score_opponent' do
+  describe 'bet_opponent_score' do
     subject { bet }
 
     context 'when empty' do
       before do
-        bet.score_opponent = nil
+        bet.bet_opponent_score = nil
       end
 
       it { is_expected.to_not(be_valid) }
     end
 
     context 'when out of range' do
-      before { bet.score_opponent = 101 }
+      before { bet.bet_opponent_score = 101 }
 
       it { is_expected.to_not(be_valid) }
     end

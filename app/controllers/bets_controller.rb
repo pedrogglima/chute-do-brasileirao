@@ -3,12 +3,17 @@ class BetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @match = Match.first
     @resources = Bet.all.where(user_id: current_user.id)
   end
 
   def new
     @match = Match.find(params[:match_id])
     @resource = Bet.new
+  end
+
+  def show
+    @resource = Bet.find(params[:id])
   end
 
   def create
@@ -25,6 +30,6 @@ class BetsController < ApplicationController
   end
 
   def bet_params
-    params.require(:bet).permit(:match_id, :score_team, :score_opponent)
+    params.require(:bet).permit(:match_id, :bet_team_score, :bet_opponent_score)
   end
 end

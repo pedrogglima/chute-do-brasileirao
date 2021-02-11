@@ -5,7 +5,7 @@ FactoryBot.define do
   factory :bet do
     association :user
     association :match
-    score_team { 1 }
-    score_opponent { 1 }
+    bet_team_score { 1 }
+    bet_opponent_score { 1 }
   end
 end

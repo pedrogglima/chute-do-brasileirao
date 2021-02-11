@@ -13,7 +13,13 @@ RSpec.describe("Bets", type: :request) do
     end
 
     it "should be redirect to (new)" do
-      get new_bet_path
+      get new_match_bet_path(bet.match.id)
+      expect(response).to(redirect_to(new_user_session_path))
+      expect(request.flash_hash.alert).to(eq("Para continuar, efetue login ou registre-se."))
+    end
+
+    it "should be redirect to (show)" do
+      get match_bet_path(id: bet.id, match_id: bet.match.id)
       expect(response).to(redirect_to(new_user_session_path))
       expect(request.flash_hash.alert).to(eq("Para continuar, efetue login ou registre-se."))
     end
@@ -39,7 +45,16 @@ RSpec.describe("Bets", type: :request) do
       it "returns http success" do
         sign_in(user)
 
-        get new_bet_path
+        get new_match_bet_path(bet.match.id)
+        expect(response).to(have_http_status(:success))
+      end
+    end
+
+    describe "GET /show" do
+      it "returns http success" do
+        sign_in(user)
+
+        get match_bet_path(id: bet.id, match_id: bet.match.id)
         expect(response).to(have_http_status(:success))
       end
     end
@@ -57,13 +72,12 @@ RSpec.describe("Bets", type: :request) do
           params: {
             "bet" => {
               "match_id" => match[:id],
-              "score_team" => bet[:score_team],
-              "score_opponent" => bet[:score_opponent],
+              "bet_team_score" => bet[:bet_team_score],
+              "bet_opponent_score" => bet[:bet_opponent_score],
             },
           }
         end.to(change { Bet.count }.by(1))
         expect(response).to(have_http_status(:success))
-        expect(request.flash[:success]).to(eq("Seu chute foi criado com sucesso!"))
       end
 
       it "when invalid returns http success" do
@@ -76,8 +90,8 @@ RSpec.describe("Bets", type: :request) do
           params: {
             "bet" => {
               "match_id" => match[:id],
-              "score_team" => "",
-              "score_opponent" => bet[:score_opponent],
+              "bet_team_score" => "",
+              "bet_opponent_score" => bet[:bet_opponent_score],
             },
           }
         end.to(change { Bet.count }.by(0))
