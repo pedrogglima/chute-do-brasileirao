@@ -20,6 +20,7 @@ class IndexController < ApplicationController
   def sidebar
     # TODO: add champship year
     @top_rankings = Ranking.order(posicao: :asc).limit(6)
+    @bottom_rankings = Ranking.order(posicao: :desc).limit(4)
 
     respond_to do |format|
       format.html do
