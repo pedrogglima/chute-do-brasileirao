@@ -2,24 +2,40 @@
 
 .row
   .col-md-8
-    %h1.title "Preparando para chutar..."
-
     .row
       .col-12.col-xs-12.col-sm-12.col-md-12.col-lg-12
         .card
-          .card-header
-            %span Chutar
-          .card-body
+          .card-header.header-custom
+            %span Prepare seu chute
+          .card-body.card-form
             = form_with model: @resource, url: bets_path do |f| 
               = render "layouts/shared/error_messages", resource: @resource
+              = f.hidden_field :match_id, value: @match.id
+              .row.mb-3
+                .col-xs-12.col-sm-12.col-md-12.col-lg-6
+                  .team-avatar
+                    .image 
+                      = image_tag(@match.team.avatar) 
+                    .name=@match.team.name
+                  .form-group
+                    .score
+                      = button_tag type: "button", class: "button button-left" do
+                        %i.fas.fa-caret-up
+                      = f.text_field :score_team, class: "input"
+                      = button_tag "^", type: "button", class: "button button-right" do
+                        %i.fas.fa-caret-down
+                .col-xs-12.col-sm-12.col-md-12.col-lg-6
+                  .team-avatar
+                    .image
+                      = image_tag(@match.opponent.avatar) 
+                    .name=@match.opponent.name
+                  .form-group
+                    .score
+                      = button_tag type: "button", class: "button button-left" do
+                        %i.fas.fa-caret-up
+                      = f.text_field :score_opponent, class: "input"
+                      = button_tag "^", type: "button", class: "button button-right" do
+                        %i.fas.fa-caret-down
 
-              .form-group
-                = f.label :score_team, "Time da Casa"
-                = f.number_field :score_team, autofocus: true, class: "form-control"
-
-              .form-group
-                = f.label :score_opponent, "Time Oponente"
-                = f.number_field :score_opponent, class: "form-control"
-
-              = f.submit "Chutar", class: "btn btn-success btn-block"
+              = f.submit "CHUTAR", class: "btn btn-success btn-block"
   = sidebar

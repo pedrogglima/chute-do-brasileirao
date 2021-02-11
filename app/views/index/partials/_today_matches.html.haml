@@ -26,7 +26,7 @@
         .col-md-12
           %span.text=match.place
     .btn-bet
-      = link_to new_bet_path, class: "btn btn-success btn-custom" do
+      = link_to new_match_bet_path(match.id), class: "btn btn-success btn-custom" do
         %i.fas.fa-futbol
         %span Chutar
         

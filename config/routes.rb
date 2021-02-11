@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       }
   end
 
-  scope(path: 'serie-a/', path_names: {
+  scope(path_names: {
     new: 'novo',
     edit: 'editar',
     create: 'criar',
@@ -43,11 +43,16 @@ Rails.application.routes.draw do
     resources :partidas,
               controller: 'matches',
               as: 'matches',
-              only: [:show]
+              only: [:show] do
+      resources :chutes,
+                controller: 'bets',
+                as: 'bets',
+                only: [:new]
+    end
 
     resources :chutes,
-              controller: 'bets',
-              as: 'bets',
-              only: [:index, :new, :create]
+                controller: 'bets',
+                as: 'bets',
+                only: [:index, :create]
   end
 end
