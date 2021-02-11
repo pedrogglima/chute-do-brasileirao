@@ -20,8 +20,8 @@
                 %span.name=TeamDecorator.new(match.team).display_short_name
             .col-4
               .score
-                - if match.score
-                  %span.badge.badge-default=match.score
+                - if MatchDecorator.new(match).display_score
+                  %span.badge.badge-default=MatchDecorator.new(match).display_score
                 - else
                   %i.fas.fa-clock
             .col-4
@@ -33,9 +33,4 @@
           .row
             .col-md-12
               %span.text=match.place
-        .btn-bet
-          = link_to new_bet_path, class: "btn btn-info btn-custom" do
-            %i.fas.fa-plus-circle
-            %span Detalhes 
-
     .col-3
