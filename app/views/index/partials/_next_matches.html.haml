@@ -6,8 +6,14 @@
         .info
           .row
             .col-md-12
-              %span.text=MatchDecorator.new(match).display_date
-              %span.text=MatchDecorator.new(match).display_id_match
+              - if match.date
+                %span.text=MatchDecorator.new(match).display_date
+                %span -
+                %span.text=MatchDecorator.new(match).display_id_match
+              - else
+                %span aguardando
+                %span -
+                %span.text=MatchDecorator.new(match).display_id_match
         .teams
           .row
             .col-4
@@ -17,7 +23,10 @@
                 %span.name=TeamDecorator.new(match.team).display_short_name
             .col-4
               .time 
-                %span.text=MatchDecorator.new(match).display_time
+                - if match.date
+                  %span.badge.badge-default=MatchDecorator.new(match).display_time
+                - else
+                  %i.fas.fa-clock                
             .col-4
               .team
                 .image
@@ -26,7 +35,10 @@
         .place
           .row
             .col-md-12
-              %span.text=match.place
+              - if match.place
+                %span.text=match.place
+              - else
+                %span
         .btn-bet
-          = link_to "Chutar", new_bet_path, class: "btn btn-success btn-sm btn-custom"
+          %span.badge.badge-secondary=sanitize '<i class="fas fa-clock"></i> Aguardando', tags: %w(i)
     .col-3

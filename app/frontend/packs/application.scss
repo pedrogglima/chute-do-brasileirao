@@ -4,12 +4,16 @@
 @import "~swiper/swiper-bundle";
 
 $bg-color: #f6f6f6;
+$bg-card: #fcfcfc;
+$bg-card-header: #224422;
 $border-color: #ccc;
-$highlights: #113311;
+
+$default: #224422;
 
 $text-light-color: #444;
 $text-normal-color: #224422;
 $text-bold-color: #113311;
+$text-gray: #999;
 
 $success-color: #28a745;
 $danger-color: #dc3545;
@@ -54,7 +58,7 @@ header {
 
     .navbar-brand {
       svg {
-        color: $text-bold-color;
+        color: $text-normal-color;
       }
 
       .text {
@@ -131,6 +135,7 @@ main {
   }
 
   .card {
+    background-color: $bg-card;
     margin-bottom: 1rem;
 
     .header-custom {
@@ -140,7 +145,7 @@ main {
       margin: 0;
       text-align: center;
       text-transform: uppercase;
-      background-color: #224422;
+      background-color: $bg-card-header;
       color: #fff;
     }
 
@@ -199,27 +204,34 @@ main {
       padding: 0.5rem;
       margin-bottom: 1rem;
       text-align: center;
+      background-color: $bg-card;
+      text-transform: uppercase;
+
+      .badge-default {
+        color: white;
+        background-color: $default;
+      }
 
       .info {
-        text-transform: uppercase;
         font-size: 0.7rem;
-        color: $text-light-color;
+        color: $text-gray;
+        font-weight: 600;
 
         margin-bottom: 0.5rem;
+
+        .time {
+          text-transform: none;
+        }
       }
 
       .teams {
         vertical-align: middle;
         margin-bottom: 0.5rem;
+        color: $text-normal-color;
+        font-size: 1.3rem;
+        font-weight: 800;
 
         .team {
-          .name {
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            color: $text-bold-color;
-            font-weight: 800;
-          }
-
           img {
             max-width: 45px;
             max-height: 45px;
@@ -228,24 +240,31 @@ main {
 
         .time {
           margin-top: 1.5rem;
+          text-transform: none;
+        }
 
-          .text {
-            color: $text-bold-color;
-            font-size: 1.3rem;
-            font-weight: 800;
-          }
+        .score {
+          margin-top: 1.5rem;
+          text-transform: none;
         }
       }
 
       .place {
-        text-transform: uppercase;
         font-size: 0.7rem;
         margin-bottom: 0.5rem;
-        color: $text-light-color;
+        color: $text-gray;
+        font-weight: 600;
       }
 
       .btn-custom {
-        border-radius: 1rem;
+        padding: .25em .4em;
+        font-size: 80%;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+
       }
     }
   }

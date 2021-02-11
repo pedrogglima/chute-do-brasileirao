@@ -4,6 +4,7 @@
       .row
         .col-md-12
           %span.text=MatchDecorator.new(match).display_date
+          %span -
           %span.text=MatchDecorator.new(match).display_id_match
     .teams
       .row
@@ -14,7 +15,7 @@
             %span.name=TeamDecorator.new(match.team).display_short_name
         .col-4
           .time 
-            %span.text=MatchDecorator.new(match).display_time
+            %span.badge.badge-default=MatchDecorator.new(match).display_time
         .col-4
           .team
             .image
@@ -25,4 +26,9 @@
         .col-md-12
           %span.text=match.place
     .btn-bet
-      = link_to "Chutar", new_bet_path, class: "btn btn-success btn-sm btn-custom"
+      = link_to new_bet_path, class: "btn btn-success btn-custom" do
+        %i.fas.fa-futbol
+        %span Chutar
+        
+        
+      
