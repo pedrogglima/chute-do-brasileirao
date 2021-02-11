@@ -16,7 +16,8 @@ FactoryBot.define do
       )
     end
     number_of_changes { "Alterações: 1" }
-    score { "1 x 1" }
+    team_score { 1 }
+    opponent_score { 1 }
     place { "Estadio - Cidadade - Estado" }
   end
 end

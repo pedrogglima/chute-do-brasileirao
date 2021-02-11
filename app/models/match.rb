@@ -10,4 +10,14 @@ class Match < ApplicationRecord
             uniqueness: { scope: :championship_id },
             numericality: { only_integer: true },
             inclusion: 1..380
+
+  validates :team_score,
+            numericality: { only_integer: true },
+            inclusion: 0..100,
+            allow_nil: true
+
+  validates :opponent_score,
+            numericality: { only_integer: true },
+            inclusion: 0..100,
+            allow_nil: true
 end

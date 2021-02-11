@@ -16,6 +16,14 @@ RSpec.describe(Match, type: :model) do
     it { should validate_uniqueness_of(:id_match).scoped_to(:championship_id) }
     it { should validate_numericality_of(:id_match) }
     it { should validate_inclusion_of(:id_match).in_range(1..380) }
+
+    it { should allow_value(:nil).for(:team_score) }
+    it { should validate_numericality_of(:team_score) }
+    it { should validate_inclusion_of(:team_score).in_range(0..100) }
+
+    it { should allow_value(:nil).for(:opponent_score) }
+    it { should validate_numericality_of(:opponent_score) }
+    it { should validate_inclusion_of(:opponent_score).in_range(0..100) }
   end
 
   describe 'attributes' do
