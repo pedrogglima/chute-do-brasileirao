@@ -2,7 +2,7 @@
   %td
     =style_posicao(ranking.posicao)
     %span -
-    %span.wrapper-image=image_tag(ranking.team.avatar)
+    %span.team-avatar=image_tag(ranking.team.avatar)
   %td.font-weight-bold=ranking.pontos
   %td=ranking.jogos
   %td=ranking.vitorias
@@ -15,4 +15,4 @@
   %td=ranking.cartoes_vermelhos
   %td=ranking.aproveitamento
   %td=style_recentes(ranking.recentes)
-  %td=image_tag(ranking.next_opponent.avatar)
+  %td.team-avatar=image_tag(ranking.next_opponent.avatar)

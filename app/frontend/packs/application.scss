@@ -24,7 +24,6 @@ body {
   margin: 0;
   position: relative;
   background-image: url(images/bg-img.svg);
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
 // fix footer on page's bottom
@@ -215,6 +214,7 @@ main {
           font-weight: 800;
         }
       }
+
       .form-group {
         .score {
           text-align: center;
@@ -307,6 +307,21 @@ main {
         }
       }
 
+      .result {
+        font-size: 1.2rem;
+        margin-bottom: 0.1rem;
+        font-weight: 600;
+        text-transform: none;
+        color: $default;
+      }
+
+      .message {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        text-transform: none;
+      }
+
       .place {
         font-size: 0.7rem;
         margin-bottom: 0.5rem;
@@ -323,6 +338,38 @@ main {
         vertical-align: baseline;
         border-radius: 0.25rem;
       }
+
+      .btn-right {
+        margin-top: .5rem;
+        text-align: right;
+        text-transform: none;
+        font-size: 0.5rem;
+      }
+    }
+  }
+
+  .bet-details {
+    .team {
+      font-weight: 600;
+    }
+
+    .divider {
+      border-top: 2px solid $default;
+      border-bottom: 2px solid $default;
+    }
+
+    .result {
+      text-align: center;
+    }
+  }
+
+  // default avatar size for tables
+  table {
+    .team-avatar {
+      img {
+        max-width: 28px;
+        max-height: 28px;
+      }
     }
   }
 
@@ -336,11 +383,6 @@ main {
 
     td:nth-last-child(-n + 13) {
       padding: 0.75rem 0.5rem;
-    }
-
-    img {
-      max-width: 28px;
-      max-height: 28px;
     }
   }
 }

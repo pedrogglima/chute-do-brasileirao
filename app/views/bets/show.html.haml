@@ -1,14 +1,37 @@
 = flash_message_row
 
 .row
-  .col-md-9
-    %h1.title Resultado da partida
+  .col-md-8
+    %h1.title.border-0 Detalhes do Chute
     .row
-      .col-12.col-xs-12.col-sm-12.col-md-12.col-lg-12
-        .card
-          .card-header
-            %span Seu chute
-          .card-body
-            .form-group
+      .col-12
+        %table.table.bet-details
+          %tbody
+            %tr.divider
+              %td 
+                %span.team Time da casa 
+              %td.result.team-avatar=image_tag(@match.team.avatar)
+            %tr
+              %td Nome
+              %td.result.team-avatar=@match.team.name
+            %tr
+              %td Número de gols
+              %td.result=style_number_of_goals(@match.team_score)
+            %tr
+              %td Seu chute
+              %td.result=style_bet_number_of_goals(@resource.bet_team_score, @match.team_score)
+            %tr.divider
+              %td
+                %span.team Time de fora
+              %td.result.team-avatar=image_tag(@match.opponent.avatar)
+            %tr
+              %td Nome
+              %td.result=@match.opponent.name
+            %tr
+              %td Número de gols
+              %td.result=style_number_of_goals(@match.opponent_score)
+            %tr
+              %td Seu chute
+              %td.result=style_bet_number_of_goals(@resource.bet_opponent_score, @match.opponent_score)
               
   = sidebar

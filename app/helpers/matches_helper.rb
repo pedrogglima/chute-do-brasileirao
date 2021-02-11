@@ -21,4 +21,16 @@ module MatchesHelper
   def format_id_match(id)
     "Jogo: #{id}" if id
   end
+
+  def style_number_of_goals(score)
+    if score
+      if score >= 1
+        "<span class=\"badge badge-success\">#{score}</span>".html_safe
+      else
+        "<span class=\"badge badge-secondary\">#{score}</span>".html_safe
+      end
+    else
+      "<span class=\"badge badge-info\">Aguardando resultado</span>".html_safe
+    end
+  end
 end
