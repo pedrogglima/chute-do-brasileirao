@@ -16,7 +16,7 @@ class BetsController < ApplicationController
     @resource.user = current_user
 
     if @resource.save
-      flash[:success] = 'Seu chute foi criado com sucesso!'
+      flash[:success] = 'Seu chute foi realizado com sucesso!'
       redirect_to(bets_path)
     else
       @match = Match.find(@resource.match_id)
