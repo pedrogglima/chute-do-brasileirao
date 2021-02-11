@@ -40,14 +40,11 @@ Rails.application.routes.draw do
               as: 'rounds',
               only: [:index]
 
-    resources :partidas,
-              controller: 'matches',
-              as: 'matches',
-              only: [:show] do
+    resources :partidas, as: 'matches', only: [] do
       resources :chutes,
                 controller: 'bets',
                 as: 'bets',
-                only: [:new]
+                only: [:new, :show]
     end
 
     resources :chutes,
