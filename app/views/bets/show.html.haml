@@ -9,7 +9,20 @@
           %tbody
             %tr.divider
               %td 
-                %span.team Time da casa 
+                %span.highlight Nº do Jogo 
+              %td.result=@match.id_match
+            %tr
+              %td Local
+              %td.result=@match.place
+            %tr
+              %td Data
+              %td.result=format_date(@match.date)
+            %tr
+              %td Horário
+              %td.result=format_time(@match.date)
+            %tr.divider
+              %td 
+                %span.highlight Time da casa 
               %td.result.team-avatar=image_tag(@match.team.avatar)
             %tr
               %td Nome
@@ -22,7 +35,7 @@
               %td.result=style_bet_number_of_goals(@resource.bet_team_score, @match.team_score)
             %tr.divider
               %td
-                %span.team Time de fora
+                %span.highlight Time de fora
               %td.result.team-avatar=image_tag(@match.opponent.avatar)
             %tr
               %td Nome

@@ -4,6 +4,10 @@ module MatchesHelper
     time&.strftime("%Hh%M")
   end
 
+  def format_date(date)
+    I18n.l(date, format: "%a, %d/%m/%Y") if date
+  end
+
   def format_datetime(datetime)
     I18n.l(datetime, format: "%a, %d/%m/%Y - %Hh%M") if datetime
   end
