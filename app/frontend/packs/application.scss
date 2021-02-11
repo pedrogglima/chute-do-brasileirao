@@ -36,13 +36,10 @@ body::after {
 header {
   width: 100%;
   height: auto;
-  margin-bottom: 1rem;
   background-color: $bg-color;
-  border-radius: calc(0.25rem - 1px);
 
   .border-style {
     border-bottom: 1px solid $border-color;
-    border-radius: calc(0.25rem - 1px);
   }
 
   .inner-border-style {
@@ -98,7 +95,7 @@ main {
     padding-top: 1rem;
     background-color: $bg-color;
     border: 1px solid $border-color;
-    border-radius: calc(0.25rem - 1px);
+    border-top: none;
   }
 
   .title {
