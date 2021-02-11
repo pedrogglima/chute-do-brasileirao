@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_120515) do
+ActiveRecord::Schema.define(version: 2021_02_11_171348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_120515) do
   create_table "bets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "match_id", null: false
-    t.integer "score_team", default: 0, null: false
-    t.integer "score_opponent", default: 0, null: false
+    t.integer "bet_team_score", default: 0, null: false
+    t.integer "bet_opponent_score", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["match_id"], name: "index_bets_on_match_id"
@@ -81,10 +81,11 @@ ActiveRecord::Schema.define(version: 2021_02_10_120515) do
     t.string "number_of_changes"
     t.string "place"
     t.datetime "date"
-    t.string "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "round_id", null: false
+    t.integer "team_score"
+    t.integer "opponent_score"
     t.index ["championship_id"], name: "index_matches_on_championship_id"
     t.index ["date"], name: "index_matches_on_date"
     t.index ["opponent_id"], name: "index_matches_on_opponent_id"
