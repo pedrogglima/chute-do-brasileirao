@@ -13,6 +13,7 @@ class BetsController < ApplicationController
   end
 
   def show
+    @match = Match.find(params[:match_id])
     @resource = Bet.find(params[:id])
   end
 
@@ -22,7 +23,7 @@ class BetsController < ApplicationController
 
     if @resource.save
       flash[:success] = 'Seu chute foi realizado com sucesso!'
-      redirect_to(bets_path)
+      redirect_to(match_bet_path(@resource, match_id: @resource.match_id))
     else
       @match = Match.find(@resource.match_id)
       render(:new, status: 422)
