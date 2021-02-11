@@ -2,6 +2,7 @@
 
 ## Now
 
+- Create specs for helpers match & bet
 - Fix spec error for request/bet#create
 - Create controller for up/down score bet#new
 - Create table statistic per match & show statistic on bet#show
