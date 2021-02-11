@@ -1,41 +1,9 @@
 = flash_message_row
 
 .row
-  .col-md-9
-    = title_row "Meus chutes"
-
-    .component-meus-chutes
+  .col-md-8
+    %h1.title Meus chutes
+    .component-today-matches
       .row
-        .col-12.col-xs-12.col-sm-12.col-md-6.col-lg-6
-          .card
-            .teams
-              .row
-                .col-4
-                  = image_tag('sp.jpg')
-                .col-4
-                  .time 
-                    %span 16h00
-                .col-4
-                  = image_tag('bh.jpg')
-            .info
-              .row
-                .col-md-12
-                  São Januário - Rio de Janeiro - RJ
-            
-        .col-12.col-xs-12.col-sm-12.col-md-6.col-lg-6
-          .card
-            .teams
-              .row
-                .col-4
-                  = image_tag('sp.jpg')
-                .col-4
-                  16h00
-                .col-4
-                  = image_tag('bh.jpg')
-              .info
-                .row
-                  .col-md-12
-                    São Januário - Rio de Janeiro - RJ
-              .btn-group{ role: "group", aria: { label: "Second group" } }
-                = link_to "Chutar", "", class: "btn btn-success"
+        = render partial: 'bets/partials/bet', collection: @resources, cached: true
   = sidebar

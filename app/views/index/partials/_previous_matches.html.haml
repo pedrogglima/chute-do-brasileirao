@@ -6,29 +6,27 @@
         .info
           .row
             .col-md-12
-              %span.date=MatchDecorator.new(match).display_date
+              %span.date=format_datetime(match.date)
               %span -
-              %span.time=MatchDecorator.new(match).display_time
-              %span -
-              %span.match=MatchDecorator.new(match).display_id_match
+              %span.match=format_id_match(match.id_match)
         .teams
           .row
             .col-4
               .team
                 .image
                   = image_tag(match.team.avatar)
-                %span.name=TeamDecorator.new(match.team).display_short_name
+                %span.name=format_short_name(match.team.name)
             .col-4
               .score
-                - if MatchDecorator.new(match).display_score
-                  %span.badge.badge-default=MatchDecorator.new(match).display_score
+                - if has_score?(match.team_score, match.opponent_score)
+                  %span.badge.badge-default=format_score(match.team_score, match.opponent_score)
                 - else
                   %i.fas.fa-clock
             .col-4
               .team
                 .image
                   = image_tag(match.opponent.avatar)
-                %span.name=TeamDecorator.new(match.opponent).display_short_name
+                %span.name=format_short_name(match.opponent.name)
         .place
           .row
             .col-md-12
