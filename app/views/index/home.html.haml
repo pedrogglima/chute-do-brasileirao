@@ -17,24 +17,18 @@
       - unless @next_matches.empty?
         %h1.title Próximos Jogos
         
-        .row
-          .col-12
-            .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "navigation": { "nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev" } }' }
-              .swiper-wrapper
-                = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
-              .swiper-button-next
-              .swiper-button-prev
-
+        .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "slidesPerView": "1", "spaceBetween": "10", "pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "breakpoints": { "288": { "slidesPerView": "1", "spaceBetween": "20" }, "640": { "slidesPerView": "1", "spaceBetween": "20" }, "768": { "slidesPerView": "1", "spaceBetween": "20" }, "1024": { "slidesPerView": "2", "spaceBetween": "20" } } }' }
+          .swiper-wrapper
+            = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
+          .swiper-pagination
+              
     %section.mb-5
       - unless @previous_matches.empty?
         %h1.title Jogos Anteriores
         
-        .row
-          .col-12
-            .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "navigation": { "nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev" } }' }
-              .swiper-wrapper
-                = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: true
-              .swiper-button-next
-              .swiper-button-prev
+        .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "slidesPerView": "1", "spaceBetween": "10", "pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "breakpoints": { "288": { "slidesPerView": "1", "spaceBetween": "20" }, "640": { "slidesPerView": "1", "spaceBetween": "20" }, "768": { "slidesPerView": "1", "spaceBetween": "20" }, "1024": { "slidesPerView": "2", "spaceBetween": "20" } } }' }
+          .swiper-wrapper
+            = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: true
+          .swiper-pagination
 
   = sidebar

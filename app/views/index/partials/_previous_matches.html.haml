@@ -1,34 +1,30 @@
 .swiper-slide.component-today-matches
-  .row
-    .col-3
-    .col-6
-      .card
-        .info
-          .row
-            .col-md-12
-              %span.date=format_datetime(match.date)
-              %span -
-              %span.match=format_id_match(match.id_match)
-        .teams
-          .row
-            .col-4
-              .team
-                .image
-                  = image_tag(match.team.avatar)
-                %span.name=format_short_name(match.team.name)
-            .col-4
-              .score
-                - if has_score?(match.team_score, match.opponent_score)
-                  %span.badge.badge-default=format_score(match.team_score, match.opponent_score)
-                - else
-                  %i.fas.fa-clock
-            .col-4
-              .team
-                .image
-                  = image_tag(match.opponent.avatar)
-                %span.name=format_short_name(match.opponent.name)
-        .place
-          .row
-            .col-md-12
-              %span.text=match.place
-    .col-3
+  .card
+    .info
+      .row
+        .col-md-12
+          %span.date=format_datetime(match.date)
+          %span -
+          %span.match=format_id_match(match.id_match)
+    .teams
+      .row
+        .col-4
+          .team
+            .image
+              = image_tag(match.team.avatar)
+            %span.name=format_short_name(match.team.name)
+        .col-4
+          .score
+            - if has_score?(match.team_score, match.opponent_score)
+              %span.badge.badge-default=format_score(match.team_score, match.opponent_score)
+            - else
+              %i.fas.fa-clock
+        .col-4
+          .team
+            .image
+              = image_tag(match.opponent.avatar)
+            %span.name=format_short_name(match.opponent.name)
+    .place
+      .row
+        .col-md-12
+          %span.text=match.place
