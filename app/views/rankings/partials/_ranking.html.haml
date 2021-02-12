@@ -4,15 +4,15 @@
     %span -
     %span.team-avatar=image_tag(ranking.team.avatar)
   %td.font-weight-bold=ranking.pontos
-  %td=ranking.jogos
-  %td=ranking.vitorias
-  %td=ranking.empates
-  %td=ranking.derrotas
-  %td=ranking.gols_pro
-  %td=ranking.gols_contra
-  %td=ranking.saldo_de_gols
-  %td=ranking.cartoes_amarelos
-  %td=ranking.cartoes_vermelhos
-  %td=ranking.aproveitamento
+  %td.d-none.d-lg-table-cell=ranking.jogos
+  %td.d-none.d-lg-table-cell=ranking.vitorias
+  %td.d-none.d-lg-table-cell=ranking.empates
+  %td.d-none.d-lg-table-cell=ranking.derrotas
+  %td.d-none.d-lg-table-cell=ranking.gols_pro
+  %td.d-none.d-lg-table-cell=ranking.gols_contra
+  %td.d-none.d-lg-table-cell=ranking.saldo_de_gols
+  %td.d-none.d-lg-table-cell=ranking.cartoes_amarelos
+  %td.d-none.d-lg-table-cell=ranking.cartoes_vermelhos
+  %td.d-none.d-lg-table-cell=ranking.aproveitamento
   %td=style_recentes(ranking.recentes)
   %td.team-avatar=image_tag(ranking.next_opponent.avatar)
