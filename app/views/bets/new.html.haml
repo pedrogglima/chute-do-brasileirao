@@ -7,7 +7,7 @@
         .card
           .card-header.header-custom
             %span Prepare seu chute
-          .card-body.card-form
+          .card-body.card-form{ data: {controller: "number-field" } }
             = form_with model: @resource, url: bets_path do |f| 
               = render "layouts/shared/error_messages", resource: @resource
               = f.hidden_field :match_id, value: @match.id
@@ -19,11 +19,11 @@
                     .name=@match.team.name
                   .form-group
                     .score
-                      = button_tag type: "button", class: "button button-left" do
-                        %i.fas.fa-caret-up
-                      = f.text_field :bet_team_score, class: "input"
-                      = button_tag "^", type: "button", class: "button button-right" do
-                        %i.fas.fa-caret-down
+                      = button_tag type: "button", class: "button button-left", data: { action: "click->number-field#inc_value", id: "bet_team_score"} do
+                        %i.fas.fa-caret-up.non-clickable
+                      = f.text_field :bet_team_score, class: "input", data: { 'number-field-target': "input", id: "bet_team_score" }
+                      = button_tag "^", type: "button", class: "button button-right", data: { action: "click->number-field#dec_value", id: "bet_team_score"} do
+                        %i.fas.fa-caret-down.non-clickable
                 .col-xs-12.col-sm-12.col-md-12.col-lg-6
                   .team-avatar
                     .image
@@ -31,11 +31,11 @@
                     .name=@match.opponent.name
                   .form-group
                     .score
-                      = button_tag type: "button", class: "button button-left" do
-                        %i.fas.fa-caret-up
-                      = f.text_field :bet_opponent_score, class: "input"
-                      = button_tag "^", type: "button", class: "button button-right" do
-                        %i.fas.fa-caret-down
+                      = button_tag type: "button", class: "button button-left", data: { action: "click->number-field#inc_value", id: "bet_opponent_score"} do
+                        %i.fas.fa-caret-up.non-clickable
+                      = f.text_field :bet_opponent_score, class: "input", data: { 'number-field-target': "input", id: "bet_opponent_score" }
+                      = button_tag "^", type: "button", class: "button button-right", data: { action: "click->number-field#dec_value", id: "bet_opponent_score"} do
+                        %i.fas.fa-caret-down.non-clickable
 
               = f.submit "CHUTAR", class: "btn btn-success btn-block"
   = sidebar
