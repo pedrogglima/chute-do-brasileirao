@@ -360,16 +360,6 @@ main {
     }
   }
 
-  // default avatar size for tables
-  table {
-    .team-avatar {
-      img {
-        max-width: 28px;
-        max-height: 28px;
-      }
-    }
-  }
-
   // TODO add respo for mobile
   .ranking {
     font-size: 14px;
@@ -380,6 +370,29 @@ main {
 
     td:nth-last-child(-n + 13) {
       padding: 0.75rem 0.5rem;
+    }
+  }
+
+  // prevent from trigger click event on icons
+  .non-clickable {
+    pointer-events: none;
+
+    svg {
+      pointer-events: none;
+
+      path {
+        pointer-events: none;
+      }
+    }
+  }
+
+  // default avatar size for tables
+  table {
+    .team-avatar {
+      img {
+        max-width: 28px;
+        max-height: 28px;
+      }
     }
   }
 }
