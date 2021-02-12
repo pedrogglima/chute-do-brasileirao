@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 // used by stimulus-carousel
-@import "~swiper/swiper-bundle";
+@import "scss/swiper.scss";
 
 $bg-color: #f6f6f6;
 $bg-card: #fcfcfc;
@@ -255,6 +255,8 @@ main {
   }
 
   .component-today-matches {
+    min-width: 288px;
+
     .card {
       padding: 0.5rem;
       margin-bottom: 1rem;

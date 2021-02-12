@@ -1,0 +1,15 @@
+@import "~swiper/swiper-bundle";
+
+// override swiper styles
+
+// default (margin: 0 4px)
+.swiper-container-horizontal
+  > .swiper-pagination-bullets
+  .swiper-pagination-bullet {
+  margin: -2px 4px;
+}
+
+// default (overflow: hidden)
+.swiper-pagination-bullets-dynamic {
+  overflow: visible;
+}
