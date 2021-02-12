@@ -19,7 +19,7 @@
         
         .row
           .col-12
-            .swiper-container{ data: {controller: "carousel"} }
+            .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "navigation": { "nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev" } }' }
               .swiper-wrapper
                 = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
               .swiper-button-next
@@ -31,7 +31,7 @@
         
         .row
           .col-12
-            .swiper-container{ data: {controller: "carousel"} }
+            .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "navigation": { "nextEl": ".swiper-button-next", "prevEl": ".swiper-button-prev" } }' }
               .swiper-wrapper
                 = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: true
               .swiper-button-next
