@@ -22,6 +22,8 @@ class Team < ApplicationRecord
   validates :avatar_url,
             presence: true
 
+  private
+
   def upload_avatar_from_url
     UploadAvatarWorker.perform_async(id)
   end
