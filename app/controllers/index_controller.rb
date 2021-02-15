@@ -2,19 +2,10 @@
 class IndexController < ApplicationController
   def home
     # TODO: add champship year
-
-    # @today_matches = Match.where(date: Date.today).order(date: :asc)
-    @today_matches = Match.where(date: 1.day.from_now...30.days.from_now)
+    @today_matches = Match.today_matches.order(date: :asc)
+    @next_matches = Match.next_matches(Date.tomorrow).order(date: :asc)
+    @previous_matches = Match.previous_matches(Date.yesterday)
       .order(date: :desc)
-      .limit(2)
-
-    @next_matches = Match.where(date: 1.day.from_now...30.days.from_now)
-      .order(date: :desc)
-      .limit(5)
-
-    @previous_matches = Match.where(date: 30.days.ago...Time.now)
-      .order(date: :desc)
-      .limit(5)
   end
 
   def sidebar
