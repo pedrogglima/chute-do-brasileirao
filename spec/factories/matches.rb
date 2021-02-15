@@ -5,8 +5,8 @@ FactoryBot.define do
   factory :match do
     association :championship
     association :round
-    association :team, name: "team"
-    association :opponent, factory: :team, name: "opponent"
+    association :team
+    association :opponent, factory: :team
     id_match { 100 }
     date do
       Faker::Time.between(
