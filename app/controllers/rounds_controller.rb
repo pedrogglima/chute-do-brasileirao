@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 class RoundsController < ApplicationController
-  def index
-    @resources = Round.joins(:matches)
-  end
+  # TODO: create query
+  def index; end
 end
