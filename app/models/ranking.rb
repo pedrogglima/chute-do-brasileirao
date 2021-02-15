@@ -24,4 +24,9 @@ class Ranking < ApplicationRecord
   validates :cartoes_vermelhos, presence: true
   validates :aproveitamento, presence: true
   validates :recentes, presence: true
+
+  # scopes
+  #
+  scope :top_rank, -> { limit(6) }
+  scope :bottom_rank, -> { limit(4) }
 end
