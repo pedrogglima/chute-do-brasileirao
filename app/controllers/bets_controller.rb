@@ -3,8 +3,9 @@ class BetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @match = Match.first
-    @resources = Bet.all.where(user_id: current_user.id)
+    @resources = Bet
+      .matches_with_teams
+      .where(user_id: current_user.id)
   end
 
   def new
@@ -13,8 +14,7 @@ class BetsController < ApplicationController
   end
 
   def show
-    @match = Match.find(params[:match_id])
-    @resource = Bet.find(params[:id])
+    @resource = Bet.matches_with_teams.find(params[:id])
   end
 
   def create
