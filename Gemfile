@@ -36,6 +36,9 @@ gem('image_processing', '~> 1.2')
 gem('devise')
 gem('haml')
 
+# Authorization system
+gem('pundit', '~> 2.1.0')
+
 # Reduces boot times through caching; required in config/boot.rb
 gem('bootsnap', '>= 1.4.4', require: false)
 
