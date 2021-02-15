@@ -34,5 +34,7 @@ class Match < ApplicationRecord
   # To avoid n+1 issue
   scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
   # To avoid n+1 issue
-  scope :opponent_with_avatar, -> { includes(opponent: { avatar_attachment: :blob }) }
+  scope :opponent_with_avatar, -> {
+    includes(opponent: { avatar_attachment: :blob })
+  }
 end
