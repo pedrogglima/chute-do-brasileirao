@@ -45,7 +45,7 @@ RSpec.describe("Bets", type: :request) do
       it "returns http success" do
         sign_in(user)
 
-        get new_match_bet_path(bet.match.id)
+        get new_match_bet_path(match_id: bet.match.id)
         expect(response).to(have_http_status(:success))
       end
     end
