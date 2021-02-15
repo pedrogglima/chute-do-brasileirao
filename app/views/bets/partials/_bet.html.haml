@@ -3,37 +3,37 @@
     .info
       .row
         .col-md-12
-          %span.text=format_datetime(@match.date)
+          %span.text=format_datetime(bet.match.date)
           %span -
-          %span.text=format_id_match(@match.id_match)
+          %span.text=format_id_match(bet.match.id_match)
     .teams
       .row
         .col-4
           .team
             .image
-              = image_tag(@match.team.avatar) 
-            %span.name=format_short_name(@match.team.name)
+              = image_tag(bet.match.team.avatar) 
+            %span.name=format_short_name(bet.match.team.name)
         .col-4
           .time 
             %span.badge.badge-default=format_bet_score(bet.bet_team_score, bet.bet_opponent_score)
         .col-4
           .team
             .image
-              = image_tag(@match.opponent.avatar)
-            %span.name=format_short_name(@match.opponent.name)
+              = image_tag(bet.match.opponent.avatar)
+            %span.name=format_short_name(bet.match.opponent.name)
 
     .result
       .row
         .col-md-12
-          %span.text=display_result(@match)
-    
-    - if has_score?(@match.team_score, @match.opponent_score)
+          %span.text=display_result(bet.match)
+          
+    - if has_score?(bet.match.team_score, bet.match.opponent_score)
       .message
         .row
           .col-md-12
-            %span.text=select_message(bet, @match)
+            %span.text=select_message(bet, bet.match)
     .btn-right
-      = link_to match_bet_path(id: bet.id, match_id: @match.id), class: "btn btn-link" do
+      = link_to match_bet_path(id: bet.id, match_id: bet.match.id), class: "btn btn-link" do
         %i.fas.fa-plus-circle
         %span detalhes 
         
