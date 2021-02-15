@@ -9,7 +9,10 @@ class BetsController < ApplicationController
   end
 
   def new
-    @match = Match.find(params[:match_id])
+    @match = Match.team_with_avatar
+      .opponent_with_avatar
+      .find(params[:match_id])
+
     @resource = Bet.new
   end
 
