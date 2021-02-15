@@ -73,6 +73,7 @@ group :test do
   gem 'shoulda-matchers', '~> 4.4.1'
   gem 'rspec-sidekiq', '~> 3.1.0'
   gem 'timecop', '~> 0.9.2'
+  gem 'pundit-matchers', '~> 1.6.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
