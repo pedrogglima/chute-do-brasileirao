@@ -10,41 +10,41 @@
             %tr.divider
               %td 
                 %span.highlight Nº do Jogo 
-              %td.result=@match.id_match
+              %td.result=@resource.match.id_match
             %tr
               %td Local
-              %td.result=@match.place
+              %td.result=@resource.match.place
             %tr
               %td Data
-              %td.result=format_date(@match.date)
+              %td.result=format_date(@resource.match.date)
             %tr
               %td Horário
-              %td.result=format_time(@match.date)
+              %td.result=format_time(@resource.match.date)
             %tr.divider
               %td 
                 %span.highlight Time da casa 
-              %td.result.team-avatar=image_tag(@match.team.avatar)
+              %td.result.team-avatar=image_tag(@resource.match.team.avatar)
             %tr
               %td Nome
-              %td.result.team-avatar=@match.team.name
+              %td.result.team-avatar=@resource.match.team.name
             %tr
               %td Número de gols
-              %td.result=style_number_of_goals(@match.team_score)
+              %td.result=style_number_of_goals(@resource.match.team_score)
             %tr
               %td Seu chute
-              %td.result=style_bet_number_of_goals(@resource.bet_team_score, @match.team_score)
+              %td.result=style_bet_number_of_goals(@resource.bet_team_score, @resource.match.team_score)
             %tr.divider
               %td
                 %span.highlight Time de fora
-              %td.result.team-avatar=image_tag(@match.opponent.avatar)
+              %td.result.team-avatar=image_tag(@resource.match.opponent.avatar)
             %tr
               %td Nome
-              %td.result=@match.opponent.name
+              %td.result=@resource.match.opponent.name
             %tr
               %td Número de gols
-              %td.result=style_number_of_goals(@match.opponent_score)
+              %td.result=style_number_of_goals(@resource.match.opponent_score)
             %tr
               %td Seu chute
-              %td.result=style_bet_number_of_goals(@resource.bet_opponent_score, @match.opponent_score)
+              %td.result=style_bet_number_of_goals(@resource.bet_opponent_score, @resource.match.opponent_score)
               
   = sidebar
