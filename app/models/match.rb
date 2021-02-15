@@ -30,4 +30,9 @@ class Match < ApplicationRecord
   scope :today_matches, -> { where(date: Date.today) }
   scope :next_matches, ->(date) { where("date >= ?", date) }
   scope :previous_matches, ->(date) { where("date <= ?", date) }
+
+  # To avoid n+1 issue
+  scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
+  # To avoid n+1 issue
+  scope :opponent_with_avatar, -> { includes(opponent: { avatar_attachment: :blob }) }
 end
