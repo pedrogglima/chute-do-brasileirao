@@ -18,6 +18,7 @@ class BetsController < ApplicationController
 
   def show
     @resource = Bet.matches_with_teams.find(params[:id])
+    authorize(@resource)
   end
 
   def create
