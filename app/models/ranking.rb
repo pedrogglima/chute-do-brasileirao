@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 class Ranking < ApplicationRecord
+  # associations
+  #
   belongs_to :championship
   belongs_to :team
   belongs_to :next_opponent, class_name: "Team", foreign_key: "next_opponent_id"
 
+  # validations
+  #
   validates :posicao,
             presence: true,
             numericality: { only_integer: true },
