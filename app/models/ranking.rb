@@ -29,4 +29,7 @@ class Ranking < ApplicationRecord
   #
   scope :top_rank, -> { limit(6) }
   scope :bottom_rank, -> { limit(4) }
+
+  # To avoid n+1 issue
+  scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
 end
