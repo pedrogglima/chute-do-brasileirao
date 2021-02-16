@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   # rubocop:enable Layout/LineLength
   #
   def current_championship
-    GlobalSetting.singleton.championship
+    @current_championship = GlobalSetting.singleton.championship
   end
 end
