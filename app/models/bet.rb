@@ -31,7 +31,7 @@ class Bet < ApplicationRecord
   private
 
   # Validates whether user can bet or not, based on the match schedule.
-  # User can only bet on the same date of the match and before it started.
+  # User can only bet on the same date of the match and before it start.
   #
   def creation_period
     if match.already_played?

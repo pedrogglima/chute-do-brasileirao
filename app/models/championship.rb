@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 class Championship < ApplicationRecord
+  # associations
+  #
   belongs_to :league
   has_many :matches
   has_many :rankings
 
+  # validations
+  #
   validates :year,
             presence: true,
             uniqueness: { scope: :league_id },
