@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_165930) do
+ActiveRecord::Schema.define(version: 2021_02_16_171030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 2021_02_16_165930) do
     t.bigint "[:league_id, :year]_id"
     t.index ["[:league_id, :year]_id"], name: "index_championships_on_[:league_id, :year]_id"
     t.index ["league_id"], name: "index_championships_on_league_id"
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.bigint "championship_id", null: false
+    t.integer "singleton_guard", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["championship_id"], name: "index_configurations_on_championship_id"
+    t.index ["singleton_guard"], name: "index_configurations_on_singleton_guard", unique: true
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -173,6 +182,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_165930) do
   add_foreign_key "bets", "matches"
   add_foreign_key "bets", "users"
   add_foreign_key "championships", "leagues"
+  add_foreign_key "configurations", "championships"
   add_foreign_key "matches", "championships"
   add_foreign_key "matches", "rounds"
   add_foreign_key "matches", "teams"
