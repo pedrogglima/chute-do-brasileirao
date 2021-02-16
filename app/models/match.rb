@@ -37,4 +37,14 @@ class Match < ApplicationRecord
   scope :opponent_with_avatar, -> {
     includes(opponent: { avatar_attachment: :blob })
   }
+
+  # Public Methods
+  #
+  def today?
+    date&.to_date == Date.today ? true : false
+  end
+
+  def already_played?
+    date.present? && date < Time.now ? true : false
+  end
 end
