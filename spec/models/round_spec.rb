@@ -21,16 +21,4 @@ RSpec.describe(Round, type: :model) do
       it { expect(round).to(be_valid) }
     end
   end
-
-  describe 'number' do
-    subject { round }
-
-    context 'when empty' do
-      before do
-        round.number = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
 end

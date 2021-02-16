@@ -10,6 +10,8 @@ RSpec.describe(League, type: :model) do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it { should validate_length_of(:name).is_at_least(1).is_at_most(100) }
+    it { should validate_uniqueness_of(:name).scoped_to(:division) }
     it { should validate_uniqueness_of(:name).scoped_to(:division) }
   end
 
@@ -19,34 +21,8 @@ RSpec.describe(League, type: :model) do
     end
   end
 
-  describe 'name' do
-    subject { league }
-
-    context 'when empty' do
-      before do
-        league.name = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-
-    context 'when too long' do
-      before { league.name = 'Name' * 100 }
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
-
   describe 'division' do
     subject { league }
-
-    context 'when empty' do
-      before do
-        league.division = nil
-      end
-
-      it { is_expected.to(be_valid) }
-    end
 
     context 'when too long' do
       before { league.division = 'SP' * 100 }

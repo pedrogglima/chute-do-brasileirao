@@ -13,7 +13,9 @@ RSpec.describe(Team, type: :model) do
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
+    it { should validate_length_of(:name).is_at_least(1).is_at_most(100) }
     it { should validate_presence_of(:state) }
+    it { should validate_length_of(:state).is_at_least(1).is_at_most(2) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_presence_of(:avatar_url) }
   end
@@ -27,14 +29,6 @@ RSpec.describe(Team, type: :model) do
   describe 'name' do
     subject { team }
 
-    context 'when empty' do
-      before do
-        team.name = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-
     context 'when too long' do
       before { team.name = 'Name' * 100 }
 
@@ -45,28 +39,8 @@ RSpec.describe(Team, type: :model) do
   describe 'state' do
     subject { team }
 
-    context 'when empty' do
-      before do
-        team.state = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-
     context 'when too long' do
       before { team.state = 'SP' * 2 }
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
-
-  describe 'avatar_url' do
-    subject { team }
-
-    context 'when empty' do
-      before do
-        team.avatar_url = nil
-      end
 
       it { is_expected.to_not(be_valid) }
     end

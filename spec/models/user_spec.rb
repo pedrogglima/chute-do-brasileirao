@@ -10,6 +10,9 @@ RSpec.describe(User, type: :model) do
 
   describe 'validations' do
     it { should validate_presence_of(:email) }
+    it { should validate_length_of(:email).is_at_most(100) }
+    it { should validate_length_of(:first_name).is_at_least(1).is_at_most(100) }
+    it { should validate_length_of(:last_name).is_at_least(1).is_at_most(100) }
     it { should validate_presence_of(:password) }
     it { should validate_confirmation_of(:password) }
     it { should validate_uniqueness_of(:email).case_insensitive }
@@ -30,31 +33,6 @@ RSpec.describe(User, type: :model) do
 
     context 'with invalid address' do
       before { user.email = 'invalid_example' }
-
-      it { is_expected.to_not(be_valid) }
-    end
-
-    context 'with empty address' do
-      before { user.email = nil }
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
-
-  describe 'first and last name' do
-    subject { user }
-
-    context 'when empty' do
-      before do
-        user.first_name = nil
-        user.last_name = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-
-    context 'when too long' do
-      before { user.first_name = 'Name' * 100 }
 
       it { is_expected.to_not(be_valid) }
     end

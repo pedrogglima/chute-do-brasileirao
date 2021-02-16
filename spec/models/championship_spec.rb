@@ -26,28 +26,4 @@ RSpec.describe(Championship, type: :model) do
       it { expect(championship).to(be_valid) }
     end
   end
-
-  describe 'year' do
-    subject { championship }
-
-    context 'when empty' do
-      before do
-        championship.year = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
-
-  describe 'number_of_participants' do
-    subject { championship }
-
-    context 'when empty' do
-      before do
-        championship.number_of_participants = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
 end

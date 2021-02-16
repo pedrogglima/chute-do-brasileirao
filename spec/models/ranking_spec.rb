@@ -33,16 +33,4 @@ RSpec.describe(Ranking, type: :model) do
       it { expect(ranking).to(be_valid) }
     end
   end
-
-  describe 'posicao' do
-    subject { ranking }
-
-    context 'when empty' do
-      before do
-        ranking.posicao = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
-    end
-  end
 end
