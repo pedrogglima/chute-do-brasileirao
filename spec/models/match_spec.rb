@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe(Match, type: :model) do
-  let!(:match) { create :match }
+  subject(:match) { create(:match) }
 
   describe 'associations' do
     it { should belong_to(:championship) }
@@ -32,15 +32,42 @@ RSpec.describe(Match, type: :model) do
     end
   end
 
-  describe 'id_match' do
-    subject { match }
+  describe 'today?' do
+    context 'when match date is nil' do
+      let(:match) { build_stubbed(:match, date: nil) }
 
-    context 'when empty' do
-      before do
-        match.id_match = nil
-      end
+      it { expect(match.today?).to(be(false)) }
+    end
 
-      it { is_expected.to_not(be_valid) }
+    context 'when match is not today' do
+      let(:match) { build_stubbed(:match, :is_not_today) }
+
+      it { expect(match.today?).to(be(false)) }
+    end
+
+    context 'when match is today' do
+      let(:match) { build_stubbed(:match, :is_today) }
+
+      it { expect(match.today?).to(be(true)) }
+    end
+  end
+
+  describe 'already_played?' do
+    context 'when match date is nil' do
+      let(:match) { build_stubbed(:match, date: nil) }
+
+      it { expect(match.already_played?).to(be(false)) }
+    end
+
+    context 'when match is already played' do
+      let(:match) { build_stubbed(:match, :already_played) }
+
+      it { expect(match.already_played?).to(be(true)) }
+    end
+
+    context 'when match is not played yet' do
+      let(:match) { build_stubbed(:match, :not_played_yet) }
+      it { expect(match.already_played?).to(be(false)) }
     end
   end
 end
