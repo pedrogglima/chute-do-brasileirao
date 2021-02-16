@@ -37,7 +37,7 @@ class Bet < ApplicationRecord
     if match.already_played?
       errors.add(:base, 'O período para chute dessa partida já expirou.')
     elsif !match.today?
-      errors.add(:base, 'O período para chute desse partida não iníciou.')
+      errors.add(:base, 'O período para chute dessa partida não iníciou.')
     end
   end
 end
