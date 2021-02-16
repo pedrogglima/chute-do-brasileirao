@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe(Bet, type: :model) do
-  let!(:bet) { create :bet }
+  subject(:bet) { create(:bet) }
 
   describe 'associations' do
     context 'belongs_to' do
@@ -26,33 +26,27 @@ RSpec.describe(Bet, type: :model) do
     end
   end
 
-  describe 'bet_team_score' do
-    subject { bet }
+  describe 'creation_period' do
+    let(:match_already_played) { create(:match, :already_played) }
+    let(:match_is_not_today) { create(:match, :is_not_today) }
+    let(:match_not_played_yet) { create(:match, :not_played_yet) }
 
-    context 'when empty' do
-      before do
-        bet.bet_team_score = nil
-      end
+    context 'when match already played' do
+      let(:bet) { build(:bet, match: match_already_played) }
 
-      it { is_expected.to_not(be_valid) }
-    end
-  end
-
-  describe 'bet_opponent_score' do
-    subject { bet }
-
-    context 'when empty' do
-      before do
-        bet.bet_opponent_score = nil
-      end
-
-      it { is_expected.to_not(be_valid) }
+      it { expect(bet).to_not(be_valid) }
     end
 
-    context 'when out of range' do
-      before { bet.bet_opponent_score = 101 }
+    context 'when match is not today' do
+      let(:bet) { build(:bet, match: match_is_not_today) }
 
-      it { is_expected.to_not(be_valid) }
+      it { expect(bet).to_not(be_valid) }
+    end
+
+    context 'when match is today and is not played yet' do
+      let(:bet) { build(:bet, match: match_not_played_yet) }
+
+      it { expect(bet).to(be_valid) }
     end
   end
 end
