@@ -60,7 +60,7 @@ RSpec.describe("Bets", type: :request) do
     end
 
     describe "POST /create" do
-      let(:match) { create(:match) }
+      let(:match) { create(:match, :not_played_yet) }
 
       it "when valid returns http success" do
         sign_in(user)
