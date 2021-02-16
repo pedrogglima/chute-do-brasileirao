@@ -17,6 +17,8 @@ class Bet < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: 0..100
 
+  validate :creation_period, on: :create
+
   # scopes
   #
   scope :matches_with_teams, -> {
@@ -25,4 +27,17 @@ class Bet < ApplicationRecord
                                  opponent: { avatar_attachment: :blob },
                                ])
                              }
+
+  private
+
+  # Validates whether user can bet or not, based on the match schedule.
+  # User can only bet on the same date of the match and before it started.
+  #
+  def creation_period
+    if match.already_played?
+      errors.add(:base, 'O período para chute dessa partida já expirou.')
+    elsif !match.today?
+      errors.add(:base, 'O período para chute desse partida não iníciou.')
+    end
+  end
 end
