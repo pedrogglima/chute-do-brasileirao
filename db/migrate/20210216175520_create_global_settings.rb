@@ -2,7 +2,7 @@
 class CreateGlobalSettings < ActiveRecord::Migration[6.1]
   def change
     create_table :global_settings do |t|
-      t.references(:championship, null: false, foreign_key: true)
+      t.references(:championship, null: true, foreign_key: true)
       t.integer(:singleton_guard, null: false, default: 0)
       t.timestamps
     end
