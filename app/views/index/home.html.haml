@@ -5,18 +5,24 @@
     %section.mb-5 
       %h1.title Jogos de Hoje
       - if @today_matches.empty?
-        .match-message
-          .row
-            %span Não há jogos hoje.
+        .card.ml-3.mr-3
+          .card-text
+            %span.block= sanitize '<b>Não há jogos do Brasileirão hoje</b>', tags: %w(b)
+            %span.block= sanitize 'Apenas nos jogos do dia você pode dar aquele "chutasso". Acompanhe abaixo quais serão os próximos jogos e quando eles acontecerão.', tags: %w(b)
+                
       - else
         .component-today-matches
           .row
             = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: true
     
     %section.mb-5
-      - unless @next_matches.empty?
-        %h1.title Próximos Jogos
-        
+      %h1.title Próximos Jogos
+      - if @next_matches.empty?
+        .card.ml-3.mr-3
+          .card-text
+            %span.block= sanitize '<b>Ihhhh, não há próximos jogos</b>', tags: %w(b)
+            %span.block= sanitize "Parece que chegamos ao fim do Brasilerão #{@current_championship.year}. Acompanhe os jogos anteriores e fique atento ao início do Brasileirão #{@current_championship.year + 1}.", tags: %w(b)
+      - else        
         .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "slidesPerView": "1", "spaceBetween": "10", "pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "breakpoints": { "288": { "slidesPerView": "1", "spaceBetween": "20" }, "640": { "slidesPerView": "1", "spaceBetween": "20" }, "768": { "slidesPerView": "1", "spaceBetween": "20" }, "1024": { "slidesPerView": "2", "spaceBetween": "20" } } }' }
           .swiper-wrapper
             = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
