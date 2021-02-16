@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class GlobalSetting < ApplicationRecord
   # This references the current championship used on the app.
-  belongs_to :championship, optional: true
+  belongs_to :championship
 
   validates :singleton_guard,
             presence: true,
