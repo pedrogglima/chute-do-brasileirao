@@ -11,7 +11,7 @@ class Configuration < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: [0]
 
-  # This references the championship in the moment and presented in the app.
+  # This references the current championship used on the app.
   belongs_to :championship
 
   def self.instance
