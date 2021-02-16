@@ -2,6 +2,22 @@
 require 'securerandom'
 
 FactoryBot.define do
+  trait :already_played do
+    date { 1.minute.ago }
+  end
+
+  trait :is_not_today do
+    date { 1.day.ago }
+  end
+
+  trait :is_today do
+    date { 1.minute.from_now }
+  end
+
+  trait :not_played_yet do
+    date { 1.minute.from_now }
+  end
+
   factory :match do
     association :championship
     association :round
