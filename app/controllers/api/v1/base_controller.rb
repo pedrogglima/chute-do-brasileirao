@@ -33,7 +33,10 @@ module Api
 
       def authenticate!
         unless logged_in?
-          render(json: { message: 'Por favor, faça o login' }, status: 401)
+          render(
+            json: { message: 'Para continuar, efetue login ou registre-se.' },
+            status: 401
+          )
         end
       end
 
