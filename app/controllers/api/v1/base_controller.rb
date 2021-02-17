@@ -20,7 +20,7 @@ module Api
 
       def generate_token_and_set_to_header(user)
         token = Users::TokenCreatorService.call(user)
-        response.set_header('Authorization: Bearer', token)
+        response.set_header('Authorization', "Bearer #{token}")
       end
 
       def current_user
