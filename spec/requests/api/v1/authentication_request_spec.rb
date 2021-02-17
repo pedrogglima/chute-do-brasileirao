@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Api::V1::Authentications", type: :request) do
+RSpec.describe("Api::v1::Authentications", type: :request) do
   let(:user) { create(:user, password: "password", password_confirmation: "password") }
 
   let(:valid_attributes) do
