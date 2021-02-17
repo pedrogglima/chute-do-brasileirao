@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: %i[create show]
+
+      post 'users/password/new', to: 'password#new'
+      put '/users/password/edit', to: 'password#edit'
       post '/login', to: 'authentication#login'
       delete '/logout', to: 'authentication#logout'
     end
