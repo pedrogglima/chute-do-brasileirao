@@ -10,13 +10,13 @@ class IndexController < ApplicationController
 
     @next_matches = Match.team_with_avatar
       .opponent_with_avatar
-      .next_matches(Date.tomorrow)
+      .next_matches(Date.tomorrow.midnight)
       .where(championship_id: current_championship.id)
       .order(date: :asc)
 
     @previous_matches = Match.team_with_avatar
       .opponent_with_avatar
-      .previous_matches(Date.yesterday)
+      .previous_matches(Date.yesterday.end_of_day)
       .where(championship_id: current_championship.id)
       .order(date: :desc)
   end
