@@ -12,6 +12,31 @@ module Api
 
       respond_to :json
 
+      protected
+
+      def auth_header
+        request.headers['Authorization']
+      end
+
+      def generate_token_and_set_to_header(user)
+        token = Users::TokenCreatorService.call(user)
+        response.set_header('Authorization: Bearer', token)
+      end
+
+      def current_user
+        @user = Users::TokenDecryptorService.call(auth_header)
+      end
+
+      def logged_in?
+        current_user.present?
+      end
+
+      def authenticate!
+        unless logged_in?
+          render(json: { message: 'Por favor, faça o login' }, status: 401)
+        end
+      end
+
       private
 
       def handle_record_not_found_error(e)
