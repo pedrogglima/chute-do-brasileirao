@@ -27,7 +27,7 @@ class Match < ApplicationRecord
 
   # scopes
   #
-  scope :today_matches, -> { where(date: Date.today) }
+  scope :today_matches, -> { where(date: Date.today.all_day) }
   scope :next_matches, ->(date) { where("date >= ?", date) }
   scope :previous_matches, ->(date) { where("date <= ?", date) }
   # To avoid n+1 issue
