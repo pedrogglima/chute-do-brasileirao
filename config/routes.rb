@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   # TODO: add auth for access
   mount Sidekiq::Web => '/sidekiq'
 
+  namespace :api do
+    namespace :v1 do
+    end
+  end
+
   root to: 'index#home'
   get 'sidebar', to: 'index#sidebar'
 
