@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class AuthenticationController < BaseController
+    class AuthenticationController < Api::V1::BaseController
       before_action :authenticate!, only: %i[logout]
 
       def login

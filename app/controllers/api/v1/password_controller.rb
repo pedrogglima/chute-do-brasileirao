@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class PasswordController < BaseController
+    class PasswordController < Api::V1::BaseController
       before_action :find_user_by_email!, only: %i[new]
 
       def new

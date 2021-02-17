@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class UsersController < BaseController
+    class UsersController < Api::V1::BaseController
       before_action :authenticate!, only: %i[show]
 
       def create
