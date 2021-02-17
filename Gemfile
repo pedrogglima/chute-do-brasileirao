@@ -76,6 +76,7 @@ group :test do
   gem 'rspec-sidekiq', '~> 3.1.0'
   gem 'timecop', '~> 0.9.2'
   gem 'pundit-matchers', '~> 1.6.0'
+  gem 'rspec-json_expectations', '~> 1.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
