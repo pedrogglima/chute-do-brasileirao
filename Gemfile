@@ -36,6 +36,8 @@ gem('image_processing', '~> 1.2')
 gem('devise')
 gem('haml')
 
+# Auth with JWT
+gem('jwt', '~> 2.2', '>= 2.2.2')
 # Authorization system
 gem('pundit', '~> 2.1.0')
 
