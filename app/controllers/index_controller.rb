@@ -6,6 +6,7 @@ class IndexController < ApplicationController
     @today_matches = Match.team_with_avatar
       .opponent_with_avatar
       .today_matches
+      .where(championship_id: current_championship.id)
       .order(date: :asc)
 
     @next_matches = Match.team_with_avatar
