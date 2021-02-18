@@ -5,12 +5,45 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: %i[create show]
+      scope(path_names: {
+        new: 'novo',
+        edit: 'editar',
+        create: 'criar',
+        update: 'atualizar',
+        destroy: 'deletar',
+      }) do
+        get 'index', to: 'index#home'
+        get 'sidebar', to: 'index#sidebar'
 
-      post 'users/password/new', to: 'password#new'
-      put '/users/password/edit', to: 'password#edit'
-      post '/login', to: 'authentication#login'
-      delete '/logout', to: 'authentication#logout'
+        resources :usuarios,
+                  controller: 'users',
+                  as: 'users',
+                  only: %i[create show]
+
+        scope path: 'usuario', as: 'user' do
+          post 'senha/novo', to: 'password#new', as: 'password/new'
+          put 'senha/editar', to: 'password#edit', as: 'password/edit'
+          post '/entrar', to: 'authentication#login', as: 'login'
+          delete '/sair', to: 'authentication#logout', as: 'logout'
+        end
+
+        resources :chutes,
+                  controller: 'bets',
+                  as: 'bets',
+                  only: %i[index create]
+
+        resources :partidas, as: 'matches', only: [] do
+          resources :chutes,
+                    controller: 'bets',
+                    as: 'bets',
+                    only: %i[new show]
+        end
+
+        resources :tabelas,
+                  controller: 'rankings',
+                  as: 'rankings',
+                  only: %i[index]
+      end
     end
   end
 

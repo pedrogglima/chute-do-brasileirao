@@ -11,124 +11,112 @@ RSpec.describe("Api::v1::Users", type: :request) do
     }
   end
 
-  let(:user) do
-    create(:user, password: "password", password_confirmation: "password")
-  end
+  api_setup do
+    describe "POST api/v1/users#create" do
+      subject { post api_v1_users_path(params: user_params, format: :json) }
 
-  let(:valid_attributes) do
-    attributes_for(:user, password: "password", email: user.email)
-  end
+      context 'correct params are passed' do
+        it "has some additional info about user" do
+          subject
+          expect(JSON.parse(response.body)).to(include_json(
+            "email": "anon@anon.com",
+            "first_name": "Anonimus",
+            "last_name": "Nope"
+          ))
+        end
 
-  let(:token_new) { Users::TokenCreatorService.call(user) }
+        it "returns created successfuly" do
+          subject
+          expect(response).to(have_http_status(201))
+        end
 
-  let(:token) do
-    { "Authorization" => "Bearer #{token_new}" }
-  end
+        it 'adds new object to db' do
+          expect { subject }.to(change(User, :count).by(1))
+        end
 
-  describe "POST api/v1/users#create" do
-    subject { post api_v1_users_path(params: user_params, format: :json) }
-
-    context 'correct params are passed' do
-      it "has some additional info about user" do
-        subject
-        expect(JSON.parse(response.body)).to(include_json(
-          "email": "anon@anon.com",
-          "first_name": "Anonimus",
-          "last_name": "Nope"
-        ))
+        it "has header with new token" do
+          subject
+          expect(response.header["Authorization"]).to(be_present)
+        end
       end
 
-      it "returns created successfuly" do
-        subject
-        expect(response).to(have_http_status(201))
-      end
+      context "incorrect params are passed" do
+        let(:user_params) do
+          {
+            "email": "anon@anon.com",
+            "password": "",
+            "first_name": "Anonimus",
+            "last_name": "Nope",
+          }
+        end
+        it "returns error Unprocessable Entity" do
+          subject
+          expect(response).to(have_http_status(422))
+        end
 
-      it 'adds new object to db' do
-        expect { subject }.to(change(User, :count).by(1))
-      end
+        it "hasn\'t token inside header" do
+          subject
+          expect(response.header["Authorization"]).to_not(be_present)
+        end
 
-      it "has header with new token" do
-        subject
-        expect(response.header["Authorization: Bearer"]).to(be_present)
-      end
-    end
+        it "hasn\'t token inside body" do
+          subject
+          expect(response.body["Authorization"]).to_not(be_present)
+        end
 
-    context "incorrect params are passed" do
-      let(:user_params) do
-        {
-          "email": "anon@anon.com",
-          "password": "",
-          "first_name": "Anonimus",
-          "last_name": "Nope",
-        }
-      end
-      it "returns error Unprocessable Entity" do
-        subject
-        expect(response).to(have_http_status(422))
-      end
+        it 'doesn\'t create new object' do
+          expect { subject }.to(change(User, :count).by(0))
+        end
 
-      it "hasn\'t token inside header" do
-        subject
-        expect(response.header["Authorization: Bearer"]).to_not(be_present)
-      end
-
-      it "hasn\'t token inside body" do
-        subject
-        expect(response.body["Authorization: Bearer"]).to_not(be_present)
-      end
-
-      it 'doesn\'t create new object' do
-        expect { subject }.to(change(User, :count).by(0))
-      end
-
-      it "returns correct error message" do
-        subject
-        expect(JSON.parse(response.body)['errors']).to(eq(["Senha não pode ficar em branco"]))
-      end
-    end
-  end
-
-  describe "GET api/v1/user#show" do
-    context "correct params are passed" do
-      subject do
-        get api_v1_user_path(id: user.id, format: :json), headers: token
-      end
-
-      it "has some additional info about user" do
-        subject
-        expect(JSON.parse(response.body)).to(eq(
-          "id" => user.id,
-          "email" => user.email,
-          "first_name" => user.first_name,
-          "last_name" => user.last_name,
-          "created_at" => user.created_at.strftime("%FT%T.%L%:z"),
-          "updated_at" => user.updated_at.strftime("%FT%T.%L%:z")
-        ))
-      end
-
-      it "returns correct status" do
-        subject
-        expect(response).to(have_http_status(200))
+        it "returns correct error message" do
+          subject
+          expect(JSON.parse(response.body)['errors']).to(eq(["Senha não pode ficar em branco"]))
+        end
       end
     end
 
-    context "incorrect params are passed" do
-      subject do
-        get api_v1_user_path(
-          id: user.id,
-          format: :json
-        ),
-        headers: { Authorization: "Token 123" }
+    describe "GET api/v1/user#show" do
+      context "correct params are passed" do
+        subject do
+          get api_v1_user_path(id: @user.id, format: :json), headers: @token
+        end
+
+        it "has some additional info about user" do
+          subject
+          expect(JSON.parse(response.body)).to(eq(
+            "id" => @user.id,
+            "email" => @user.email,
+            "first_name" => @user.first_name,
+            "last_name" => @user.last_name,
+            "created_at" => @user.created_at.strftime("%FT%T.%L%:z"),
+            "updated_at" => @user.updated_at.strftime("%FT%T.%L%:z")
+          ))
+        end
+
+        it "returns correct status" do
+          subject
+          expect(response).to(have_http_status(200))
+        end
       end
 
-      it "returns error Unauthorized" do
-        subject
-        expect(response).to(have_http_status(401))
-      end
+      context "incorrect params are passed" do
+        subject do
+          get api_v1_user_path(
+            id: @user.id,
+            format: :json
+          ),
+          headers: { Authorization: "Token 123" }
+        end
 
-      it "returns correct error message" do
-        subject
-        expect(JSON.parse(response.body)['message']).to(eq("Para continuar, efetue login ou registre-se."))
+        it "returns error Unauthorized" do
+          subject
+          expect(response).to(have_http_status(401))
+        end
+
+        it "returns correct error message" do
+          subject
+          expect(JSON.parse(response.body)['message']).to(eq("Para continuar, efetue login ou registre-se."))
+        end
       end
     end
   end

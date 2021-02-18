@@ -11,14 +11,14 @@ RSpec.describe('Api::V1::PasswordControllers', type: :request) do
            reset_password_sent_at: Time.now)
   end
 
-  describe 'POST api/v1/password#new' do
+  describe 'POST api/v1/usuarios/senhas#create' do
     let(:valid_attributes) do
       attributes_for(:user, email: user.email)
     end
 
     context 'correct params are passed' do
       subject do
-        post api_v1_users_password_new_path(
+        post api_v1_user_password_new_path(
           params: valid_attributes,
           format: :json
         )
@@ -43,7 +43,7 @@ RSpec.describe('Api::V1::PasswordControllers', type: :request) do
       end
 
       subject do
-        post api_v1_users_password_new_path(
+        post api_v1_user_password_new_path(
           params: invalid_email,
           format: :json
         )
@@ -62,7 +62,7 @@ RSpec.describe('Api::V1::PasswordControllers', type: :request) do
     end
   end
 
-  describe 'PUT api/v1/password#edit' do
+  describe 'PUT api/v1/usuarios/senhas#update' do
     let!(:reset_password_params) do
       {
         reset_password_token: user.reset_password_token,
@@ -72,7 +72,7 @@ RSpec.describe('Api::V1::PasswordControllers', type: :request) do
     end
 
     subject do
-      put api_v1_users_password_edit_path(
+      put api_v1_user_password_edit_path(
         format: :json,
         params: reset_password_params
       )
@@ -86,7 +86,7 @@ RSpec.describe('Api::V1::PasswordControllers', type: :request) do
 
       it 'has header with new token' do
         subject
-        expect(response.header['Authorization: Bearer']).to(be_present)
+        expect(response.header['Authorization']).to(be_present)
       end
     end
 
