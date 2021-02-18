@@ -30,6 +30,9 @@ class Ranking < ApplicationRecord
   scope :top_rank, -> { limit(6) }
   scope :bottom_rank, -> { limit(4) }
   # To avoid n+1 issue
+  scope :championship_relationships, -> {
+    joins(championship: { league: :division })
+  }
   scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
   scope :next_opponent_with_avatar, -> {
     includes(next_opponent: { avatar_attachment: :blob })
