@@ -2,28 +2,28 @@
 require 'rails_helper'
 
 RSpec.describe(Api::V1::BetsController, type: :request) do
-  api_setup do
-    let(:invalid_token) { { "Authorization" => "Bearer invalid token" } }
-    let(:match) { create(:match, :is_today) }
-    let(:bet) { build_stubbed(:bet, match: match) }
+  let(:invalid_token) { { "Authorization" => "Bearer invalid token" } }
+  let(:match) { create(:match, :is_today) }
+  let(:bet) { build_stubbed(:bet, match: match) }
 
-    let(:bet_params) { attributes_for(:bet) }
-    let(:valid_params) do
-      {
-        "match_id" => match.id,
-        "bet_team_score" => bet[:bet_team_score],
-        "bet_opponent_score" => bet[:bet_opponent_score],
-      }
-    end
+  let(:bet_params) { attributes_for(:bet) }
+  let(:valid_params) do
+    {
+      "match_id" => match.id,
+      "bet_team_score" => bet[:bet_team_score],
+      "bet_opponent_score" => bet[:bet_opponent_score],
+    }
+  end
 
-    let(:invalid_params) do
-      {
-        "match_id" => "",
-        "bet_team_score" => bet[:bet_team_score],
-        "bet_opponent_score" => bet[:bet_opponent_score],
-      }
-    end
-
+  let(:invalid_params) do
+    {
+      "match_id" => "",
+      "bet_team_score" => bet[:bet_team_score],
+      "bet_opponent_score" => bet[:bet_opponent_score],
+    }
+  end
+  
+  setup_api do
     describe "non-loggers" do
       it "returns 401 (#index)" do
         get api_v1_bets_path(format: :json), xhr: true, headers: invalid_token

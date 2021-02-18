@@ -11,7 +11,7 @@ RSpec.describe(Api::V1::UsersController, type: :request) do
     }
   end
 
-  api_setup do
+  setup_api do
     describe "POST api/v1/users#create" do
       subject { post api_v1_users_path(params: user_params, format: :json) }
 
