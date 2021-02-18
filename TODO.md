@@ -2,7 +2,6 @@
 
 ## Now
 
-- Validate: allow only one chute per match
 - Cache queries on redis
 
 - Fix css on Bet#create when display error message

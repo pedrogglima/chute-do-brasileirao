@@ -7,6 +7,8 @@ class Bet < ApplicationRecord
 
   # validations
   #
+  validates :user_id, uniqueness: { scope: :match_id }
+
   validates :bet_team_score,
             presence: true,
             numericality: { only_integer: true },
