@@ -21,6 +21,9 @@ class Bet < ApplicationRecord
 
   # scopes
   #
+  scope :matches_relationships, -> {
+    joins(match: { championship: { league: :division } })
+  }
   scope :matches_with_teams, -> {
                                includes(match: [
                                  team: { avatar_attachment: :blob },
@@ -34,10 +37,12 @@ class Bet < ApplicationRecord
   # User can only bet on the same date of the match and before it start.
   #
   def creation_period
-    if match.already_played?
-      errors.add(:base, 'O período para chute dessa partida já expirou.')
-    elsif !match.today?
-      errors.add(:base, 'O período para chute dessa partida não iníciou.')
+    if match
+      if match.already_played?
+        errors.add(:base, 'O período para chute dessa partida já expirou.')
+      elsif !match.today?
+        errors.add(:base, 'O período para chute dessa partida não iníciou.')
+      end
     end
   end
 end
