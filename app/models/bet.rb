@@ -7,7 +7,11 @@ class Bet < ApplicationRecord
 
   # validations
   #
-  validates :user_id, uniqueness: { scope: :match_id }
+  validates :user_id,
+            uniqueness: {
+              scope: :match_id,
+              message: "Você já chutou essa partida. Só é possível dar um chute por partida.",
+            }
 
   validates :bet_team_score,
             presence: true,
@@ -19,7 +23,7 @@ class Bet < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: 0..100
 
-  validate :creation_period, on: :create
+  # validate :creation_period, on: :create
 
   # scopes
   #

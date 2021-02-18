@@ -15,6 +15,10 @@ pt-BR:
         current_password: Senha atual
         confirmation_token: Link para confirmação de email
         reset_password_token: Link para resetar senha
+      bet:
+        user_id: ""
+        bet_team_score: Chute para o time
+        bet_opponent_score: Chute para o time
     errors:
       messages:
         record_invalid: "A validação falhou: %{errors}"
