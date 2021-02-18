@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Api::v1::Rankings", type: :request) do
+RSpec.describe(Api::V1::RankingsController, type: :request) do
   describe "#index" do
     subject do
       get api_v1_rankings_path(format: :json), xhr: true

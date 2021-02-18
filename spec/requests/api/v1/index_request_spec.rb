@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Api::v1::Index", type: :request) do
+RSpec.describe(Api::V1::IndexController, type: :request) do
   describe "#index" do
     subject do
       get api_v1_index_path(format: :json), xhr: true

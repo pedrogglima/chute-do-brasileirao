@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Bets", type: :request) do
+RSpec.describe(BetsController, type: :request) do
   let(:user) { create(:user) }
   let(:bet) { create(:bet, user: user) }
 

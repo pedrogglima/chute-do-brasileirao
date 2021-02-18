@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe('Api::V1::PasswordControllers', type: :request) do
+RSpec.describe(Api::V1::PasswordController, type: :request) do
   let!(:user) do
     create(:user,
            password: 'password',

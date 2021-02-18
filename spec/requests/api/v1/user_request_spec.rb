@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Api::v1::Users", type: :request) do
+RSpec.describe(Api::V1::UsersController, type: :request) do
   let(:user_params) do
     {
       "email": "anon@anon.com",

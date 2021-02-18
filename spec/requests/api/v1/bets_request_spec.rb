@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Api::v1::Bets", type: :request) do
+RSpec.describe(Api::V1::BetsController, type: :request) do
   api_setup do
     let(:invalid_token) { { "Authorization" => "Bearer invalid token" } }
     let(:match) { create(:match, :is_today) }

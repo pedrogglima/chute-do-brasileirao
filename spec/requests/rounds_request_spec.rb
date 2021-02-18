@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe("Rounds", type: :request) do
+RSpec.describe(RoundsController, type: :request) do
   describe "GET /index" do
     it "returns http success" do
       get rounds_path
