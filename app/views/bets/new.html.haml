@@ -8,8 +8,8 @@
           .card-header.header-custom
             %span Prepare seu chute
           .card-body.card-form{ data: {controller: "number-field" } }
-            = form_with model: @resource, url: bets_path do |f| 
-              = render "layouts/shared/error_messages", resource: @resource
+            = form_with model: @bet, url: bets_path do |f| 
+              = render "layouts/shared/error_messages", resource: @bet
               = f.hidden_field :match_id, value: @match.id
               .row.mb-3
                 .col-xs-12.col-sm-12.col-md-12.col-lg-6

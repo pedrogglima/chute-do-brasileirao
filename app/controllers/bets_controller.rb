@@ -3,7 +3,7 @@ class BetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @resources = Bet
+    @bets = Bet
       .matches_with_teams
       .where(user_id: current_user.id)
   end
@@ -13,23 +13,23 @@ class BetsController < ApplicationController
       .opponent_with_avatar
       .find(params[:match_id])
 
-    @resource = Bet.new
+    @bet = Bet.new
   end
 
   def show
-    @resource = Bet.matches_with_teams.find(params[:id])
-    authorize(@resource)
+    @bet = Bet.matches_with_teams.find(params[:id])
+    authorize(@bet)
   end
 
   def create
-    @resource = Bet.new(bet_params)
-    @resource.user = current_user
+    @bet = Bet.new(bet_params)
+    @bet.user = current_user
 
-    if @resource.save
+    if @bet.save
       flash[:success] = 'Seu chute foi realizado com sucesso!'
-      redirect_to(match_bet_path(@resource, match_id: @resource.match_id))
+      redirect_to(match_bet_path(@bet, match_id: @bet.match_id))
     else
-      @match = Match.find(@resource.match_id)
+      @match = Match.find(@bet.match_id)
       render(:new, status: 422)
     end
   end
