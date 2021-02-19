@@ -1,7 +1,15 @@
-require "active_support/core_ext/integer/time"
+# frozen_string_literal: true
+
+require 'active_support/core_ext/integer/time'
+require_relative '../initializers/log_formatter'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+
+  # Custom loger formatter - less active storage verbose
+
+  config.log_tags = [:uuid]
+  config.log_formatter = CustomLogFormatter.new
 
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
