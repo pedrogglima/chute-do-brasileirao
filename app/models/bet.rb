@@ -23,7 +23,7 @@ class Bet < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: 0..100
 
-  # validate :creation_period, on: :create
+  validate :creation_period, on: :create
 
   # scopes
   #

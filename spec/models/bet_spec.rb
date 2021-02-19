@@ -12,8 +12,11 @@ RSpec.describe(Bet, type: :model) do
   end
 
   describe 'validations' do
-    it { should validate_uniqueness_of(:user_id).scoped_to(:match_id) }
-
+    it { should validate_uniqueness_of(:user_id)
+      .scoped_to(:match_id)
+      .with_message("Você já chutou essa partida. Só é possível dar um chute por partida.") 
+    }
+    
     it { should validate_presence_of(:bet_team_score) }
     it { should validate_numericality_of(:bet_team_score) }
     it { should validate_inclusion_of(:bet_team_score).in_range(0..100) }
