@@ -4,7 +4,7 @@ module Cache
   class TopRankingsService < Cache::RankingsService
     KEY = 'ranking_list'
     FROM = 0
-    TO = 6
+    TO = 5
 
     def call
       res = list(KEY, FROM, TO)
