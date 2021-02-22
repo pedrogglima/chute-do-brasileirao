@@ -1,0 +1,34 @@
+.col-12.col-xs-12.col-sm-12.col-md-12.col-lg-6
+  .card
+    .info
+      .row
+        .col-md-12
+          %span.text=format_datetime(match.date)
+          %span -
+          %span.text=format_id_match(match.id_match)
+    .teams
+      .row
+        .col-4
+          .team
+            .image
+              = image_tag(match.team.avatar) 
+            %span.name=format_short_name(match.team.name)
+        .col-4
+          .time 
+            %span.badge.badge-default=format_time(match.date)
+        .col-4
+          .team
+            .image
+              = image_tag(match.opponent.avatar)
+            %span.name=format_short_name(match.opponent.name)
+    .place
+      .row
+        .col-md-12
+          %span.text=match.place
+    .btn-bet
+      = link_to new_match_bet_path(match.id), class: "btn btn-success btn-custom" do
+        %i.fas.fa-futbol
+        %span Chutar
+        
+        
+      

@@ -3,28 +3,28 @@
     .info
       .row
         .col-md-12
-          %span.date=format_datetime(match.date)
+          %span.date=format_datetime(match[:date].to_datetime)
           %span -
-          %span.match=format_id_match(match.id_match)
+          %span.match=format_id_match(match[:id_match])
     .teams
       .row
         .col-4
           .team
             .image
-              = image_tag(match.team.avatar)
-            %span.name=format_short_name(match.team.name)
+              = image_tag(match[:team_avatar])
+            %span.name=format_short_name(match[:team_name])
         .col-4
           .score
-            - if has_score?(match.team_score, match.opponent_score)
-              %span.badge.badge-default=format_score(match.team_score, match.opponent_score)
+            - if has_score?(match[:team_score], match[:opponent_score])
+              %span.badge.badge-default=format_score(match[:team_score], match[:opponent_score])
             - else
               %i.fas.fa-clock
         .col-4
           .team
             .image
-              = image_tag(match.opponent.avatar)
-            %span.name=format_short_name(match.opponent.name)
+              = image_tag(match[:opponent_avatar])
+            %span.name=format_short_name(match[:opponent_name])
     .place
       .row
         .col-md-12
-          %span.text=match.place
+          %span.text=match[:place]

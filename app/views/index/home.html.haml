@@ -13,7 +13,7 @@
       - else
         .component-today-matches
           .row
-            = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: true
+            = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: false
     
     %section.mb-5
       %h1.title Próximos Jogos
@@ -25,7 +25,7 @@
       - else        
         .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "slidesPerView": "1", "spaceBetween": "10", "pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "breakpoints": { "288": { "slidesPerView": "1", "spaceBetween": "20" }, "640": { "slidesPerView": "1", "spaceBetween": "20" }, "768": { "slidesPerView": "1", "spaceBetween": "20" }, "1024": { "slidesPerView": "2", "spaceBetween": "20" } } }' }
           .swiper-wrapper
-            = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: true
+            = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: false
           .swiper-pagination
               
     %section.mb-5
@@ -34,7 +34,7 @@
         
         .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel" }, 'data-carousel-options-value': '{ "slidesPerView": "1", "spaceBetween": "10", "pagination": { "el": ".swiper-pagination", "dynamicBullets": "true" }, "breakpoints": { "288": { "slidesPerView": "1", "spaceBetween": "20" }, "640": { "slidesPerView": "1", "spaceBetween": "20" }, "768": { "slidesPerView": "1", "spaceBetween": "20" }, "1024": { "slidesPerView": "2", "spaceBetween": "20" } } }' }
           .swiper-wrapper
-            = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: true
+            = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: false
           .swiper-pagination
 
   = sidebar

@@ -3,37 +3,37 @@
     .info
       .row
         .col-md-12
-          - if match.date
-            %span.text=format_datetime(match.date)
+          - if match[:date].to_datetime
+            %span.text=format_datetime(match[:date].to_datetime)
             %span -
-            %span.text=format_id_match(match.id_match)
+            %span.text=format_id_match(match[:id_match])
           - else
             %span aguardando
             %span -
-            %span.text=format_id_match(match.id_match)
+            %span.text=format_id_match(match[:id_match])
     .teams
       .row
         .col-4
           .team
             .image
-              = image_tag(match.team.avatar)
-            %span.name=format_short_name(match.team.name)
+              = image_tag(match[:team_avatar])
+            %span.name=format_short_name(match[:team_name])
         .col-4
           .time 
-            - if match.date
-              %span.badge.badge-default=format_time(match.date)
+            - if match[:date].to_datetime
+              %span.badge.badge-default=format_time(match[:date].to_datetime)
             - else
               %i.fas.fa-clock                
         .col-4
           .team
             .image
-              = image_tag(match.opponent.avatar)
-            %span.name=format_short_name(match.opponent.name)
+              = image_tag(match[:opponent_avatar])
+            %span.name=format_short_name(match[:opponent_name])
     .place
       .row
         .col-md-12
-          - if match.place
-            %span.text=match.place
+          - if match[:place]
+            %span.text=match[:place]
           - else
             %span
     .btn-bet
