@@ -15,7 +15,7 @@ module Cache
 
         return res unless res.empty?
 
-        load_objects(KEY)
+        load_resources(KEY)
         list(KEY, FROM, TO)
       end
       
@@ -25,9 +25,9 @@ module Cache
         end
       end
       
-      def load_objects(key)
+      def load_resources(key)
         resources.each do |resource|
-          $redis.rpush(KEY, to_json(resource))
+          $redis.rpush(key, to_json(resource))
         end
       end
 
@@ -39,6 +39,7 @@ module Cache
         raise 'this method should be overriden'
       end
       
+      # generate urls for Active Storage associations
       def extract_url(resource)
         rails_blob_path(resource, disposition: 'attachment', only_path: true)
       end
