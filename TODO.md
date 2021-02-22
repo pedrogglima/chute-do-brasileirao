@@ -2,6 +2,11 @@
 
 ## Now
 
+- Add comments on how create sneakers workers (rake file) and create queue on rabbitmq (rake setup file)
+- Add coments on services, etc.
+
+- add sidekiq to scraper to automate the schedule for scrap pages
+
 - add twitter auth & create bet twitter
 - apply robocup to project
 - add commentaries on services/caches/...
