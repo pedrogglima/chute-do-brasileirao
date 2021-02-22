@@ -15,15 +15,15 @@ services:
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack_dev_server
 
-  scrapper:
+  scraper:
     build:
-      context: ../scrapper/.
+      context: ../scraper/.
       dockerfile: Dockerfile
     ports:
       - "3050:3050"
     volumes:
-      - ../scrapper/:/var/www/app
-      - gem_cache_scrapper:/gems
+      - ../scraper/:/var/www/app
+      - gem_cache_scraper:/gems
     env_file:
       - .env/development
 
@@ -77,8 +77,18 @@ services:
       - 5672:5672
       - 15672:15672
 
+  sneakers:
+    build: ../scraper/.
+    volumes:
+      - .:/sneakers
+    depends_on:
+      - rabbitmq
+      - redis_cache
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+
 volumes:
   db_data:
   gem_cache_app:
-  gem_cache_scrapper:
+  gem_cache_scraper:
   redis_cache_data:
