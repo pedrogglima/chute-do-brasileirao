@@ -3,7 +3,7 @@
 .row
   .col-md-8
     %h1.title Meus chutes
-    - if @resources.empty?
+    - if @bets.empty?
       .card.ml-3.mr-3
         .card-text
           %span.block= sanitize '<b>Você não possue nenhum chute ainda.</b>', tags: %w(b)
@@ -11,5 +11,5 @@
     - else
       .component-today-matches
         .row
-          = render partial: 'bets/partials/bet', collection: @resources, cached: true
+          = render partial: 'bets/partials/bet', collection: @bets, cached: true
   = sidebar
