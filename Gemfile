@@ -36,6 +36,8 @@ gem('image_processing', '~> 1.2')
 gem('devise')
 gem('haml')
 
+# Message Broker Rabbitmq cli
+gem 'bunny', '~> 2.4'
 # Auth with JWT
 gem('jwt', '~> 2.2', '>= 2.2.2')
 # Authorization system
