@@ -13,6 +13,7 @@
 
 ## Later
 
+- Create configs (as user, passw) to rabbit config
 - Create rounds page
 - Resize team avatar before saving
 - Create table statistic per match & show statistic on bet#show
