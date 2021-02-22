@@ -2,6 +2,7 @@
 
 ## Now
 
+- remove format logger for AS
 - add twitter auth & create bet twitter
 - apply robocup to project
 - add commentaries on services/caches/...
