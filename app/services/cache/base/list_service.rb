@@ -18,6 +18,8 @@ module Cache
         load_resources(KEY)
         list(KEY, FROM, TO)
       end
+
+      protected
       
       def list(key, from, to)
         $redis.lrange(key, from, to).map do |raw_resource|
