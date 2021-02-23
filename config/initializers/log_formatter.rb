@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/MethodLength
 class CustomLogFormatter
   def initialize
     # Suppress is an array of request uuids. Each listed uuid means no messages from this request.
@@ -37,3 +39,5 @@ class CustomLogFormatter
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/PerceivedComplexity

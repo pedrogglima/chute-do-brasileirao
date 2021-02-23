@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# Set all the 'must' class for working properly without setting too much  configuration.
+# Set all the 'must' class for working properly
 
-division = Division.create!(name: "Série A")
+division = Division.create!(name: 'Série A')
 
-league = League.create!(name: "Campeonato Brasileiro", division: division)
+league = League.create!(name: 'Campeonato Brasileiro', division: division)
 
 championship = Championship.create!(
   league: league,

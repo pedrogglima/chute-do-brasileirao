@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $stdout.sync = true # this line is needed by docker-compose to work with Ruby output
 
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../Gemfile', __dir__)

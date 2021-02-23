@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   # TODO: add auth for access
   mount Sidekiq::Web => '/sidekiq'
@@ -6,12 +7,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       scope(path_names: {
-        new: 'novo',
-        edit: 'editar',
-        create: 'criar',
-        update: 'atualizar',
-        destroy: 'deletar',
-      }) do
+              new: 'novo',
+              edit: 'editar',
+              create: 'criar',
+              update: 'atualizar',
+              destroy: 'deletar'
+            }) do
         get 'index', to: 'index#home'
         get 'sidebar', to: 'index#sidebar'
 
@@ -52,32 +53,32 @@ Rails.application.routes.draw do
 
   scope(path_names: { new: 'novo', edit: 'editar', password: 'senha' }) do
     devise_for :users,
-      path: 'usuario',
-      class_name: "User",
-      controllers: {
-        sessions: 'users/sessions',
-        registrations: 'users/registrations',
-        passwords: 'users/passwords',
-      },
-      path_names: {
-        sign_in: 'entrar',
-        sign_out: 'sair',
-        sign_up: 'cadastrar-se',
-        confirmation: 'verificacao-email',
-      }
+               path: 'usuario',
+               class_name: 'User',
+               controllers: {
+                 sessions: 'users/sessions',
+                 registrations: 'users/registrations',
+                 passwords: 'users/passwords'
+               },
+               path_names: {
+                 sign_in: 'entrar',
+                 sign_out: 'sair',
+                 sign_up: 'cadastrar-se',
+                 confirmation: 'verificacao-email'
+               }
   end
 
   scope(path_names: {
-    new: 'novo',
-    edit: 'editar',
-    create: 'criar',
-    update: 'atualizar',
-    destroy: 'deletar',
-  }) do
+          new: 'novo',
+          edit: 'editar',
+          create: 'criar',
+          update: 'atualizar',
+          destroy: 'deletar'
+        }) do
     resources :tabelas,
-            controller: 'rankings',
-            as: 'rankings',
-            only: [:index]
+              controller: 'rankings',
+              as: 'rankings',
+              only: [:index]
 
     resources :rodadas,
               controller: 'rounds',
@@ -88,12 +89,12 @@ Rails.application.routes.draw do
       resources :chutes,
                 controller: 'bets',
                 as: 'bets',
-                only: [:new, :show]
+                only: %i[new show]
     end
 
     resources :chutes,
-                controller: 'bets',
-                as: 'bets',
-                only: [:index, :create]
+              controller: 'bets',
+              as: 'bets',
+              only: %i[index create]
   end
 end
