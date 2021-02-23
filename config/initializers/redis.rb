@@ -10,10 +10,10 @@ Redis.exists_returns_integer = false
 
 redis_instance = Redis.new(host: 'redis_cache', port: 6379)
 
-if Rails.env.production?
-  $redis = Redis::Namespace.new(:production, redis: redis_instance)
-elsif Rails.env.development?
-  $redis = Redis::Namespace.new(:development, redis: redis_instance)
-else
-  $redis = Redis::Namespace.new(:test, redis: MockRedis.new)
-end
+Redis.current = if Rails.env.production?
+                  Redis::Namespace.new(:prod, redis: redis_instance)
+                elsif Rails.env.development?
+                  Redis::Namespace.new(:dev, redis: redis_instance)
+                else
+                  Redis::Namespace.new(:test, redis: MockRedis.new)
+                end
