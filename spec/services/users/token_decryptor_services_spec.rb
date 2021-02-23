@@ -7,12 +7,12 @@ RSpec.describe(Users::TokenDecryptorService) do
   let(:token_new) { Users::TokenCreatorService.call(user) }
   let!(:decrypt_service) { Users::TokenDecryptorService.new(token) }
 
-  describe "#call" do
+  describe '#call' do
     subject { decrypt_service.call }
 
     context 'token are successfully decrypted' do
       let!(:token) do
-        { "Authorization" => "Bearer #{token_new}" }.to_s
+        { 'Authorization' => "Bearer #{token_new}" }.to_s
       end
 
       it 'tokens are valid ' do
@@ -38,7 +38,7 @@ RSpec.describe(Users::TokenDecryptorService) do
 
     context 'error occurred with decryption' do
       let!(:token) do
-        { "Authorization" => "Bearer #{token_new}ivalid" }.to_s
+        { 'Authorization' => "Bearer #{token_new}ivalid" }.to_s
       end
 
       it 'tokens are valid ' do

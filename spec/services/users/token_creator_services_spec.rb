@@ -6,7 +6,7 @@ RSpec.describe(Users::TokenCreatorService) do
   let!(:user) { create(:user) }
   let!(:create_service) { Users::TokenCreatorService.new(user) }
 
-  describe "#call" do
+  describe '#call' do
     subject { create_service.call }
 
     context 'token for user are correctly set' do
