@@ -18,6 +18,6 @@ FactoryBot.define do
     cartoes_amarelos { 10 }
     cartoes_vermelhos { 10 }
     aproveitamento { 10 }
-    recentes { "VVV" }
+    recentes { 'VVV' }
   end
 end
