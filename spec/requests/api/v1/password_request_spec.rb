@@ -32,7 +32,8 @@ RSpec.describe(Api::V1::PasswordController, type: :request) do
       it 'should return correct message' do
         subject
         expect(JSON.parse(response.body)['success']).to(
-          eq('Dentro de minutos, você receberá um e-mail com instruções para a troca da sua senha.')
+          eq('Dentro de minutos, você receberá um e-mail' \
+            ' com instruções para a troca da sua senha.')
         )
       end
     end
@@ -67,7 +68,7 @@ RSpec.describe(Api::V1::PasswordController, type: :request) do
       {
         reset_password_token: user.reset_password_token,
         new_password: 'new_password',
-        new_password_confirmation: 'new_password',
+        new_password_confirmation: 'new_password'
       }
     end
 
@@ -95,7 +96,7 @@ RSpec.describe(Api::V1::PasswordController, type: :request) do
         {
           reset_password_token: user.reset_password_token,
           new_password: 'new_password',
-          new_password_confirmation: 'incorrect',
+          new_password_confirmation: 'incorrect'
         }
       end
 
@@ -106,7 +107,9 @@ RSpec.describe(Api::V1::PasswordController, type: :request) do
 
       it 'should return correct message' do
         subject
-        expect(JSON.parse(response.body)['error']).to(eq("Senha diferente de Confirmação senha."))
+        expect(JSON.parse(response.body)['error']).to(
+          eq('Senha diferente de Confirmação senha.')
+        )
       end
     end
   end

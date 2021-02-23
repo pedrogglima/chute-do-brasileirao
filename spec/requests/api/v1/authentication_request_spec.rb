@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe(Api::V1::AuthenticationController, type: :request) do
   let(:user) do
-    create(:user, password: "password", password_confirmation: "password")
+    create(:user, password: 'password', password_confirmation: 'password')
   end
 
   let(:valid_attributes) do
@@ -11,84 +12,88 @@ RSpec.describe(Api::V1::AuthenticationController, type: :request) do
   end
 
   let(:invalid_attributes) do
-    attributes_for(:user, email: "invalid")
+    attributes_for(:user, email: 'invalid')
   end
 
-  describe "POST api/v1/user/login#login" do
-    context "correct params are passed" do
+  describe 'POST api/v1/user/login#login' do
+    context 'correct params are passed' do
       subject do
         post api_v1_user_login_path(params: valid_attributes, format: :json)
       end
 
-      it "returns status 200" do
+      it 'returns status 200' do
         subject
         expect(response).to(have_http_status(200))
       end
 
-      it "has header with new token" do
+      it 'has header with new token' do
         subject
-        expect(response.header["Authorization"]).to(be_present)
+        expect(response.header['Authorization']).to(be_present)
       end
     end
 
-    context "incorrect params are passed" do
+    context 'incorrect params are passed' do
       subject do
         post api_v1_user_login_path(params: invalid_attributes, format: :json)
       end
 
-      it "returns status 200" do
+      it 'returns status 200' do
         subject
         expect(response).to(have_http_status(401))
       end
 
-      it "returns correct error message" do
+      it 'returns correct error message' do
         subject
-        expect(JSON.parse(response.body)['error']).to(eq("Log in falhou! Usuário ou senha incorreto."))
+        expect(JSON.parse(response.body)['error']).to(
+          eq('Log in falhou! Usuário ou senha incorreto.')
+        )
       end
 
       it "hasn't token inside header" do
         subject
-        expect(response.header["Authorization"]).to_not(be_present)
+        expect(response.header['Authorization']).to_not(be_present)
       end
     end
   end
 
-  describe "DELETE api/v1/user/authentication#logout" do
+  describe 'DELETE api/v1/user/authentication#logout' do
     let(:token_new) { Users::TokenCreatorService.call(user) }
 
     let(:token) do
-      { "Authorization" => "Bearer #{token_new}" }
+      { 'Authorization' => "Bearer #{token_new}" }
     end
 
-    context "correct params are passed" do
+    context 'correct params are passed' do
       subject { delete api_v1_user_logout_path(format: :json), headers: token }
 
-      it "returns status 200" do
+      it 'returns status 200' do
         subject
         expect(response).to(have_http_status(200))
       end
 
-      it "returns correct error message" do
+      it 'returns correct error message' do
         subject
         expect(JSON.parse(response.body)['message']).to(eq('Saiu com sucesso.'))
       end
     end
 
-    context "incorrect params are passed" do
+    context 'incorrect params are passed' do
       let!(:token) do
-        { "Authorization" => "Bearer some_hash344sd4rtwesdf" }
+        { 'Authorization' => 'Bearer some_hash344sd4rtwesdf' }
       end
 
       subject { delete api_v1_user_logout_path(format: :json), headers: token }
 
-      it "returns status 401" do
+      it 'returns status 401' do
         subject
         expect(response).to(have_http_status(401))
       end
 
-      it "returns correct error message" do
+      it 'returns correct error message' do
         subject
-        expect(JSON.parse(response.body)['message']).to(eq('Para continuar, efetue login ou registre-se.'))
+        expect(JSON.parse(response.body)['message']).to(
+          eq('Para continuar, efetue login ou registre-se.')
+        )
       end
     end
   end
