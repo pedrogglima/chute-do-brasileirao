@@ -1,17 +1,18 @@
 # frozen_string_literal: true
+
 class BetsController < ApplicationController
   before_action :authenticate_user!
 
   def index
     @bets = Bet
-      .matches_with_teams
-      .where(user_id: current_user.id)
+            .matches_with_teams
+            .where(user_id: current_user.id)
   end
 
   def new
     @match = Match.team_with_avatar
-      .opponent_with_avatar
-      .find(params[:match_id])
+                  .opponent_with_avatar
+                  .find(params[:match_id])
 
     @bet = Bet.new
   end

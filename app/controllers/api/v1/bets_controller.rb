@@ -6,16 +6,19 @@ module Api
       before_action :authenticate!
 
       def index
-        @bets = current_user.bets
-          .matches_relationships
-          .where(matches: { championship_id: current_championship.id })
-          .matches_with_teams
+        @bets =
+          current_user.bets
+                      .matches_relationships
+                      .where(
+                        matches: { championship_id: current_championship.id }
+                      )
+                      .matches_with_teams
       end
 
       def new
         @match = Match.team_with_avatar
-          .opponent_with_avatar
-          .find(params[:match_id])
+                      .opponent_with_avatar
+                      .find(params[:match_id])
 
         @bet = Bet.new
       end

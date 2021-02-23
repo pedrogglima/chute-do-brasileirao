@@ -4,21 +4,18 @@ module Api
   module V1
     class AuthenticationController < Api::V1::BaseController
       before_action :authenticate!, only: %i[logout]
+      before_action :find_user_by_email!, only: %i[login]
 
       def login
-        user = User.find_by(email: params[:email])
-
-        if user&.valid_password?(params[:password])
-          generate_token_and_set_to_header(user)
+        if @user&.valid_password?(params[:password])
+          generate_token_and_set_to_header(@user)
           render(
             partial: 'api/v1/users/partials/user',
-            locals: { user: user },
+            locals: { user: @user },
             status: 200
           )
         else
-          render(
-            json: { error: 'Log in falhou! Usuário ou senha incorreto.' }, status: 401
-          )
+          render(json: { error: invalid_credential_message }, status: 401)
         end
       end
 
@@ -29,6 +26,16 @@ module Api
         else
           render(json: { error: 'Unauthorize' }, status: 401)
         end
+      end
+
+      private
+
+      def find_user_by_email!
+        @user = User.find_by(email: params[:email])
+      end
+
+      def invalid_credential_message
+        'Log in falhou! Usuário ou senha incorreto.'
       end
     end
   end
