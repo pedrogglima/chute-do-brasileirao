@@ -15,7 +15,7 @@
             %span.name=format_short_name(match[:team_name])
         .col-4
           .score
-            - if has_score?(match[:team_score], match[:opponent_score])
+            - if score?(match[:team_score], match[:opponent_score])
               %span.badge.badge-default=format_score(match[:team_score], match[:opponent_score])
             - else
               %i.fas.fa-clock
