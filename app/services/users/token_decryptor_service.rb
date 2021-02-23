@@ -7,10 +7,10 @@ module Users
     end
 
     def call
-      unless @decoded_hash.nil?
-        user = User.find_by(id: user_id)
-        user if exp > Time.now.to_i && jti == user.jti
-      end
+      return if @decoded_hash.nil?
+
+      user = User.find_by(id: user_id)
+      user if exp > Time.now.to_i && jti == user.jti
     end
 
     private
@@ -28,19 +28,23 @@ module Users
     end
 
     def decoded_token(auth_header)
-      if auth_header
-        token = auth_header.split(' ')[1]
-        begin
-          JWT.decode(
-            token,
-            Rails.application.secrets.secret_key_base,
-            true,
-            algorithm: 'HS256'
-          )
-        rescue JWT::DecodeError
-          nil
-        end
+      return unless auth_header
+
+      token = auth_header.split(' ')[1]
+      begin
+        decode_token(token)
+      rescue JWT::DecodeError
+        nil
       end
+    end
+
+    def decode_token(token)
+      JWT.decode(
+        token,
+        Rails.application.secrets.secret_key_base,
+        true,
+        algorithm: 'HS256'
+      )
     end
   end
 end

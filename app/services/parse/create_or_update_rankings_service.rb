@@ -7,65 +7,80 @@ module Parse
     end
 
     def call
-      championship = GlobalSetting.singleton.championship
-
-      @rankings.each do |r|
-        ranking = Ranking.where(
-          posicao: r["posicao"],
-          championship_id: championship.id
-        ).first  
-        
-        team = Team.find_by(name: r["team"])
-        next_opponent = Team.find_by(name: r["next_opponent"])
-        
-        if ranking
-          update(ranking, r, team, next_opponent)
-        else
-          create(r, championship.id, team, next_opponent)
-        end
+      @rankings.each do |ranking_hash|
+        create_or_update(ranking_hash)
       end
     end
 
     private
 
-    def update(obj, ranking, team, next_opponent)
-      obj.update!(
-        team_id: team.id,
-        pontos:  ranking["pontos"],
-        jogos:  ranking["jogos"],
-        vitorias:  ranking["vitorias"],
-        empates:  ranking["empates"],
-        derrotas:  ranking["derrotas"],
-        gols_pro:  ranking["gols_pro"],
-        gols_contra:  ranking["gols_contra"],
-        saldo_de_gols:  ranking["saldo_de_gols"],
-        cartoes_amarelos:  ranking["cartoes_amarelos"],
-        cartoes_vermelhos:  ranking["cartoes_vermelhos"],
-        aproveitamento:  ranking["aproveitamento"],
-        recentes:  ranking["recentes"],
-        next_opponent_id: next_opponent.id
+    def create_or_update(ranking_hash)
+      ranking = find_ranking(ranking_hash['posicao'])
+      team = find_team_by_name(ranking_hash['team'])
+      next_opponent = find_team_by_name(ranking_hash['next_opponent'])
+
+      if ranking
+        update(ranking, ranking_hash, team.id, next_opponent.id)
+      else
+        create(ranking_hash, current_championship.id, team.id, next_opponent.id)
+      end
+    end
+
+    def current_championship
+      GlobalSetting.singleton.championship
+    end
+
+    def find_ranking(posicao)
+      Ranking.where(
+        posicao: posicao,
+        championship_id: current_championship.id
+      ).first
+    end
+
+    def find_team_by_name(name)
+      Team.find_by(name: name)
+    end
+
+    # rubocop:disable Metrics/MethodLength
+    def update(ranking, ranking_hash, team_id, next_opponent_id)
+      ranking.update!(
+        team_id: team_id,
+        pontos: ranking_hash['pontos'],
+        jogos: ranking_hash['jogos'],
+        vitorias: ranking_hash['vitorias'],
+        empates: ranking_hash['empates'],
+        derrotas: ranking_hash['derrotas'],
+        gols_pro: ranking_hash['gols_pro'],
+        gols_contra: ranking_hash['gols_contra'],
+        saldo_de_gols: ranking_hash['saldo_de_gols'],
+        cartoes_amarelos: ranking_hash['cartoes_amarelos'],
+        cartoes_vermelhos: ranking_hash['cartoes_vermelhos'],
+        aproveitamento: ranking_hash['aproveitamento'],
+        recentes: ranking_hash['recentes'],
+        next_opponent_id: next_opponent_id
       )
     end
 
-    def create(ranking, champ_id, team, next_opponent)
+    def create(ranking_hash, champ_id, team_id, next_opponent_id)
       Ranking.create!(
         championship_id: champ_id,
-        posicao: ranking["posicao"].to_i,
-        team_id: team.id,
-        pontos:  ranking["pontos"],
-        jogos:  ranking["jogos"],
-        vitorias:  ranking["vitorias"],
-        empates:  ranking["empates"],
-        derrotas:  ranking["derrotas"],
-        gols_pro:  ranking["gols_pro"],
-        gols_contra:  ranking["gols_contra"],
-        saldo_de_gols:  ranking["saldo_de_gols"],
-        cartoes_amarelos:  ranking["cartoes_amarelos"],
-        cartoes_vermelhos:  ranking["cartoes_vermelhos"],
-        aproveitamento:  ranking["aproveitamento"],
-        recentes:  ranking["recentes"],
-        next_opponent_id: next_opponent.id
+        posicao: ranking_hash['posicao'].to_i,
+        team_id: team_id,
+        pontos: ranking_hash['pontos'],
+        jogos: ranking_hash['jogos'],
+        vitorias: ranking_hash['vitorias'],
+        empates: ranking_hash['empates'],
+        derrotas: ranking_hash['derrotas'],
+        gols_pro: ranking_hash['gols_pro'],
+        gols_contra: ranking_hash['gols_contra'],
+        saldo_de_gols: ranking_hash['saldo_de_gols'],
+        cartoes_amarelos: ranking_hash['cartoes_amarelos'],
+        cartoes_vermelhos: ranking_hash['cartoes_vermelhos'],
+        aproveitamento: ranking_hash['aproveitamento'],
+        recentes: ranking_hash['recentes'],
+        next_opponent_id: next_opponent_id
       )
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

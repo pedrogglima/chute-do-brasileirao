@@ -14,7 +14,7 @@ module Cache
     end
 
     protected
-    
+
     def resources
       Match.team_with_avatar
            .opponent_with_avatar
@@ -24,6 +24,13 @@ module Cache
     end
 
     def to_json(match)
+      hash_resource(match).to_json
+    end
+
+    private
+
+    # rubocop:disable Metrics/MethodLength
+    def hash_resource(match)
       {
         id: match.id,
         date: match.date,
@@ -34,7 +41,8 @@ module Cache
         opponent_name: match.opponent.name,
         place: match.place,
         update_at: match.updated_at
-      }.to_json
+      }
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

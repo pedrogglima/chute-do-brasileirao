@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cache
   module Base
     class ListService < ApplicationService
@@ -20,16 +22,16 @@ module Cache
       end
 
       protected
-      
+
       def list(key, from, to)
-        $redis.lrange(key, from, to).map do |raw_resource|
+        redis.lrange(key, from, to).map do |raw_resource|
           JSON.parse(raw_resource).with_indifferent_access
         end
       end
-      
+
       def load_resources(key)
         resources.each do |resource|
-          $redis.rpush(key, to_json(resource))
+          redis.rpush(key, to_json(resource))
         end
       end
 
@@ -37,13 +39,19 @@ module Cache
         raise 'this method should be overriden'
       end
 
-      def to_json
+      def to_json(*_args)
         raise 'this method should be overriden'
       end
-      
+
       # generate urls for Active Storage associations
       def extract_url(resource)
         rails_blob_path(resource, disposition: 'attachment', only_path: true)
+      end
+
+      private
+
+      def redis
+        Redis.current
       end
     end
   end

@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module Parse
@@ -8,14 +7,14 @@ module Parse
     end
 
     def call
-      @teams.each do |t|
-        team = Team.find_by(name: t["name"])
+      @teams.each do |team_hash|
+        team = Team.find_by(name: team_hash['name'])
         next if team
-      
+
         Team.create!(
-          name: t["name"],
-          state: t["state"],
-          avatar_url: t["avatar_url"]
+          name: team_hash['name'],
+          state: team_hash['state'],
+          avatar_url: team_hash['avatar_url']
         )
       end
     end

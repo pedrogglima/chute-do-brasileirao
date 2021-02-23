@@ -24,6 +24,14 @@ module Cache
     end
 
     def to_json(match)
+      hash_resource(match).to_json
+    end
+
+    private
+
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def hash_resource(match)
       {
         id: match.id,
         date: match.date,
@@ -35,7 +43,9 @@ module Cache
         opponent_name: match.opponent.name,
         opponent_score: match.opponent_score,
         place: match.place
-      }.to_json
+      }
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
   end
 end
