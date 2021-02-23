@@ -9,7 +9,7 @@ module RequestSetup
       # Auth
       @user = create(:user)
       token_new = Users::TokenCreatorService.call(@user)
-      @token = { "Authorization" => "Bearer #{token_new}" }
+      @token = { 'Authorization' => "Bearer #{token_new}" }
 
       # Global settings
       championship = create(:championship)
