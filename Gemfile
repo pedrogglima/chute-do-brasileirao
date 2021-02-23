@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source('https://rubygems.org')
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -23,7 +24,7 @@ gem('redis', '~> 4.0')
 # Add namespace to redis
 gem('redis-namespace', '~> 1.5', '>= 1.5.2')
 # Lib for Redis connection
-gem("hiredis", "~> 0.6.0")
+gem('hiredis', '~> 0.6.0')
 # Use Sidekiq as background scheduler
 gem('sidekiq', '~> 6.0.7')
 # Dependency for Sidekiq
@@ -52,10 +53,10 @@ gem('bootsnap', '>= 1.4.4', require: false)
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'pry', '~> 0.12.2'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'faker', '~> 2.14.0'
+  gem 'pry', '~> 0.12.2'
   gem 'rspec-rails', '~> 4.0.1'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
 
 group :development do
@@ -63,12 +64,12 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'haml-rails', '~> 2.0'
   gem 'rubocop', require: false
+  gem 'spring'
 end
 
 group :test do
@@ -78,14 +79,14 @@ group :test do
   # Clean database test after each interaction
   gem 'database_cleaner', '~> 1.8.5'
   gem 'factory_bot_rails', '~>  5.2.0'
-  gem 'shoulda-matchers', '~> 4.4.1'
-  gem 'rspec-sidekiq', '~> 3.1.0'
-  gem 'timecop', '~> 0.9.2'
-  gem 'pundit-matchers', '~> 1.6.0'
-  gem 'rspec-json_expectations', '~> 1.2'
   gem 'mock_redis', '~> 0.16.1'
+  gem 'pundit-matchers', '~> 1.6.0'
   gem 'rspec-expectations', '~> 3.4'
+  gem 'rspec-json_expectations', '~> 1.2'
+  gem 'rspec-sidekiq', '~> 3.1.0'
+  gem 'shoulda-matchers', '~> 4.4.1'
+  gem 'timecop', '~> 0.9.2'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem('tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby])
+gem('tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby])
