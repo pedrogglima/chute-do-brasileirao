@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 class Match < ApplicationRecord
   # associations
   #
   belongs_to :championship
   belongs_to :round
   belongs_to :team
-  belongs_to :opponent, class_name: "Team", foreign_key: "opponent_id"
+  belongs_to :opponent, class_name: 'Team', foreign_key: 'opponent_id'
 
   # validations
   #
@@ -28,18 +29,18 @@ class Match < ApplicationRecord
   # scopes
   #
   scope :today_matches, -> { where(date: Date.today.all_day) }
-  scope :next_matches, ->(date) { where("date >= ? OR date IS ?", date, nil) }
-  scope :previous_matches, ->(date) { where("date <= ?", date) }
+  scope :next_matches, ->(date) { where('date >= ? OR date IS ?', date, nil) }
+  scope :previous_matches, ->(date) { where('date <= ?', date) }
   # To avoid n+1 issue
   scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
-  scope :opponent_with_avatar, -> {
+  scope :opponent_with_avatar, lambda {
     includes(opponent: { avatar_attachment: :blob })
   }
 
   # public methods
   #
   def today?
-    date&.to_date == Date.today ? true : false
+    date&.to_date == Date.today
   end
 
   def already_played?

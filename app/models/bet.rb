@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Bet < ApplicationRecord
   # associations
   #
@@ -10,7 +11,8 @@ class Bet < ApplicationRecord
   validates :user_id,
             uniqueness: {
               scope: :match_id,
-              message: "Você já chutou essa partida. Só é possível dar um chute por partida.",
+              message: 'Você já chutou essa partida.' \
+              ' Só é possível dar um chute por partida.'
             }
 
   validates :bet_team_score,
@@ -27,14 +29,14 @@ class Bet < ApplicationRecord
 
   # scopes
   #
-  scope :matches_relationships, -> {
+  scope :matches_relationships, lambda {
     joins(match: { championship: { league: :division } })
   }
-  scope :matches_with_teams, -> {
+  scope :matches_with_teams, lambda {
                                includes(match: [
-                                 team: { avatar_attachment: :blob },
-                                 opponent: { avatar_attachment: :blob },
-                               ])
+                                          team: { avatar_attachment: :blob },
+                                          opponent: { avatar_attachment: :blob }
+                                        ])
                              }
 
   private
@@ -43,12 +45,12 @@ class Bet < ApplicationRecord
   # User can only bet on the same date of the match and before it start.
   #
   def creation_period
-    if match
-      if match.already_played?
-        errors.add(:base, 'O período para chute dessa partida já expirou.')
-      elsif !match.today?
-        errors.add(:base, 'O período para chute dessa partida não iníciou.')
-      end
+    return unless match
+
+    if match.already_played?
+      errors.add(:base, 'O período para chute dessa partida já expirou.')
+    elsif !match.today?
+      errors.add(:base, 'O período para chute dessa partida não iníciou.')
     end
   end
 end

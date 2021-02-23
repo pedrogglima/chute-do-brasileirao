@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class User < ApplicationRecord
   # associations
   #
@@ -11,7 +12,7 @@ class User < ApplicationRecord
   validates :last_name, length: { within: 1..100 }
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :rememberable, :trackable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :rememberable, :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :validatable, :trackable
 
