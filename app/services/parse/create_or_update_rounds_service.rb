@@ -16,7 +16,7 @@ module Parse
         round = create_round(r, championship.id) unless round
 
         # each round has n numbers of matches
-        create_matches(round, r, championship)
+        create_matches(round, r, championship.id)
       end
     end
 
@@ -24,22 +24,22 @@ module Parse
 
     def create_round(round, champ_id)
       Round.create!(
-        championship_id: championship.id,
+        championship_id: champ_id,
         number: round["number"].to_i
       )
     end
 
-    def create_matches(obj_round, round, championship)
+    def create_matches(obj_round, round, champ_id)
       round["matches"].each do |m|
         match = Match.where(
           id_match: m["id_match"],
-          championship_id: championship.id
+          championship_id: champ_id
         ).first
 
         if match
           update_match(match, m)
         else
-          create_match(m, championship.id, obj_round.id)
+          create_match(m, champ_id, obj_round.id)
         end
       end
     end
