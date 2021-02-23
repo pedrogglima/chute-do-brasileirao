@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe(Championship, type: :model) do
@@ -18,7 +19,9 @@ RSpec.describe(Championship, type: :model) do
     it { should validate_inclusion_of(:year).in_range(2020..3000) }
     it { should validate_presence_of(:number_of_participants) }
     it { should validate_numericality_of(:number_of_participants) }
-    it { should validate_inclusion_of(:number_of_participants).in_range(1..1000) }
+    it do
+      should validate_inclusion_of(:number_of_participants).in_range(1..1000)
+    end
   end
 
   describe 'attributes' do

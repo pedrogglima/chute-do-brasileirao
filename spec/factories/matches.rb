@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 FactoryBot.define do
   trait :already_played do
     date { 1.minute.ago }
@@ -37,4 +36,3 @@ FactoryBot.define do
     place { 'Estadio - Cidadade - Estado' }
   end
 end
-# rubocop:enable Metrics/BlockLength
