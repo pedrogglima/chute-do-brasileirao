@@ -9,7 +9,7 @@ module Cache
 
       return res unless res.empty?
 
-      load_objects(KEY)
+      load_resources(KEY)
       list(KEY, FROM, TO)
     end
 

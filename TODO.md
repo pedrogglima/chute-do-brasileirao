@@ -2,7 +2,15 @@
 
 ## Now
 
+<<<<<<< HEAD
 - remove format logger for AS
+=======
+- Add comments on how create sneakers workers (rake file) and create queue on rabbitmq (rake setup file)
+- Add coments on services, etc.
+
+- add sidekiq to scraper to automate the schedule for scrap pages
+
+>>>>>>> adding-rabbitmq
 - add twitter auth & create bet twitter
 - apply robocup to project
 - add commentaries on services/caches/...
@@ -14,6 +22,7 @@
 
 ## Later
 
+- Create configs (as user, passw) to rabbit config
 - Create rounds page
 - Resize team avatar before saving
 - Create table statistic per match & show statistic on bet#show

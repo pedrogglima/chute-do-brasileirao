@@ -1,11 +1,10 @@
 # frozen_string_literal: true
-require 'securerandom'
 
 FactoryBot.define do
   factory :ranking do
     association :championship
-    association :team, name: "team"
-    association :next_opponent, factory: :team, name: "opponent"
+    association :team
+    association :next_opponent, factory: :team
 
     posicao { 10 }
     pontos { 10 }

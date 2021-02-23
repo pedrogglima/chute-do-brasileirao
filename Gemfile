@@ -20,6 +20,8 @@ gem('turbolinks', '~> 5')
 gem('jbuilder', '~> 2.7')
 # Use Redis adapter to run Action Cable in production
 gem('redis', '~> 4.0')
+# Add namespace to redis
+gem('redis-namespace', '~> 1.5', '>= 1.5.2')
 # Lib for Redis connection
 gem("hiredis", "~> 0.6.0")
 # Use Sidekiq as background scheduler
@@ -36,6 +38,10 @@ gem('image_processing', '~> 1.2')
 gem('devise')
 gem('haml')
 
+# Message Broker RabbitMQ cli
+gem 'bunny', '~> 2.4'
+# Background Processing for RabbitMQ
+gem 'sneakers', '~> 2.3', '>= 2.3.5'
 # Auth with JWT
 gem('jwt', '~> 2.2', '>= 2.2.2')
 # Authorization system
@@ -77,6 +83,8 @@ group :test do
   gem 'timecop', '~> 0.9.2'
   gem 'pundit-matchers', '~> 1.6.0'
   gem 'rspec-json_expectations', '~> 1.2'
+  gem 'mock_redis', '~> 0.16.1'
+  gem 'rspec-expectations', '~> 3.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
