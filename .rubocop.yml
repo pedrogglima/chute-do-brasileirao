@@ -9,3 +9,4 @@ Layout/LineLength:
   Exclude:
     - "config/**/*"
     - "Gemfile"
+    - "Rakefile"
