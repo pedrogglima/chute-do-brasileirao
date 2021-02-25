@@ -53,6 +53,7 @@ There aren't much to say here, the image says by itself. The only think I can sa
 - **Championship**: almost all the main entities are related direct and indirect to it (e.g matches, rounds, guesses/bets). Also, every year we have a new championship.
 - **Round**: the only purpose of this entity is map 10 matches. The championship has 38 rounds with 10 matches each, which sum up to 380 matches.
 - **Match**: this entity represents the real matches between two teams, the place of the game, the date and time, the scores and everything else that can happen during the match.
+- **Ranking**: This entity represent the team ranking on the championship. It also has details about the team during the championship's matches (e.g number of games, number of goals, number of vitories, next opponent, etc)
 - **Division**: the CBF has many division, and I let it open to the future possibility of adding more divisions to the project - right now only division A is taking in count.
 - **League**: as the same as division, I let it open to the possibility of adding others leagues besides the CBF.
 - **Team**: this entity represents the real teams, with their names, avatar and, maybe in the future, the association with the entity player.
