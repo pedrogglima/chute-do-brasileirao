@@ -60,4 +60,20 @@ RSpec.describe(User, type: :model) do
       end
     end
   end
+
+  describe 'full_name' do
+    subject { user }
+
+    context 'when last_name is nil' do
+      before { user.last_name = nil }
+      it { expect(user.full_name).to(eq(user.first_name)) }
+    end
+
+    context 'when last_name is present' do
+      before { user.last_name = 'Lastname' }
+      it do
+        expect(user.full_name).to(eq("#{user.first_name} #{user.last_name}"))
+      end
+    end
+  end
 end

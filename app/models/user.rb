@@ -24,4 +24,10 @@ class User < ApplicationRecord
     where('reset_password_sent_at > ?', Time.now - 4 * 3600)
       .find_by!(reset_password_token: token)
   }
+
+  # public methods
+  #
+  def full_name
+    "#{first_name} #{last_name}".strip
+  end
 end
