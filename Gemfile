@@ -36,7 +36,14 @@ gem('sidekiq-scheduler', '~> 3.0.1')
 # Use Active Storage variant
 gem('image_processing', '~> 1.2')
 
-gem('devise')
+# We need to pull from master because of omniauth 2 compatibility
+gem 'devise', github: 'heartcombo/devise', branch: 'master'
+# Auth with Twitter, etc
+gem 'omniauth', '~> 2.0', '>= 2.0.3'
+gem 'omniauth-twitter', '~> 1.4'
+# Needed for Oauth2
+gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
+
 gem('haml')
 
 # Message Broker RabbitMQ cli
