@@ -9,7 +9,7 @@ class User < ApplicationRecord
   #
   validates :email, uniqueness: true, length: { maximum: 100 }
   validates :first_name, length: { within: 1..100 }
-  validates :last_name, length: { within: 1..100 }
+  validates :last_name, length: { maximum: 100 }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :rememberable, :omniauthable
