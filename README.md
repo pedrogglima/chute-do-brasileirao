@@ -74,7 +74,7 @@ Future expectations are increase the number of users interacting with the projec
 
 - Creating more guess/bet (e.g Guess the players that will make goals)
 - Creating more interaction among users (e.g Top 5 users bets; show users statistics about guesses)
-- Adding avatar for the users using their favorite team.
+- Adding a favorite team avatar for users.
 - Creating a mobile app: better access and interoperability for user.
 
 ## How to use
