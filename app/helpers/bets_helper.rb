@@ -2,9 +2,9 @@
 
 module BetsHelper
   def format_bet_score(bet_team_score, bet_opponent_score)
-    return if bet_team_score && bet_opponent_score
+    return unless bet_team_score && bet_opponent_score
 
-    "#{bet_team_score} x #{bet_opponent_score}"
+    "Seu chute: #{bet_team_score} x #{bet_opponent_score}"
   end
 
   def style_bet_number_of_goals(bet, score)
@@ -20,11 +20,7 @@ module BetsHelper
   end
 
   def display_result(match)
-    if has_score?(match.team_score, match.opponent_score)
-      "Resultado: #{match.team_score} x #{match.opponent_score}"
-    else
-      'Resultado: Aguardando'
-    end
+    "#{match.team_score} x #{match.opponent_score}"
   end
 
   def select_message(bet, match)

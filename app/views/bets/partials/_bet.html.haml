@@ -14,8 +14,12 @@
               = image_tag(bet.match.team.avatar) 
             %span.name=format_short_name(bet.match.team.name)
         .col-4
-          .time 
-            %span.badge.badge-default=format_bet_score(bet.bet_team_score, bet.bet_opponent_score)
+          .time
+            - if score?(bet.match.team_score, bet.match.opponent_score)
+              %span.badge.badge-default=display_result(bet.match)
+            - else
+              %i.fas.fa-clock
+            
         .col-4
           .team
             .image
@@ -25,9 +29,9 @@
     .result
       .row
         .col-md-12
-          %span.text=display_result(bet.match)
-          
-    - if has_score?(bet.match.team_score, bet.match.opponent_score)
+          %span.text=format_bet_score(bet.bet_team_score, bet.bet_opponent_score)
+
+    - if score?(bet.match.team_score, bet.match.opponent_score)
       .message
         .row
           .col-md-12
