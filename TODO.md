@@ -7,13 +7,13 @@
 - Add coments on services, etc.
 - add commentaries on services/caches/...
 
-- add twitter auth & create bet twitter
 - Cache queries on redis (missing pagination for previous/next matches)
 
 - Fix css on Bet#create when display error message
 
 ## Later
 
+- create bet twitter
 - Create configs (as user, passw) to rabbit config
 - Create rounds page
 - Resize team avatar before saving
