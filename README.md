@@ -1,16 +1,35 @@
 # Table of Contents
 
-- [1. Introduction](#introduction)
-  - [1.1. Who should read this document?](#who-should-read)
-- [2. Campeonato Brasileiro de Futebol](#campeonato-brasileiro)
-- [3. Project Architecture](#architecture)
-  - [3.1. Overview architecture](#overview-architecture)
-  - [3.2. Database relational entity](#database-relational-entity)
-  - [3.3. Tools, Libraries and 3º Services](#tools)
-- [4. Future Expectations](#future-expectations)
-- [5. How to use](#how-to-use)
+- [1. Introduction](#1.-introduction)
 
-## Introduction
+  - [1.1. Who should read this document?](#1.1.-who-should-read-this-document?)
+
+- [2. Campeonato Brasileiro de Futebol](#2.-campeonato-brasileiro-de-futebol)
+- [3. Project Architecture](#3.-project-architecture)
+  - [3.1. Overview architecture](#3.1.-overview-architecture)
+  - [3.2. Database relational entity](#3.2.-database-relational-entity)
+  - [3.3. Tools, Libraries and 3º Services](#3.3.-tools-libraries-and-3º-services)
+- [4. Getting started](#4.-getting-started)
+
+  - [4.1. Prerequisites](#4.1.-prerequisites)
+  - [4.2. Repositories](#4.2.-repositories)
+  - [4.3. Updating the docker-compose.yml](#4.3.-updating-the-docker-compose.yml)
+  - [4.4. Creating the Postgres database](#4.4.-creating-the-postgres-database)
+  - [4.5. Running Docker](#4.5.-running-docker)
+  - [4.6. RabbitMQ Setup](#4.6.-rabbitmq-setup)
+  - [4.7. Runnings specs](#4.7.-running-specs)
+
+- [5. Usage](#5.-usage)
+  - [5.1. UI](#5.1.-ui)
+    - [5.1.1. Login](#5.1.1-login)
+    - [5.1.2. Making a bet](#5.1.2.-making-a-bet)
+    - [5.1.3. My bets](#5.1.3.-my-bets)
+  - [5.2. API](#5.2.-api)
+    - [5.2.1. Login](#5.2.1.-login)
+    - [5.2.2. Requesting current rankings](#5.2.2.-requesting-current-rankings)
+- [6. Future Expectations](#6.-future-expectations)
+
+## 1. Introduction
 
 _Note: First of all, this is more a personal portfolio than a open source project. This document doesn't follow the conventions used on open source project._
 
@@ -20,11 +39,11 @@ The image below is the app's frontpage. In the main panel we can see information
 
 ![Frontpage](./images/frontpage.png "Frontpage")
 
-### Who should read this document?
+### 1.1. Who should read this document?
 
 If you are recruiter and found this page througth my curriculum, or if you already know the webpage and want to understant more about it. If you are in one of these categories, you can reads this document to understant about the project and how it was build.
 
-## Campeonato Brasileiro de Futebol
+## 2. Campeonato Brasileiro de Futebol
 
 CBF (Campeonato Brasileiro de Futebol) is a brazilian soccer championship that happens once a year (on the time of the writing, the championship was in the end of the CBF 2020). The championship has many division (e.g A, B, C, etc). For the division A, 20 teams compete for the championship cup. To win the championship cup, each team must match, twice, with the others 19 teams (hence, the championship has in the total 380 matches). For each match, the winner gains 3 points or 1 point for ties. On the end of the 380 matches, the team with more points wins. For the last, the first six on the ranking of division A have the chance to compete on the Libertadores championship, and the last four on the ranking will play on division B (one division below A) on the next championship.
 
@@ -32,13 +51,13 @@ The image below is the Ranking page. Here we have informations about the teams a
 
 ![Ranking](./images/ranking.png "Ranking")
 
-## Project Architecture
+## 3. Project Architecture
 
 First, let me talk about why I choose this project. I was looking, mainly, for a project where I could use a Message broker, even if it was a simple use case. But I also had others interesting: that other people had interesting on using it; that it had little maintenance; and that was a long term project with possibility of expansion. So, while searching for projects using message brokers, I found the following example: server B scraps restaurant webpages for menu pricing, than sends to server A the results through the Message broker. I found the idea cool, even if hosting two servers and one Message broker to exchange a little of data sound a little overkilling - it could be easily done using one server and one background processing. But I didn't like the idea of scraping restaurants page, so I decided to scrap something that I could find more intersting on it - the CBF.
 
 I found two ways of getting data for this project: first, paying for a private API (but I'm not in positing to pay for that); second, scraping the [CBF official page](https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a). Obviously, I choose the second, even though it could give me a little more work and less data (there isn't data about players). So, now that I introduce the main idea of the project, lets see the overview architecture.
 
-### Overview architecture
+### 3.1. Overview architecture
 
 ![Overview architecture](./images/overview_architecture.jpg "Overview architecture")
 
@@ -48,7 +67,7 @@ The server B is used only to scrap the CBF official page for data from time to t
 
 For the last, but not less important, a reverse proxy (Nginx) is placed between server A and the users. All these applications are running on Docker and orchestrated by Swarm.
 
-### Database relational entity
+### 3.2. Database relational entity
 
 ![Database relationa entity diagram](./images/relational_entity_diagram.jpg "Database relationa entity diagram")
 
@@ -65,7 +84,7 @@ There aren't much to say here, the image says by itself. So I will only describe
 - **Bet**: this represents the guesses an user can give to a match. A better name for this entity would be 'bet_score' or 'bet_match_score', it helps identify the kind of bet it represents.
 - **Global Setting**: I use the singleton pattern for this entity. It holds the global settings(e.g "which championship is occuring right now", or "which url is used to access the CBF official page"). The advantage of using a database table to hold the global settings, instead of using a file, is how easily is to change their values. No need for rebooting the server, and can be easily accessed and changed.
 
-### Tools, Libraries and 3º Services
+### 3.3. Tools, Libraries and 3º Services
 
 - **Tools**: Ruby on Rails, StimulusJs, Bootstrap, Sidekiq, Nginx, Redis DB, Postgres DB, RabbitMQ, Docker, Swarm, Git.
 
@@ -73,28 +92,19 @@ There aren't much to say here, the image says by itself. So I will only describe
 
 - **3º Services**: DigitalOcean droplets, Amazon S3, Amazon Cloudfront.
 
-## Future Expectations
-
-Future expectations are increase the number of users interacting with the project. I hope to achieve this through:
-
-- Creating more guess/bet (e.g Guess the players that will make goals)
-- Creating more interaction among users (e.g Top 5 users bets; showing users statistics about guesses)
-- Adding a favorite team avatar for users.
-- Creating a mobile app: easy access for users when compared to websites responsive.
-
-## Getting started
+## 4. Getting started
 
 This project is formed by two repositories: This one, where we can find the most part of the codebase, and the [second repository](https://github.com/pedrogglima/chute-do-brasileirao-scrapper.git), that has the lib used to scrap the CBF official page, and the logic to fetch and publish the data.
 
 We will be running this on localhost as we don't have here the full settings for running on production.
 
-### Prerequisites
+### 4.1. Prerequisites
 
 The only thing you will need to install are [Docker and Docker Compose](https://docs.docker.com/compose/install/).
 
 _Note: Because we are creating the tools from Docker's images, there are no need for downloading tools or worry about version compatibility. But if you are insteresting into know the tools version, you can find them on the docker-composite file and Dockerfile on this same repository._
 
-#### Repositories
+### 4.2. Repositories
 
     git clone https://github.com/pedrogglima/chute-do-brasileirao.git
 
@@ -104,7 +114,7 @@ and
 
 _Note: To simplify the name for this repositories on the rest of this section, lets call them 'first repo' and 'second repo', respectively._
 
-#### Updating the docker-compose.yml
+### 4.3. Updating the docker-compose.yml
 
 The docker-compose file is found on the first repo. We need to update the path related to the second repo:
 
@@ -126,7 +136,7 @@ _Note: some of them you may need to subscribe on 3º services to get the credent
     TWITTER_API_KEY='!add-your-twitter-api-key!'
     TWITTER_API_SECRET='!add-your-twitter-api-secret!'
 
-#### Creating the Postgres database
+### 4.4. Creating the Postgres database
 
 Inside the first repo, runs:
 
@@ -136,13 +146,13 @@ Update the file db/seeds/1_users.rb with the informations of your admin user. Af
 
     docker-compose run --rm app rails db:reset
 
-#### Running Docker
+### 4.5. Running Docker
 
 Inside the first repo, runs:
 
     docker-compose up
 
-#### RabbitMQ
+### 4.6. RabbitMQ Setup
 
 We need to setup the RabbitMQ queue. To do that go inside the second repo folder, than run the rake commmand:
 
@@ -156,35 +166,35 @@ To scrap and dispatch a page manually, go to the second repo then runs:
 
     docker-compose exec scraper rails scrap_page:cbf:publish
 
-#### Runnings specs
+### 4.7. Running specs
 
 Inside the first repo, runs:
 
     docker-compose exec app rails spec
 
-### Usage
+## 5. Usage
 
-#### UI
+### 5.1. UI
 
-##### Login
+#### 5.1.1. Login
 
 Use one of the types to log in to the program: Twitter credentials or use your email address to create a new user.
 
 ![Registration Page](./images/registration.png "Registration Page")
 
-##### My bets
+#### 5.1.2. Making a bet
+
+![Making a bets](./images/making_a_bet.png "Making a bet")
+
+#### 5.1.3. My bets
 
 Here we have the users bets.
 
 ![My bets](./images/my_bets.png "My bets")
 
-##### Making a bet
+### 5.2. API
 
-![Making a bets](./images/making_a_bet.png "Making a bet")
-
-#### API
-
-##### Login
+#### 5.2.1. Login
 
 First, you need to get the Authorization Bearer token. You can do that by log in or sign in. e.g log in:
 
@@ -211,9 +221,9 @@ Now, you can find your authorization bearer token inside Headers:
      Referrer-Policy: strict-origin-when-cross-origin
      Authorization: Bearer: eyJhbGciOiJIUzI1NiJ9...Uo2HAV7eY
 
-##### For getting the current rankings
+#### 5.2.2. Requesting current rankings
 
-You can make a GET request to https://localhost:3000/api/v1/tabelas passing the Authorization Bearer Token to the Header. You can use a http library (e.g curls) or the Postman desktop client.
+You can make a GET request to https://localhost:3000/api/v1/tabelas passing the Authorization Bearer Token to the Header. You can use a http library (e.g curl) or the Postman desktop client to make the http request.
 
 As a result you should see the following json.
 
@@ -266,3 +276,12 @@ As a result you should see the following json.
             ...
           ]
         }
+
+## 6. Future Expectations
+
+Future expectations are increase the number of users interacting with the project. I hope to achieve this through:
+
+- Creating more guess/bet (e.g Guess the players that will make goals)
+- Creating more interaction among users (e.g Top 5 users bets; showing users statistics about guesses)
+- Adding a favorite team avatar for users.
+- Creating a mobile app: easy access for users when compared to websites responsive.
