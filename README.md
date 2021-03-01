@@ -6,9 +6,10 @@
 
 - [2. Campeonato Brasileiro de Futebol](#2.-campeonato-brasileiro-de-futebol)
 - [3. Project Architecture](#3.-project-architecture)
-  - [3.1. Overview architecture](#3.1.-overview-architecture)
-  - [3.2. Database relational entity](#3.2.-database-relational-entity)
-  - [3.3. Tools, Libraries and 3º Services](#3.3.-tools-libraries-and-3º-services)
+  - [3.1. The dataset](#3.1.-the-dataset)
+  - [3.2. Overview architecture](#3.2.-overview-architecture)
+  - [3.3. Databases & the entity-relationship model](#3.3.-databases-&-the-entity-relationship-model)
+  - [3.4. Tools, Libraries and 3º Services](#3.4.-tools-libraries-and-3º-services)
 - [4. Getting started](#4.-getting-started)
 
   - [4.1. Prerequisites](#4.1.-prerequisites)
@@ -27,7 +28,6 @@
   - [5.2. API](#5.2.-api)
     - [5.2.1. Login](#5.2.1.-login)
     - [5.2.2. Requesting current rankings](#5.2.2.-requesting-current-rankings)
-- [6. Future Expectations](#6.-future-expectations)
 
 ## 1. Introduction
 
@@ -47,33 +47,65 @@ If you are recruiter and found this page througth my curriculum, or if you alrea
 
 CBF (Campeonato Brasileiro de Futebol) is a brazilian soccer championship that happens once a year (on the time of the writing, the championship was in the end of the CBF 2020). The championship has many division (e.g A, B, C, etc). For the division A, 20 teams compete for the championship cup. To win the championship cup, each team must match, twice, with the others 19 teams (hence, the championship has in the total 380 matches). For each match, the winner gains 3 points or 1 point for ties. On the end of the 380 matches, the team with more points wins. For the last, the first six on the ranking of division A have the chance to compete on the Libertadores championship, and the last four on the ranking will play on division B (one division below A) on the next championship.
 
-The image below is the Ranking page. Here we have informations about the teams and their rank on the current championship. We can also see informations for each team as: number of points, number of matches played, number of goals, next opponnent and more.
+The image below is the app's Ranking page. Here we have informations about the teams and their rank on the current championship. We can also see informations for each team as: number of points, number of matches played, number of goals, next opponnent and more.
 
 ![Ranking](./images/ranking.png "Ranking")
 
 ## 3. Project Architecture
 
-First, let me talk about why I choose this project. I was looking, mainly, for a project where I could use a Message broker, even if it was a simple use case. But I also had others interesting: that other people had interesting on using it; that it had little maintenance; and that was a long term project with possibility of expansion. So, while searching for projects using message brokers, I found the following example: server B scraps restaurant webpages for menu pricing, than sends to server A the results through the Message broker. I found the idea cool, even if hosting two servers and one Message broker to exchange a little of data sound a little overkilling - it could be easily done using one server and one background processing. But I didn't like the idea of scraping restaurants page, so I decided to scrap something that I could find more intersting on it - the CBF.
+First, let me talk about why I choose this project. I was looking, mainly, for a project where I could use a Message broker, even if it was a simple use case. But I also had others interesting: that other people had interesting on using it; that it had little maintenance; that I could in the future extract information from the data created; and that was a long term project with possibility of expansion. So, while searching for projects using message brokers, I found in a blog the following example: server B scraps restaurant webpages for menu pricing, than sends to server A the results through the Message broker. I found the idea cool, even if hosting two servers and one Message broker to exchange a little of data sound a little overkilling - it could be easily done using one server and one background processing. But I didn't like the idea of scraping restaurants page, so I decided to scrap something that I could find some intersting on it - the CBF page.
 
-I found two ways of getting data for this project: first, paying for a private API (but I'm not in positing to pay for that); second, scraping the [CBF official page](https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a). Obviously, I choose the second, even though it could give me a little more work and less data (there isn't data about players). So, now that I introduce the main idea of the project, lets see the overview architecture.
+### 3.1. The dataset
 
-### 3.1. Overview architecture
+I found two ways of getting data for this project: first, paying for a private API; second, scraping the [CBF official page](https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a). I choose the second, even though it could give me more work and less data (there isn't data about players).
+
+On the CBF page we have two sections where we can scrap data from the current championship: the ranking table (appers on the middle with the title TABELA on the image below), and the matches grouped by round (on the right with the title JOGOS on the image below). On the first section we extract the rank information for each team, but we also extracted the teams - on the ranking for division A all the teams participating appears only once. On the second section we extract the rounds and the matches.
+
+On the image below you can see how the data is displayed on the CBF page.
+
+![CBF official page](./images/cbf_official_page.png "CBF official page")
+
+To handle the extraction and mapping of the data, I created 3 classes: rankings, teams, rounds (this last one includes matches). These classes are responsable for:
+
+- mapping each entity (e.g rank, team, round and match) using classes.
+- having the logic to extract their data (I'm using the Nokogiri gem to help extract the data);
+- output the set of entities in a well known format (e.g json);
+
+For the last, I created an class named CBF to interface the acccess to the 3 classes responsible for mapping the set of entities. With this interface class we can do:
+
+    # The Nokogiri is a library specialize in extracting data from a html page.
+    document = Nokogiri::HTML(URI.open(url))
+
+    cbf = ScrapPage::CBF.new(document)
+
+    cbf.teams # returns an array of Team class
+    cbf.to_json # returns all the entities formatted in Json
+
+### 3.2. Overview architecture
 
 ![Overview architecture](./images/overview_architecture.jpg "Overview architecture")
 
-As you can see on the image, we have two serves. On server A we build a monolith Ruby on Rails app where users can have access to html pages and the API. Still on server A, I'm using two databases: a relational database (Postgres DB), and a no-sql, in-memory database (Redis DB). The reason for choosing the relational database is because the project has relational associations between entities (e.g Championship has many Matches, Users has many Bets, and Matches has many Bets). For the in-memory database, even though many applications make use of it (e.g Rails for caching and sessions, and Sidekiq for manager their queues), I use it to cache some relative heavy queries. I'm also using the background processing (Sidekiq), mainly, for two reason: first, to keep the in-memory database data up to date with the scraped data; Second, for each new Team saved on the database, I need to download the team's image flag and save them on the project's storage (Amazon S3).
+As you can see on the image, we have two serves. On server A we build a monolith Ruby on Rails app where users can have access to html pages and the API. Still on server A, I'm using two databases: a relational database (Postgres DB), and a no-sql, in-memory database (Redis DB). For the in-memory database, even though many applications make use of it (e.g Rails for caching and sessions, and Sidekiq for manager their queues), I use it to cache some relative heavy queries (more on that on the next section). I'm also using a background processing (Sidekiq) for two reason: first, to keep the in-memory database data up to date with the scraped data; Second, for each new Team saved on the database, I need to download the team's image flag and save them on the project's storage (Amazon S3).
 
 The server B is used only to scrap the CBF official page for data from time to time. I'm not using any database for server B, hence, after scraping and formatting the data, server B must publishes it to the Message broker queue (RabbitMQ). Server A, listening on the same queue, acknowledges and consumes the data, attempting to save the data on the relational database.
 
-For the last, but not less important, a reverse proxy (Nginx) is placed between server A and the users. All these applications are running on Docker and orchestrated by Swarm.
+For the last, a reverse proxy (Nginx) is placed between server A and the users. All these applications are running on Docker and orchestrated by Swarm.
 
-### 3.2. Database relational entity
+### 3.3. Databases & the entity-relationship model
+
+First, I will talk about the reasons I choose the database relational database Postgres on the first two paragraphs, after that I talk about the entity-relationship model.
+
+The dataset doesn't change frequently, usually every 24 hours, and, also, it is relative small: it shouldn't use more than 100kb of Redis DB's memory for one championship. Even if we saved 10 years of data (10 championships), we would still use a relative small size of memory (~ 1mb). So, if the project's data was only consisted of the scraped data, and if we didn't care about analysing the relationship between entities (e.g how much championships team X already participated, or how many matches team X already played with team Y), only using the Redis DB for storing data would be a good choice for the project.
+
+However, the project has others entries of data such as the ones added by the users, and these data have relationships with the scraped data (e.g championship's matches are associated with the user's bets). Also, because of the (future) nature of the app, analysing statistics of bets, winnings,etc, we need to mantaining the data consistent. Hence, for the problems and needs citated above, we can solve this problem using a relational database to save the data and a no-sql, in memory database for performance reasons.
+
+The image below we have the entity-relationship model for the project.
 
 ![Database relationa entity diagram](./images/relational_entity_diagram.jpg "Database relationa entity diagram")
 
 There aren't much to say here, the image says by itself. So I will only describe the entities meaning for the project. (If you want to see details about the tables, such as columns name, indexes, etc, you can check the config/schema.rb file).
 
-- **Championship**: almost all the main entities are related direct and indirect to it (e.g matches, rounds, guesses/bets). Also, every year we have a new championship.
+- **Championship**: All the entities are related direct and indirect to it (e.g matches, rounds, guesses/bets). Also, every year we have a new championship.
 - **Round**: the only purpose of this entity is map 10 matches. The championship has 38 rounds with 10 matches each, which sum up to 380 matches.
 - **Match**: this entity represents the real matches between two teams, the place of the game, the date and time, the scores and everything else that can happen during the match.
 - **Ranking**: This entity represent the team's ranking (also known as Standing) on the championship. It also has details about the teams in the course of the championship's matches (e.g number of games, number of goals, number of vitories, next opponent, etc)
@@ -174,7 +206,11 @@ Inside the first repo, runs:
 
 ## 5. Usage
 
+In this section you will find examples of usage for the UI and API for this project.
+
 ### 5.1. UI
+
+Here we will see how to login, to make a bet for the game of the day, and how to see all the user's bets.
 
 #### 5.1.1. Login
 
@@ -183,6 +219,8 @@ Use one of the types to log in to the program: Twitter credentials or use your e
 ![Registration Page](./images/registration.png "Registration Page")
 
 #### 5.1.2. Making a bet
+
+On this page you can make a bet. Users can only make bets to the matches of the day, and one bet per match. To make a bet it's only necessary that the user set the score for the teams.
 
 ![Making a bets](./images/making_a_bet.png "Making a bet")
 
@@ -193,6 +231,8 @@ Here we have the users bets.
 ![My bets](./images/my_bets.png "My bets")
 
 ### 5.2. API
+
+Here we have only the login and ranking example, but you can find more information on the folder app/controllers/api/v1/\*\* of this repository.
 
 #### 5.2.1. Login
 
@@ -276,12 +316,3 @@ As a result you should see the following json.
             ...
           ]
         }
-
-## 6. Future Expectations
-
-Future expectations are increase the number of users interacting with the project. I hope to achieve this through:
-
-- Creating more guess/bet (e.g Guess the players that will make goals)
-- Creating more interaction among users (e.g Top 5 users bets; showing users statistics about guesses)
-- Adding a favorite team avatar for users.
-- Creating a mobile app: easy access for users when compared to websites responsive.
