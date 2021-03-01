@@ -47,7 +47,3 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
-
-# Ignore docker run-time files
-.docker/*
-.docker/rabbitmq/data/mnesia/rabbit@488a6f5c9705/quorum/rabbit@488a6f5c9705/00000002.wal
