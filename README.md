@@ -81,6 +81,12 @@ For the last, I created an class named CBF to interface the acccess to the 3 cla
     cbf.teams # returns an array of Team class
     cbf.to_json # returns all the entities formatted in Json
 
+You can find the code for scraping on the repository
+
+    https://github.com/pedrogglima/chute-do-brasileirao-scraper.git
+
+Under the folder lib/scrap_page/\*\*
+
 ### 3.2. Overview architecture
 
 ![Overview architecture](./images/overview_architecture.jpg "Overview architecture")
@@ -126,7 +132,7 @@ There aren't much to say here, the image says by itself. So I will only describe
 
 ## 4. Getting started
 
-This project is formed by two repositories: This one, where we can find the most part of the codebase, and the [second repository](https://github.com/pedrogglima/chute-do-brasileirao-scrapper.git), that has the lib used to scrap the CBF official page, and the logic to fetch and publish the data.
+This project is formed by two repositories: This one, where we can find the most part of the codebase, and the [second repository](https://github.com/pedrogglima/chute-do-brasileirao-scraper.git), that has the lib used to scrap the CBF official page, and the logic to fetch and publish the data.
 
 We will be running this on localhost as we don't have here the full settings for running on production.
 
@@ -142,7 +148,7 @@ _Note: Because we are creating the tools from Docker's images, there are no need
 
 and
 
-    git clone https://github.com/pedrogglima/chute-do-brasileirao-scrapper.git
+    git clone https://github.com/pedrogglima/chute-do-brasileirao-scraper.git
 
 _Note: To simplify the name for this repositories on the rest of this section, lets call them 'first repo' and 'second repo', respectively._
 
