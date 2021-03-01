@@ -38,7 +38,9 @@ class Ranking < ApplicationRecord
     joins(championship: { league: :division })
   }
   scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
+  # There are cases where there aren`t next opponents
   scope :next_opponent_with_avatar, lambda {
-    includes(next_opponent: { avatar_attachment: :blob })
+    left_outer_joins(:next_opponent)
+      .includes(next_opponent: { avatar_attachment: :blob })
   }
 end
