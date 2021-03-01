@@ -13,6 +13,7 @@
 
 ## Later
 
+- add some form of rescue for cases of missing team avatar
 - create bet twitter
 - Create configs (as user, passw) to rabbit config
 - Create rounds page
