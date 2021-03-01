@@ -8,7 +8,7 @@ RSpec.describe(Ranking, type: :model) do
   describe 'associations' do
     it { should belong_to(:championship) }
     it { should belong_to(:team) }
-    it { should belong_to(:next_opponent) }
+    it { should belong_to(:next_opponent).optional(true) }
   end
 
   describe 'validations' do

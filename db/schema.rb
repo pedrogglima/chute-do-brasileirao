@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_182107) do
+ActiveRecord::Schema.define(version: 2021_03_01_190832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_182107) do
   create_table "rankings", force: :cascade do |t|
     t.bigint "championship_id", null: false
     t.bigint "team_id", null: false
-    t.bigint "next_opponent_id", null: false
+    t.bigint "next_opponent_id"
     t.integer "posicao", null: false
     t.integer "pontos"
     t.integer "jogos"

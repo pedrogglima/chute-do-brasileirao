@@ -5,7 +5,10 @@ class Ranking < ApplicationRecord
   #
   belongs_to :championship
   belongs_to :team
-  belongs_to :next_opponent, class_name: 'Team', foreign_key: 'next_opponent_id'
+  belongs_to :next_opponent,
+             class_name: 'Team',
+             foreign_key: 'next_opponent_id',
+             optional: true
 
   # validations
   #
