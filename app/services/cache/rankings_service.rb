@@ -3,7 +3,7 @@
 module Cache
   class RankingsService < Cache::Base::ListService
     KEY = 'ranking_list'
-    
+
     def call
       res = list(KEY, FROM, TO)
 
@@ -23,14 +23,18 @@ module Cache
              .order(posicao: :asc)
     end
 
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
     def to_json(ranking)
       {
         id: ranking.id,
         posicao: ranking.posicao,
         team_avatar: extract_url(ranking.team.avatar),
         team_name: ranking.team.name,
-        next_opponent_avatar: extract_url(ranking.next_opponent.avatar),
-        next_opponent_name: ranking.next_opponent.name,
+        next_opponent_avatar:
+          nil_or_next_opponent_avatar(ranking.next_opponent),
+        next_opponent_name:
+          nil_or_next_opponent_name(ranking.next_opponent),
         pontos: ranking.pontos,
         jogos: ranking.jogos,
         vitorias: ranking.vitorias,
@@ -44,6 +48,18 @@ module Cache
         aproveitamento: ranking.aproveitamento,
         recentes: ranking.recentes
       }.to_json
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+
+    private
+
+    def nil_or_next_opponent_name(next_opponent)
+      next_opponent ? next_opponent.name : nil
+    end
+
+    def nil_or_next_opponent_avatar(next_opponent)
+      next_opponent ? extract_url(next_opponent.avatar) : nil
     end
   end
 end

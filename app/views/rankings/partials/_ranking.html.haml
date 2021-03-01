@@ -15,4 +15,4 @@
   %td.d-none.d-lg-table-cell=ranking[:cartoes_vermelhos]
   %td.d-none.d-lg-table-cell=ranking[:aproveitamento]
   %td=style_recentes(ranking[:recentes])
-  %td.team-avatar=image_tag(ranking[:next_opponent_avatar])
+  %td.team-avatar=empty_or_next_opponent_avatar(ranking[:next_opponent_avatar])

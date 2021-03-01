@@ -20,9 +20,9 @@ module Parse
       next_opponent = find_team_by_name(ranking_hash['next_opponent'])
 
       if ranking
-        update(ranking, ranking_hash, team.id, next_opponent.id)
+        update(ranking, ranking_hash, team, next_opponent)
       else
-        create(ranking_hash, current_championship.id, team.id, next_opponent.id)
+        create(ranking_hash, team, next_opponent)
       end
     end
 
@@ -41,10 +41,14 @@ module Parse
       Team.find_by(name: name)
     end
 
+    def nil_or_next_opponent(next_opponent)
+      next_opponent ? next_opponent.id : nil
+    end
+
     # rubocop:disable Metrics/MethodLength
-    def update(ranking, ranking_hash, team_id, next_opponent_id)
+    def update(ranking, ranking_hash, team, next_opponent)
       ranking.update!(
-        team_id: team_id,
+        team_id: team.id,
         pontos: ranking_hash['pontos'],
         jogos: ranking_hash['jogos'],
         vitorias: ranking_hash['vitorias'],
@@ -57,15 +61,16 @@ module Parse
         cartoes_vermelhos: ranking_hash['cartoes_vermelhos'],
         aproveitamento: ranking_hash['aproveitamento'],
         recentes: ranking_hash['recentes'],
-        next_opponent_id: next_opponent_id
+        next_opponent_id: nil_or_next_opponent(next_opponent)
       )
     end
 
-    def create(ranking_hash, champ_id, team_id, next_opponent_id)
+    # rubocop:disable Metrics/AbcSize
+    def create(ranking_hash, team, next_opponent)
       Ranking.create!(
-        championship_id: champ_id,
+        championship_id: current_championship.id,
         posicao: ranking_hash['posicao'].to_i,
-        team_id: team_id,
+        team_id: team.id,
         pontos: ranking_hash['pontos'],
         jogos: ranking_hash['jogos'],
         vitorias: ranking_hash['vitorias'],
@@ -78,9 +83,10 @@ module Parse
         cartoes_vermelhos: ranking_hash['cartoes_vermelhos'],
         aproveitamento: ranking_hash['aproveitamento'],
         recentes: ranking_hash['recentes'],
-        next_opponent_id: next_opponent_id
+        next_opponent_id: nil_or_next_opponent(next_opponent)
       )
     end
+    # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
   end
 end

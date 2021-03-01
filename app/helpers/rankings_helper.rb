@@ -43,4 +43,8 @@ module RankingsHelper
       span(char, 'badge badge-secondary')
     end
   end
+
+  def empty_or_next_opponent_avatar(next_opponent)
+    next_opponent ? image_tag(next_opponent) : ''
+  end
 end
