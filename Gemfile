@@ -46,10 +46,6 @@ gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
 
 gem('haml')
 
-# Message Broker RabbitMQ cli
-gem 'bunny', '~> 2.4'
-# Background Processing for RabbitMQ
-gem 'sneakers', '~> 2.3', '>= 2.3.5'
 # Auth with JWT
 gem('jwt', '~> 2.2', '>= 2.2.2')
 # Authorization system

@@ -15,18 +15,6 @@ services:
     environment:
       - WEBPACKER_DEV_SERVER_HOST=webpack_dev_server
 
-  scraper:
-    build:
-      context: ../scraper/.
-      dockerfile: Dockerfile
-    ports:
-      - "3050:3050"
-    volumes:
-      - ../scraper/:/var/www/app
-      - gem_cache_scraper:/gems
-    env_file:
-      - .env/development
-
   webpack_dev_server:
     build:
       context: .
@@ -67,28 +55,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
-    volumes:
-      - ./.docker/rabbitmq/data/:/var/lib/rabbitmq/
-      - ./.docker/rabbitmq/logs/:/var/log/rabbitmq/
-    ports:
-      - 5672:5672
-      - 15672:15672
-
-  sneakers:
-    build: ../scraper/.
-    volumes:
-      - .:/sneakers
-    depends_on:
-      - rabbitmq
-      - redis_cache
-    environment:
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
-
 volumes:
   db_data:
   gem_cache_app:
-  gem_cache_scraper:
   redis_cache_data:
