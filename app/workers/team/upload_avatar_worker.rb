@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+
 class Team
   class UploadAvatarWorker < ApplicationWorker
     sidekiq_options queue: 'default'
