@@ -14,5 +14,6 @@ championship = Championship.create!(
 
 GlobalSetting.create!(
   singleton_guard: 0,
-  championship_id: championship.id
+  championship_id: championship.id,
+  cbf_url: "https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2020"
 )

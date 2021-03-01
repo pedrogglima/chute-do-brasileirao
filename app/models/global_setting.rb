@@ -14,6 +14,9 @@ class GlobalSetting < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: [0]
 
+  validates :cbf_url,
+            presence: true
+
   # class methods
   #
   def self.singleton

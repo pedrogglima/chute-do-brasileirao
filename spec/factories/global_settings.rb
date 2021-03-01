@@ -2,8 +2,11 @@
 
 FactoryBot.define do
   factory :global_setting do
-    singleton_guard { 0 }
     association :championship
+    singleton_guard { 0 }
+    cbf_url do
+      'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2020'
+    end
 
     initialize_with do
       GlobalSetting.where(singleton_guard: 0).first_or_create

@@ -14,5 +14,7 @@ RSpec.describe(GlobalSetting, type: :model) do
     it { should validate_uniqueness_of(:singleton_guard) }
     it { should validate_numericality_of(:singleton_guard) }
     it { should validate_inclusion_of(:singleton_guard).in_array([0]) }
+    
+    it { should validate_presence_of(:cbf_url) }
   end
 end
