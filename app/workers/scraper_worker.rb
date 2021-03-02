@@ -3,7 +3,9 @@
 class ScraperWorker < ApplicationWorker
   sidekiq_options queue: 'default'
 
-  def perform(_id)
+  def perform
+    return unless GlobalSetting.singleton.continuing_scraping?
+
     url = GlobalSetting.singleton.current_championship_url
 
     cbf = ScrapPage::CBF.new(url).readable_format
