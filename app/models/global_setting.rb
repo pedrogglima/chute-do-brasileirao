@@ -18,6 +18,10 @@ class GlobalSetting < ApplicationRecord
   validates :cbf_url,
             presence: true
 
+  validates :granted_period,
+            presence: true,
+            numericality: { only_integer: true }
+
   # class methods
   #
   def self.singleton
@@ -28,5 +32,9 @@ class GlobalSetting < ApplicationRecord
   #
   def url_current_championship
     "#{cbf_url}/#{championship.year}"
+  end
+
+  def granted_period_in_seconds
+    granted_period * 1.day.seconds
   end
 end
