@@ -16,6 +16,7 @@ require_relative 'cbf/models/rounds'
 #
 module ScrapPage
   class CBF
+    # TODO, include this on scrap_page module
     include Utils::CustomLogger
 
     LOG_PATH = "#{File.dirname(__FILE__)}/cbf/logs"
