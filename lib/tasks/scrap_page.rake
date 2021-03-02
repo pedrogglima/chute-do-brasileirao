@@ -7,8 +7,7 @@ namespace :scrap_page do
     task print: :environment do
       url = GlobalSetting.singleton.cbf_url
 
-      document = Nokogiri::HTML(URI.open(url))
-      cbf = ScrapPage::CBF.new(document)
+      cbf = ScrapPage::CBF.new(url)
 
       puts '------------ CBF PRINTED PAGE IN JSON ---------------'
       puts cbf.to_json
@@ -19,14 +18,11 @@ namespace :scrap_page do
     task update: :environment do
       url = GlobalSetting.singleton.current_championship_url
 
-      document = Nokogiri::HTML(URI.open(url))
-      cbf = ScrapPage::CBF.new(document)
+      cbf = ScrapPage::CBF.new(url).readable_format
 
-      readable_format = JSON.parse(cbf.to_json)
-
-      Parse::CreateTeamsService.call(readable_format['teams'])
-      Parse::CreateOrUpdateRankingsService.call(readable_format['rankings'])
-      Parse::CreateOrUpdateRoundsService.call(readable_format['rounds'])
+      Parse::CreateTeamsService.call(cbf['teams'])
+      Parse::CreateOrUpdateRankingsService.call(cbf['rankings'])
+      Parse::CreateOrUpdateRoundsService.call(cbf['rounds'])
     end
 
     # update the app with data extract from sample
@@ -40,14 +36,11 @@ namespace :scrap_page do
           'campeonato_brasileirao_2020.html'
         )
 
-        document = Nokogiri::HTML(URI.open(path_to_sample))
-        cbf = ScrapPage::CBF.new(document)
+        cbf = ScrapPage::CBF.new(path_to_sample).readable_format
 
-        readable_format = JSON.parse(cbf.to_json)
-
-        Parse::CreateTeamsService.call(readable_format['teams'])
-        Parse::CreateOrUpdateRankingsService.call(readable_format['rankings'])
-        Parse::CreateOrUpdateRoundsService.call(readable_format['rounds'])
+        Parse::CreateTeamsService.call(cbf['teams'])
+        Parse::CreateOrUpdateRankingsService.call(cbf['rankings'])
+        Parse::CreateOrUpdateRoundsService.call(cbf['rounds'])
       end
     end
   end
