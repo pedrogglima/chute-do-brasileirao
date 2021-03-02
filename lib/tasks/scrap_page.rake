@@ -17,7 +17,7 @@ namespace :scrap_page do
 
     # update the app with new data extract from the GlobalSetting.cbf_url
     task update: :environment do
-      url = GlobalSetting.singleton.cbf_url
+      url = GlobalSetting.singleton.current_championship_url
 
       document = Nokogiri::HTML(URI.open(url))
       cbf = ScrapPage::CBF.new(document)
