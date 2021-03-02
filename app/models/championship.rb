@@ -4,6 +4,7 @@ class Championship < ApplicationRecord
   # associations
   #
   belongs_to :league
+  has_one :global_setting
   has_many :matches
   has_many :rankings
 
@@ -47,7 +48,7 @@ class Championship < ApplicationRecord
   end
 
   def granted_period
-    259_200 # 3 days in seconds
+    global_setting ? global_setting.granted_period_in_seconds.to_i : 259_200
   end
 
   def diff_date(date1, date2)

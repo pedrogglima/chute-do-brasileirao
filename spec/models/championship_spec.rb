@@ -7,6 +7,7 @@ RSpec.describe(Championship, type: :model) do
 
   describe 'associations' do
     context 'have_many' do
+      it { should have_one(:global_setting) }
       it { should have_many(:matches) }
       it { should have_many(:rankings) }
     end
