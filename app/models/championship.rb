@@ -19,4 +19,38 @@ class Championship < ApplicationRecord
             presence: true,
             numericality: { only_integer: true },
             inclusion: 1..1000
+
+  # public methods
+  #
+  def finished?
+    return false unless count_dated_matches == number_of_matches
+
+    diff_date(time_now, last_dated_match.date) >= granted_period
+  end
+
+  def count_dated_matches
+    matches.dated_matches.count
+  end
+
+  def last_dated_match
+    matches.last_dated_match
+  end
+
+  private
+
+  def number_of_matches
+    380
+  end
+
+  def time_now
+    Time.current
+  end
+
+  def granted_period
+    259_200 # 3 days in seconds
+  end
+
+  def diff_date(date1, date2)
+    (date1 - date2).to_i
+  end
 end
