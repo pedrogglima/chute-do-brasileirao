@@ -22,7 +22,7 @@ FactoryBot.define do
     association :round
     association :team
     association :opponent, factory: :team
-    id_match { 100 }
+    id_match { rand(1..380) }
     date do
       Faker::Time.between(
         from: Time.now - 360,
