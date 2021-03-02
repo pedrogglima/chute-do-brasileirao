@@ -4,7 +4,6 @@ class Championship < ApplicationRecord
   # associations
   #
   belongs_to :league
-  has_one :global_setting
   has_many :matches
   has_many :rankings
 
@@ -28,9 +27,16 @@ class Championship < ApplicationRecord
   # public methods
   #
   def finished?
-    return false unless count_dated_matches == number_of_matches
+    if count_dated_matches == number_of_matches &&
+       last_match_already_played?
+      true
+    else
+      false
+    end
+  end
 
-    diff_date(time_now, last_dated_match.date) >= granted_period
+  def last_match_already_played?
+    last_dated_match.date < Time.current
   end
 
   def count_dated_matches
@@ -39,19 +45,5 @@ class Championship < ApplicationRecord
 
   def last_dated_match
     matches.last_dated_match
-  end
-
-  private
-
-  def time_now
-    Time.current
-  end
-
-  def granted_period
-    global_setting ? global_setting.granted_period_in_seconds.to_i : 259_200
-  end
-
-  def diff_date(date1, date2)
-    (date1 - date2).to_i
   end
 end

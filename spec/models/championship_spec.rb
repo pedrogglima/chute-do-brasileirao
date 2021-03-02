@@ -7,7 +7,6 @@ RSpec.describe(Championship, type: :model) do
 
   describe 'associations' do
     context 'have_many' do
-      it { should have_one(:global_setting) }
       it { should have_many(:matches) }
       it { should have_many(:rankings) }
     end
@@ -43,16 +42,30 @@ RSpec.describe(Championship, type: :model) do
     end
 
     context 'when all matches are already dated' do
-      context 'but last dated match isn\'t greater than granted_time' do
-        let(:championship_not_finished) { create(:championship_not_finished) }
+      let(:championship_full_dated) { create(:championship_full_dated) }
 
-        it { expect(championship_not_finished.finished?).to(be(false)) }
+      context 'but last dated match isn\'t greater than current time' do
+        it do
+          create(
+            :match,
+            championship: championship_full_dated,
+            date: 1.minute.from_now
+          )
+
+          expect(championship_full_dated.finished?).to(be(false))
+        end
       end
 
-      context 'but last dated match is greater than granted_time' do
-        let(:championship_finished) { create(:championship_finished) }
+      context 'but last dated match is greater than current time' do
+        it do
+          create(
+            :match,
+            championship: championship_full_dated,
+            date: 1.minute.ago
+          )
 
-        it { expect(championship_finished.finished?).to(be(true)) }
+          expect(championship_full_dated.finished?).to(be(true))
+        end
       end
     end
   end
