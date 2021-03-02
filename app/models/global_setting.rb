@@ -18,6 +18,7 @@ class GlobalSetting < ApplicationRecord
   validates :cbf_url,
             presence: true
 
+  # specify how many days the app should scrap the CBF after the last match
   validates :granted_period,
             presence: true,
             numericality: { only_integer: true }
