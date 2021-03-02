@@ -17,11 +17,15 @@ RSpec.describe(Championship, type: :model) do
     it { should validate_uniqueness_of(:year).scoped_to(:league_id) }
     it { should validate_numericality_of(:year) }
     it { should validate_inclusion_of(:year).in_range(2020..3000) }
+
     it { should validate_presence_of(:number_of_participants) }
     it { should validate_numericality_of(:number_of_participants) }
     it do
       should validate_inclusion_of(:number_of_participants).in_range(1..1000)
     end
+
+    it { should validate_presence_of(:number_of_matches) }
+    it { should validate_numericality_of(:number_of_matches) }
   end
 
   describe 'attributes' do

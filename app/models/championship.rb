@@ -20,6 +20,10 @@ class Championship < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: 1..1000
 
+  validates :number_of_matches,
+            presence: true,
+            numericality: { only_integer: true }
+
   # public methods
   #
   def finished?
@@ -37,10 +41,6 @@ class Championship < ApplicationRecord
   end
 
   private
-
-  def number_of_matches
-    380
-  end
 
   def time_now
     Time.current

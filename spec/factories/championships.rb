@@ -5,6 +5,7 @@ FactoryBot.define do
     association :league
     year { 2021 }
     number_of_participants { 20 }
+    number_of_matches { 380 }
 
     factory :championship_not_finished do
       after(:create) do |championship, _evaluator|
