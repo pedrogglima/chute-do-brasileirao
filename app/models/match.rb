@@ -31,14 +31,16 @@ class Match < ApplicationRecord
   scope :today_matches, -> { where(date: Date.today.all_day) }
   scope :next_matches, ->(date) { where('date >= ? OR date IS ?', date, nil) }
   scope :previous_matches, ->(date) { where('date <= ?', date) }
+  scope :dated_matches, -> { where.not(date: nil) }
+  scope :last_dated_match, lambda {
+    where.not(date: nil).order(date: :desc).limit(1).first
+  }
   # To avoid n+1 issue
   scope :team_with_avatar, -> { includes(team: { avatar_attachment: :blob }) }
   scope :opponent_with_avatar, lambda {
     includes(opponent: { avatar_attachment: :blob })
   }
 
-  # public methods
-  #
   def today?
     date&.to_date == Date.today
   end
