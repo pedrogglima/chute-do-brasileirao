@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# TODO, pass these requirements to scrap_page module
+require 'nokogiri'
+require 'open-uri'
+
 require 'json'
 require_relative 'utils/custom_logger'
 require_relative 'cbf/models/championship'
@@ -21,7 +25,8 @@ module ScrapPage
                 :rankings,
                 :rounds
 
-    def initialize(document)
+    def initialize(url)
+      document = load_document(url)
       @logger = initialize_logger("#{LOG_PATH}/main.log")
 
       @championship = ScrapPage::CBF::Models::Championship.new(document)
@@ -53,6 +58,17 @@ module ScrapPage
         rankings: @scrap_rankings.to_h
 
       }
+    end
+
+    def readable_format
+      JSON.parse(to_json)
+    end
+
+    private
+
+    # TODO, pass these requirements to scrap_page module
+    def load_document(url)
+      Nokogiri::HTML(URI.open(url))
     end
   end
 end
