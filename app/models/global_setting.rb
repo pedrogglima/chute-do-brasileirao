@@ -18,10 +18,11 @@ class GlobalSetting < ApplicationRecord
   validates :cbf_url,
             presence: true
 
-  # specify how many days the app should scrap the CBF after the last match
-  validates :granted_period,
+  # period to scrap after championship finished
+  validates :days_of_scraping_after_finished,
             presence: true,
-            numericality: { only_integer: true }
+            numericality: { only_integer: true },
+            inclusion: 1..100
 
   # class methods
   #
@@ -35,7 +36,33 @@ class GlobalSetting < ApplicationRecord
     "#{cbf_url}/#{championship.year}"
   end
 
-  def granted_period_in_seconds
-    granted_period * 1.day.seconds
+  def continuing_scraping?
+    if championship.finished? && period_for_scraping_finished?
+      false
+    else
+      true
+    end
+  end
+
+  private
+
+  def period_for_scraping_finished?
+    time_from_last_match >= period_of_scraping_after_finished
+  end
+
+  def period_of_scraping_after_finished
+    (days_of_scraping_after_finished * 1.day.seconds).to_i
+  end
+
+  def time_from_last_match
+    diff_date(Time.current, last_dated_match.date)
+  end
+
+  def last_dated_match
+    championship.last_dated_match
+  end
+
+  def diff_date(date1, date2)
+    (date1 - date2).to_i
   end
 end

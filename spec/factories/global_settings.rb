@@ -7,7 +7,7 @@ FactoryBot.define do
     cbf_url do
       'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
     end
-    granted_period { 3 }
+    days_of_scraping_after_finished { 3 }
 
     initialize_with do
       GlobalSetting.where(singleton_guard: 0).first_or_create
