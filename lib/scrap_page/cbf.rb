@@ -66,7 +66,7 @@ module ScrapPage
 
     private
 
-    # TODO, pass these requirements to scrap_page module
+    # TODO, pass these method to scrap_page module
     def load_document(url)
       Nokogiri::HTML(URI.open(url))
     end
