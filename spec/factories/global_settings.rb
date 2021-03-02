@@ -5,7 +5,7 @@ FactoryBot.define do
     association :championship
     singleton_guard { 0 }
     cbf_url do
-      'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2020'
+      'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
     end
 
     initialize_with do
