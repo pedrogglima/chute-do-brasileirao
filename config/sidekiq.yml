@@ -3,3 +3,9 @@
   - ["critical", 2]
   - ["default", 2]
   - ["low", 1]
+:schedule:
+  scrap_cbf:
+    cron: "0 0 * * * * America/Sao_Paulo"
+    class: ScraperWorker
+    queue: low
+    enabled: true
