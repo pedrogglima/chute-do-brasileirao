@@ -27,7 +27,7 @@ RSpec.describe(GlobalSetting, type: :model) do
     end
   end
 
-  describe 'url_current_championship' do
+  describe 'current_championship_url' do
     before do
       setting.cbf_url =
         'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
@@ -37,7 +37,7 @@ RSpec.describe(GlobalSetting, type: :model) do
 
     it do
       expect(
-        setting.url_current_championship
+        setting.current_championship_url
       ).to(
         eq(
           'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2020'

@@ -32,7 +32,7 @@ class GlobalSetting < ApplicationRecord
 
   # public methods
   #
-  def url_current_championship
+  def current_championship_url
     "#{cbf_url}/#{championship.year}"
   end
 
