@@ -5,6 +5,7 @@ module Cache
     class ListService < ApplicationService
       include Rails.application.routes.url_helpers
       KEY = 'list'
+      EXP = 86_400
       FROM = 0
       TO = -1
 
@@ -17,7 +18,7 @@ module Cache
 
         return res unless res.empty?
 
-        load_resources(KEY)
+        load_resources(KEY, EXP)
         list(KEY, FROM, TO)
       end
 
@@ -29,10 +30,12 @@ module Cache
         end
       end
 
-      def load_resources(key)
+      def load_resources(key, exp)
         resources.each do |resource|
           redis.rpush(key, to_json(resource))
         end
+
+        redis.expire key, exp if exp
       end
 
       def resources

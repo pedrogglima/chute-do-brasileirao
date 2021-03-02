@@ -3,6 +3,7 @@
 module Cache
   class TopRankingsService < Cache::RankingsService
     KEY = 'ranking_list'
+    EXP = 3600
     FROM = 0
     TO = 5
 
@@ -11,7 +12,7 @@ module Cache
 
       return res unless res.empty?
 
-      load_resources(KEY)
+      load_resources(KEY, EXP)
       list(KEY, FROM, TO)
     end
   end

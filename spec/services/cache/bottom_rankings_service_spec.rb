@@ -12,6 +12,7 @@ RSpec.describe(Cache::BottomRankingsService, type: :service) do
   end
 
   let(:key) { Cache::BottomRankingsService::KEY }
+  let(:exp) { Cache::BottomRankingsService::EXP }
   let(:from) { Cache::BottomRankingsService::FROM }
   let(:to) { Cache::BottomRankingsService::TO }
 
@@ -28,6 +29,7 @@ RSpec.describe(Cache::BottomRankingsService, type: :service) do
 
       context 'should have constants' do
         it { expect(key).to eq('ranking_list') }
+        it { expect(exp).to eq(3600) }
         it { expect(from).to eq(16) }
         it { expect(to).to eq(19) }
       end

@@ -3,13 +3,14 @@
 module Cache
   class NextMatchesService < Cache::Base::ListService
     KEY = 'next_matches_list'
+    EXP = 3600
 
     def call
       res = list(KEY, FROM, TO)
 
       return res unless res.empty?
 
-      load_resources(KEY)
+      load_resources(KEY, EXP)
       list(KEY, FROM, TO)
     end
 
