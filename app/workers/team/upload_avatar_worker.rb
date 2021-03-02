@@ -12,7 +12,7 @@ class Team
 
       team.avatar.attach(
         io: url.open,
-        filename: "avatar_#{team.name}",
+        filename: "avatar_#{team.name}".downcase,
         content_type: 'image/jpg'
       )
     end
