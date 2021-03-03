@@ -36,5 +36,4 @@ test:
   database: chute_brasileirao_test
 
 production:
-  adapter: postgresql
-  database: <%= ENV['POSTGRES_DB'] %>
+  <<: *default
