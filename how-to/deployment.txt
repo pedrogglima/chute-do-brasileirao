@@ -18,8 +18,8 @@ No staging adicionamos Nginx como reverse proxy e rodamos a aplicação em ambie
   Obs. pedrogglima/chute-do-brasileirao:web_stg_v2.0 se refere a conta do dockerhub e a tag da imagem, respectivamente.
 
   - Enviar imagem para o dockerhub
-    -> docker push pedrogglima/chute-do-brasileirao:app_stg_v2.1
-    -> docker push pedrogglima/chute-do-brasileirao:web_stg_v2.1
+    -> docker push pedrogglima/chute-do-brasileirao:app_1.0.0_stg_v1.0.0
+    -> docker push pedrogglima/chute-do-brasileirao:web_1.0.0_stg_v1.0.0
 
   - criar/iniciar com docker-machine o container contendo virtualbox, no qual será usada como host para o nosso app.
     - docker-machine ls (mostrar as VM já criadas e seus status)
