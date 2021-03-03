@@ -1,0 +1,11 @@
+Digital Ocean
+
+P.s the engine-install-url fix the problem https://gitlab.com/gitlab-org/ci-cd/docker-machine/-/issues/41
+
+P.s Para criar um droplet em um projeto especifico: alterar no panel do DO, selecione o projeto desejado e va em settings, entao marque como projeto default, assim todos os projetos criados sem destino serao criados no projeto defautl.
+
+docker-machine create --driver digitalocean \
+--engine-install-url "https://releases.rancher.com/install-docker/19.03.9.sh" \
+--digitalocean-access-token $DIGITAL_OCEAN_TOKEN \
+--digitalocean-region ams3 \
+vm-custom-name
