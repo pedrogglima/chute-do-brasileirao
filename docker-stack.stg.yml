@@ -1,0 +1,101 @@
+version: "3"
+
+services:
+  app:
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_stg_v1.0.3
+    env_file:
+      - .env/staging
+    depends_on:
+      - database
+    volumes:
+      - local_storage:/var/www/app/storage
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 60s
+
+  web:
+    image: pedrogglima/chute-do-brasileirao:web_1.0.0_stg_v1.0.0
+    env_file:
+      - .env/staging
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ssl_setup:/etc/letsencrypt
+      - ssl_certificate:/usr/share/nginx/certificates
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 60s
+
+  sidekiq:
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_stg_v1.0.3
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    env_file:
+      - .env/staging
+    depends_on:
+      - redis_cache
+    volumes:
+      - local_storage:/var/www/app/storage
+    deploy:
+      resources:
+        limits:
+          memory: 192M
+      restart_policy:
+        condition: on-failure
+        delay: 1s
+        max_attempts: 5
+        window: 60s
+
+  redis_cache:
+    image: redis
+    volumes:
+      - redis_cache_data:/docker/redis-cache-data
+    deploy:
+      resources:
+        limits:
+          memory: 192M
+      restart_policy:
+        condition: on-failure
+        delay: 1s
+        max_attempts: 5
+        window: 60s
+
+  database:
+    image: postgres
+    env_file:
+      - .env/staging
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 1s
+        max_attempts: 5
+        window: 60s
+
+  db-migrator:
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_stg_v1.0.3
+    depends_on:
+      - database
+    command: ["bin/rails", "db:reset"]
+    env_file:
+      - .env/staging
+    deploy:
+      restart_policy:
+        condition: none
+
+volumes:
+  db_data:
+  gem_cache_app:
+  redis_cache_data:
+  local_storage:
+  ssl_setup:
+  ssl_certificate:
