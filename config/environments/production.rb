@@ -5,6 +5,8 @@ require 'active_support/core_ext/integer/time'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.secret_key_base = ENV['SECRET_KEY_BASE']
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -20,11 +22,15 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+
+  if ENV['RAILS_SERVE_STATIC_FILES'].present? &&
+     ENV['RAILS_SERVER_STATIC_FILES'] == 'true'
+    config.public_file_server.enabled = true
+  end
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -40,7 +46,14 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = if ENV['S3_STORAGE'].present? &&
+                                     ENV['S3_STORAGE'] == 'true'
+                                    :amazon
+                                  else
+                                    :local
+                                  end
+
+  config.active_storage.queue = :default
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -49,20 +62,19 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
-
-  # Include generic and useful information about system operation, but avoid logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
+  if ENV['RAILS_FORCE_SSL'].present? && ENV['RAILS_FORCE_SSL'] == 'true'
+    config.force_ssl = true
+  end
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  if ENV['REDIS_CACHE'].present?
+    config.cache_store = :redis_cache_store, { url: ENV['REDIS_CACHE'] }
+  end
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "restaurant_orders_production"
+  # config.active_job.queue_name_prefix = "chute-do-brasileirao-production"
+  config.active_job.queue_adapter = :sidekiq
 
   config.action_mailer.perform_caching = false
 
@@ -90,7 +102,18 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV['RAILS_LOG_TO_STDOUT'].present?
+  # Prepend all log lines with the following tags.
+  config.log_tags = [:request_id]
+
+  if ENV['RAILS_LOG_ONLY_INFO'].present? && ENV['RAILS_LOG_ONLY_INFO'] == 'true'
+    # Include generic and useful information about system operation, but avoid logging too much
+    # information to avoid inadvertent exposure of personally identifiable  information (PII).
+    config.log_level = :info
+  else
+    config.log_level = :debug
+  end
+
+  if ENV['RAILS_LOG_TO_STDOUT'].present? && ENV['RAILS_LOG_TO_STDOUT'] == 'true'
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
