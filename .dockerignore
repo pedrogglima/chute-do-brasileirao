@@ -23,6 +23,9 @@ log/*
 # storage
 /storage/*
 
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
 # pack-test
 /public/packs-test
 
