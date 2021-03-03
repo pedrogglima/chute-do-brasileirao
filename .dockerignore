@@ -1,13 +1,30 @@
+# Env variables
+.env
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
 # Git
 .git
 .gitignore
 
 # Logs
 log/*
+!/log/.keep
 .byebug_history
 
 # Temp files
-tmp/*
+/tmp/*
+/tmp/pids/*              
+!/tmp/.keep
+!/tmp/pids               
+!/tmp/pids/.keep  
+
+# storage
+/storage/*
+
+# pack-test
+/public/packs-test
 
 # Editor temp files
 *.swp
