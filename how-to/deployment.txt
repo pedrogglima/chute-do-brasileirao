@@ -1,0 +1,48 @@
+
+O deployment do app consistue em 2 partes: staging & production
+
+No staging adicionamos Nginx como reverse proxy e rodamos a aplicação em ambiente de produção. Os seguintes passos são requeridos na ordem dada:
+
+  - Fazer alterações antes de criar a imagem: 
+    - ajustar configurações que achar necessário em "config/enviroments/production"
+    - deletar e criar compilação estática dos arquivos em public/assets por meio dos comandos: 
+    *** env-var CDN=true & CDN_URL=... must be set at '.env/development/env'
+    
+      - docker-compose run --rm app bin/rails RAILS_ENV=production CDN=true assets:clobber
+      - docker-compose exec app bin/rails RAILS_ENV=production CDN=true assets:precompile
+
+  - Criar as imagens localmente com o comando: 
+    -> docker build -f ./docker/staging/app/Dockerfile -t pedrogglima/chute-do-brasileirao:app_1.0.0_stg_v1.0.0 .
+    -> docker build -f ./docker/staging/web/Dockerfile -t pedrogglima/chute-do-brasileirao:web_1.0.0_stg_v1.0.0 .
+
+  Obs. pedrogglima/chute-do-brasileirao:web_stg_v2.0 se refere a conta do dockerhub e a tag da imagem, respectivamente.
+
+  - Enviar imagem para o dockerhub
+    -> docker push pedrogglima/chute-do-brasileirao:app_stg_v2.1
+    -> docker push pedrogglima/chute-do-brasileirao:web_stg_v2.1
+
+  - criar/iniciar com docker-machine o container contendo virtualbox, no qual será usada como host para o nosso app.
+    - docker-machine ls (mostrar as VM já criadas e seus status)
+    - ver no livro como se cria uma nova.
+
+  - conectar-se ao container, via terminal, pelo comando "eval $(docker-machine env nome-do-host-virtual)"
+  
+  - Atualizar docker-stack.yml para utilizar as .envs e as configurações de staging em docker/staging/app & docker/staging/web
+
+  - No terminal conectado, obter as imagens do app em dockhub por meio do arquivo docker-stack.yml: docker stack deploy -c docker-stack.yml chute-do-brasileirao --with-registry-auth
+
+  - Após fazer o deploy do app na VM, podemos utilizar dos comandos: 
+    - docker services ls
+    - docker service logs nome-do-service
+    - docker exec nome-do-servico commando 
+      - conecta no rails console 
+        - docker exec -it chute-do-brasileirao.app.j2ipvajlqts bin/rails c 
+          - Útil para criar/atualizar usuários
+          - Verificar informações do Banco
+
+      - conecta no VM do web e mostra as pastas criadas no container
+        - docker exec chute-do-brasileirao.web.j2ipvajlqts7un ls
+          - Útil para verificar se algum arquivo deixou de ser atualizado ou salvo na imagem
+
+
+Na produção seguimos os mesmo passos, mas com as configurações de imagem e docker-stack.yml setados para Produção. Conectados em servidores pagos (ver livro pra deploy em DO)

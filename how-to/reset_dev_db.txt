@@ -1,0 +1,7 @@
+# Para rodar essas seeds, nao pode haver a execução de sidekiq workers durante a execucacao das seeds.
+# Portanto, comentar os seguintes callbacks (after_commited) e validacoes
+
+# * 
+# * 
+
+# trocar :sidekiq por :inline em config/initializer/development

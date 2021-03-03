@@ -1,0 +1,32 @@
+# NPM
+npm install --save-dev webpack-bundle-analyzer
+
+
+
+### Gerar o arquivo stats.json para o webpack-analyzer
+
+docker-compose run --rm/exec app node_modules/.bin/webpack --config config/webpack/production.js --profile --json > stats.json
+
+
+
+### Utilize o webpack-analyzer no arquivo gerado (stats.json) para gerar o output report.html 
+
+docker-compose run --rm/exec app node_modules/.bin/webpack-bundle-analyzer -m static stats.json
+
+
+
+### VISUALIZAR report.html e, depois de visualizado, transferir stats.json para public/packs folder
+
+
+
+docker-compose run --rm/exec app node_modules/.bin/webpack-bundle-analyzer -m static public/packs/stats.json
+
+### VISUALIZAR report.html outra vez, pois o primeiro mostra o resultado obtido apenas do arquivo stats.json gerado pelo webpack, o segundo mostra o resultado analizando os pacotes compilados e gerados pelo webpack em public/packs. Sao duas analizes diferentes. 
+
+
+
+
+
+
+
+

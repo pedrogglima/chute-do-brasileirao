@@ -1,0 +1,15 @@
+Observação: se utilizar subdominios e recaptchers em densenvolvimento local (dev ou staging), utilize do nome do dominio/subdominio do site (por meio da configuração em etc/hosts), porque algumas funções (como as citadas a cima) são configuradas/cadastradas para funcionarem com o nome do dominio.
+
+# sudo mousepad /etc/hosts
+
+127.0.0.1	glconsultoria.acessoeditais.com.br
+127.0.0.1	glconsultoria.administradoreditais.com.br
+127.0.0.1	gerente.administradoreditais.com.br
+
+#127.0.0.1	localhost
+127.0.1.1	pedro-Z370M
+
+# For staging env.
+#192.168.99.100  glconsultoria.acessoeditais.com.br
+#192.168.99.100  glconsultoria.administradoreditais.com.br
+#192.168.99.100  gerente.administradoreditais.com.br
