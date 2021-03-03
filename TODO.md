@@ -13,6 +13,8 @@
 
 ## Later
 
+- remover user#registration, only permit auth through omniauth
+
 - update scrap_page/cbf to add championship year to each sub entity (ranking, rounds, matches), then update services parse/create_or_update to query championship according to the championship year passed through each entity. This way, we will be able to add some old championships
 
 - add some form of rescue for cases of missing team avatar
