@@ -6,6 +6,9 @@ require_relative '../initializers/log_formatter'
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # For middleware ActionDispatch::HostAuthorization - whitelist hosts to prevent Host header attacks.
+  config.hosts << 'chutedobrasileirao.com.br'
+
   # Custom loger formatter - less active storage verbose
 
   config.log_tags = [:uuid]
