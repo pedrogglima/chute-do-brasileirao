@@ -1,0 +1,5 @@
+For each s3 bucket or cloudfront we need to:
+
+- On IAM create policies: for access s3 and cloudfront
+- Add these policies to a group
+- Create a user, add this user to a group, than get the AWS_KEY e AWS_SECRET_KEY
