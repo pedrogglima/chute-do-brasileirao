@@ -397,6 +397,19 @@ main {
       }
     }
   }
+
+  // stimulus-carousel
+  .swiper-container {
+    .spinner-border-wrapper {
+      text-align: center;
+      margin-top: -1rem;
+
+      .spinner-small {
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
 }
 
 footer {
