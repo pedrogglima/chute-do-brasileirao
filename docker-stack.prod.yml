@@ -47,7 +47,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 192M
+          memory: 32M
       restart_policy:
         condition: on-failure
         delay: 1s
@@ -61,7 +61,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 192M
+          memory: 256M
       restart_policy:
         condition: on-failure
         delay: 1s
