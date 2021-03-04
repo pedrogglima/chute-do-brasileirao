@@ -44,6 +44,9 @@ gem 'omniauth-twitter', '~> 1.4'
 # Needed for Oauth2
 gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
 
+# S3 Buckets
+gem 'aws-sdk-s3', '~> 1.88', '>= 1.88.1'
+
 gem('haml')
 
 # Auth with JWT
