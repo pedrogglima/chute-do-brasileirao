@@ -45,9 +45,6 @@ services:
     volumes:
       - local_storage:/var/www/app/storage
     deploy:
-      resources:
-        limits:
-          memory: 32M
       restart_policy:
         condition: on-failure
         delay: 1s
