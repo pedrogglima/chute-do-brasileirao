@@ -2,13 +2,11 @@ version: "3"
 
 services:
   app:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.0
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
     env_file:
       - .env/production
     depends_on:
       - database
-    volumes:
-      - local_storage:/var/www/app/storage
     deploy:
       restart_policy:
         condition: on-failure
@@ -17,7 +15,7 @@ services:
         window: 60s
 
   web:
-    image: pedrogglima/chute-do-brasileirao:web_1.0.0_prod_v1.0.0
+    image: pedrogglima/chute-do-brasileirao:web_1.0.0_prod_v1.0.1
     env_file:
       - .env/production
     depends_on:
@@ -36,14 +34,12 @@ services:
         window: 60s
 
   sidekiq:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.0
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
     command: bundle exec sidekiq -C config/sidekiq.yml
     env_file:
       - .env/production
     depends_on:
       - redis_cache
-    volumes:
-      - local_storage:/var/www/app/storage
     deploy:
       restart_policy:
         condition: on-failure
@@ -66,7 +62,7 @@ services:
         window: 60s
 
   database:
-    image: postgresql
+    image: postgres
     env_file:
       - .env/production
     volumes:
@@ -79,7 +75,7 @@ services:
         window: 60s
 
   db-migrator:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.0
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
     depends_on:
       - database
     command: ["bin/rails", "db:reset"]
@@ -93,6 +89,5 @@ volumes:
   db_data:
   gem_cache_app:
   redis_cache_data:
-  local_storage:
   ssl_setup:
   ssl_certificate:
