@@ -16,6 +16,56 @@ class Slides {
   }
 }
 
+class Dataset {
+  constructor(dataset) {
+    this.dataset = dataset;
+  }
+
+  get url() {
+    return this.dataset.url;
+  }
+
+  get filled() {
+    return this.dataset.filled;
+  }
+
+  set filled(val) {
+    this.dataset.filled = val;
+  }
+
+  get fetching() {
+    return this.dataset.fetching;
+  }
+
+  set fetching(val) {
+    this.dataset.fetching = val;
+  }
+
+  get size() {
+    return parseInt(this.dataset.size);
+  }
+
+  set size(val) {
+    this.dataset.size = parseInt(val);
+  }
+
+  get page() {
+    return parseInt(this.dataset.page);
+  }
+
+  set page(val) {
+    this.dataset.page = parseInt(val);
+  }
+
+  get last() {
+    return parseInt(this.dataset.last);
+  }
+
+  set last(val) {
+    this.dataset.last = parseInt(val);
+  }
+}
+
 class Pagination {
   constructor(pagination) {
     this.pagination = pagination;
@@ -47,12 +97,12 @@ class Swiper {
     return new Pagination(this.swiper.pagination);
   }
 
-  get element() {
-    return this.swiper.el;
+  get dataset() {
+    return new Dataset(this.swiper.el.dataset);
   }
 
-  get dataset() {
-    return this.swiper.el.dataset;
+  get element() {
+    return this.swiper.el;
   }
 
   get currentIndex() {

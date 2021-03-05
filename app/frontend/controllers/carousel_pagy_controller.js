@@ -20,7 +20,9 @@ const Swiper = require("../lib/carousel_pagy.js");
     - url is used to fetch data
     - filled is used to check if all pages were loaded. 
     - fetchting is used to control the state of the loading bar. 
-    - size is used to calculate if should or should not fetch more pagy. This value must be equal to the page size fetched.
+    - size is used to calculate if should or should not fetch more pagy. This 
+    value must be equal to the page size fetched.
+    - last is the last page number
 */
 
 export default class extends Carousel {
@@ -30,12 +32,21 @@ export default class extends Carousel {
     super.connect();
     const self = this;
 
-    self.initPaginate(self, 7);
+    self.initPaginate(self, 10);
     self.initLoading(self);
 
     const dataset = self.swiper.el.dataset;
     // requires that arguments be defined
-    if (!(dataset.url && dataset.filled && dataset.fetching && dataset.size)) {
+    if (
+      !(
+        dataset.url &&
+        dataset.filled &&
+        dataset.fetching &&
+        dataset.size &&
+        dataset.page &&
+        dataset.last
+      )
+    ) {
       self.swiper.destroy();
       console.error("missing arguments on carousel-pagy");
     } else {
@@ -45,10 +56,11 @@ export default class extends Carousel {
 
   /* Add async function on the event activeIndexChange: each item swaping on the carousel trigger the event.
      The func only fetches more pages in the following cases
-      - if the first page is equal or greater than the (server) pagy size
+      - if the state filled is false 
       - if the state fetching is false
-      - if the state filled is false
-      - if the remains slides (after some swipings) are greater than the threshold  
+      - if page number is lesser or equal than the last page number  
+      - if (after some swipings) the number of remains slides are greater than the threshold  
+      
   */
   initPaginate(self, threshold) {
     self.swiper.on("activeIndexChange", function (e) {
@@ -56,10 +68,11 @@ export default class extends Carousel {
       const slides = swiper.slides;
       const dataset = swiper.dataset;
 
+      // don't fetch pages if
       if (
         dataset.filled == "true" ||
         dataset.fetching == "true" ||
-        slides.length < dataset.size
+        dataset.page >= dataset.last
       )
         return;
 
@@ -84,9 +97,11 @@ export default class extends Carousel {
 
   fetchPage(self, swiper) {
     const dataset = swiper.dataset;
+    const page = dataset.page + 1;
+    const url = dataset.url + "?page=" + page;
     dataset.fetching = "true";
 
-    fetch(dataset.url)
+    fetch(url)
       .then(handlerErrorXhr)
       .then((html) => {
         if (html == null || html.trim() === "") {
@@ -94,9 +109,10 @@ export default class extends Carousel {
         } else {
           swiper.appendSlide(html);
         }
+        dataset.page = page;
       })
       .catch((error) => {
-        errorMessage(error, swiper.element);
+        self.handleError(error, swiper);
       })
       .finally(() => {
         self.showPagination(self, swiper);
@@ -108,9 +124,9 @@ export default class extends Carousel {
   // Auxiliar methods
   // ================
 
-  errorMessage(error, element) {
+  handleError(error, swiper) {
     console.error(error);
-    element.innerHTML = errorMessage();
+    swiper.element.innerHTML = errorMessage();
   }
 
   showPagination(self, swiper) {
