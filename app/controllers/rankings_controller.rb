@@ -2,13 +2,18 @@
 
 class RankingsController < ApplicationController
   def index
-    @rankings =
-      Cache::RankingsService.call(param_current_championship)
+    rankings = RankingsCaches.new
+    rankings.set(resources) unless rankings.cached?
+    @rankings = rankings.get
   end
 
   private
 
-  def param_current_championship
-    { current_championship_id: current_championship.id }
+  def resources
+    Ranking.all
+           .team_with_avatar
+           .next_opponent_with_avatar
+           .where(championship_id: current_championship.id)
+           .order(posicao: :asc)
   end
 end
