@@ -87,6 +87,9 @@ Rails.application.routes.draw do
               as: 'rounds',
               only: [:index]
 
+    get 'proximas_partidas', to: 'matches#next_matches', as: 'next_matches'
+    get 'partidas_anteriores', to: 'matches#previous_matches', as: 'previous_matches'
+
     resources :partidas, as: 'matches', only: [] do
       resources :chutes,
                 controller: 'bets',
