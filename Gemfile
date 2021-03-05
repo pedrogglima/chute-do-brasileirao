@@ -43,7 +43,8 @@ gem 'omniauth', '~> 2.0', '>= 2.0.3'
 gem 'omniauth-twitter', '~> 1.4'
 # Needed for Oauth2
 gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
-
+# Pagination
+gem 'pagy', '~> 3.11'
 # S3 Buckets
 gem 'aws-sdk-s3', '~> 1.88', '>= 1.88.1'
 
