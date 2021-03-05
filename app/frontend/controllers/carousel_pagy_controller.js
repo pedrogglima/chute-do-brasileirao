@@ -3,7 +3,7 @@ import { handlerErrorXhr, errorMessage } from "../lib/request";
 const Swiper = require("../lib/carousel_pagy.js");
 
 /*
-  - This controller offers pagination for the stimulus-carousel package (using swiperjs behind). Here you will find the module for pagination, for loading the loading bar and the defaults settings for the swiperjs. 
+  - This controller offers pagination for the stimulus-carousel package (using swiperjs behind - https://swiperjs.com/swiper-api). Here you will find the module for pagination, for loading the loading bar and the defaults settings for the swiperjs. 
   - Each carousel has one istance of this controller.
   - The loading bar (spinner-border-wrapper, spinner-border, ...) html is not part of the swiperjs. It was added to work if this project. 
   - You can load the carousel on the following way:
