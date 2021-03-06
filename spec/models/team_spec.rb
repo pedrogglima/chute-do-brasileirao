@@ -46,4 +46,42 @@ RSpec.describe(Team, type: :model) do
       it { is_expected.to_not(be_valid) }
     end
   end
+
+  describe 'upload_avatar_from_url' do
+    subject { team }
+
+    context 'when avatar present' do
+      let(:original_avatar_file) { FilesTestHelper.team_avatar_path }
+
+      before do
+        # the avatar_url must point to local file instead of a real url.
+        team.avatar_url = original_avatar_file
+
+        # We duplicate the file to conserve the original for repetitive testing
+        # On the orignal code, the downloaded file is the one processed.
+        copied_file = "tmp/test/downloads/#{SecureRandom.uuid}"
+        FilesTestHelper.duplicate(original_avatar_file, copied_file)
+        # We need to mock #on_tmp to download from local instead of from net
+        expect(Download).to(
+          receive(:on_tmp)
+            .with(original_avatar_file)
+            .and_return(copied_file)
+        )
+
+        team.name = 'Grêmio Paranaense' # checking that filename change
+        team.avatar.purge # remove avatar before testing
+        team.upload_avatar_from_url
+      end
+
+      let(:filename_after_upload) { 'avatar_gremio_paranaense' }
+      let(:copied_file_size) { File.size(copied_file) }
+      let(:file_size_before_image_process) { File.size(original_avatar_file) }
+      let(:file_size_after_image_process) { 1360 }
+
+      it { expect(team.avatar.attached?).to(be(true)) }
+      it { expect(team.avatar.filename).to(eq(filename_after_upload)) }
+      it { expect(file_size_before_image_process).to(eq(4377)) }
+      it { expect(team.avatar.byte_size).to(eq(file_size_after_image_process)) }
+    end
+  end
 end
