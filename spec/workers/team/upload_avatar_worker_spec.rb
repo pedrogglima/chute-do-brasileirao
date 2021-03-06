@@ -15,10 +15,4 @@ RSpec.describe(Team::UploadAvatarWorker, type: :worker) do
       team
     end.to(change(Team::UploadAvatarWorker.jobs, :size).by(1))
   end
-
-  # This test guarantes that a raised exception will be catch here
-  it 'should perform task' do
-    Team::UploadAvatarWorker.new.perform(team.id)
-    expect(team.reload.avatar.attached?).to(be(true))
-  end
 end
