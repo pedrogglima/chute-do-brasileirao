@@ -10,7 +10,7 @@ module FilesTestHelper
   end
 
   def pgn_path
-    file_path(pgn_name)
+    file_path(pgn_name).to_s
   end
 
   def png
@@ -22,7 +22,7 @@ module FilesTestHelper
   end
 
   def jpg_path
-    file_path(jpg_name)
+    file_path(jpg_name).to_s
   end
 
   def jpg
@@ -34,7 +34,7 @@ module FilesTestHelper
   end
 
   def tiff_path
-    file_path(tiff_name)
+    file_path(tiff_name).to_s
   end
 
   def tiff
@@ -46,7 +46,7 @@ module FilesTestHelper
   end
 
   def pdf_path
-    file_path(pdf_name)
+    file_path(pdf_name).to_s
   end
 
   def pdf
@@ -58,11 +58,19 @@ module FilesTestHelper
   end
 
   def team_avatar_path
-    file_path(team_avatar_name)
+    file_path(team_avatar_name).to_s
   end
 
   def team_avatar_jpg
     upload(team_avatar_name, 'image/jpg')
+  end
+
+  def team_avatar_size
+    File.size(team_avatar_path)
+  end
+
+  def duplicate(source, destination)
+    FileUtils.cp(source, destination)
   end
 
   private
