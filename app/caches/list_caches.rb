@@ -22,8 +22,6 @@ class ListCaches < BaseCaches
   end
 
   def set(resources, expire = 3600)
-    p resources.inspect
-
     resources.each do |resource|
       redis.rpush(@key, to_json(resource))
     end
