@@ -446,6 +446,27 @@ footer {
   }
 }
 
+/* per media */
+@media (max-width: 576px) {
+  header {
+    /* hide top menu to not collid with logo */
+    .top-menu {
+      display: none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  header {
+    /* hide top menu to not collid with logo */
+    .bottom-menu {
+      .entrar {
+        display: none;
+      }
+    }
+  }
+}
+
 /* methods aux */
 
 .btn-google {

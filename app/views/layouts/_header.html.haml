@@ -1,10 +1,9 @@
 .border-style
   .container.inner-border-style
     %nav.navbar.nav-custom.navbar-custom.navbar-expand-lg.navbar-light
-      %a.navbar-brand{href: ""}
-        %i.fab.fa-cuttlefish.fa-2x 
-        %span.text hute do Brasileirão
-      %ul.ml-auto.navbar-nav
+      %a.navbar-brand(href=root_path)
+        = image_tag("logo.png")
+      %ul.ml-auto.navbar-nav.top-menu
         %li.nav-item.menu-item
           - if current_user
             %span
@@ -26,7 +25,7 @@
       }
         %span.navbar-toggler-icon
       .collapse.navbar-collapse#navbar
-        %ul.navbar-nav.mx-auto
+        %ul.navbar-nav.mx-auto.bottom-menu
           %li.nav-item.menu-item
             %span
               = link_to "Jogos de Hoje", root_path
@@ -36,6 +35,12 @@
           %li.nav-item.menu-item
             %span
               = link_to "Rodadas", rounds_path
+          %li.nav-item.menu-item.entrar
+            %span
+              = link_to new_user_session_path do
+                Entrar
+                %i.fas.fa-sign-in-alt.fa-1x 
+        
           - if current_user
             %li.nav-item.menu-item
               %span
