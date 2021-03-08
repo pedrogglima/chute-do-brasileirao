@@ -14,10 +14,10 @@ class PreviousMatchesCaches < ListPagyCaches
       id: match.id,
       date: match.date,
       id_match: match.id_match,
-      team_avatar: extract_url(match.team.avatar),
+      team_avatar: extract_blob_url(match.team.avatar),
       team_name: match.team.name,
       team_score: match.team_score,
-      opponent_avatar: extract_url(match.opponent.avatar),
+      opponent_avatar: extract_blob_url(match.opponent.avatar),
       opponent_name: match.opponent.name,
       opponent_score: match.opponent_score,
       place: match.place

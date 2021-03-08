@@ -11,8 +11,16 @@ class BaseCaches
   end
 
   # generate urls for Active Storage associations
-  def extract_url(resource)
-    rails_blob_path(resource, disposition: 'attachment', only_path: true)
+  def extract_blob_url(resource)
+    rails_blob_url(resource, disposition: 'attachment', only_path: true)
+  end
+
+  def extract_variant_url(resource)
+    rails_representation_url(
+      resource,
+      disposition: 'attachment',
+      only_path: true
+    )
   end
 
   private

@@ -13,7 +13,9 @@ class RankingsCaches < ListCaches
     {
       id: ranking.id,
       posicao: ranking.posicao,
-      team_avatar: extract_url(ranking.team.avatar),
+      team_avatar: extract_variant_url(
+        ranking.team.avatar.variant(resize_to_limit: [26, 26])
+      ),
       team_name: ranking.team.name,
       next_opponent_avatar:
         nil_or_next_opponent_avatar(ranking.next_opponent),
@@ -41,6 +43,10 @@ class RankingsCaches < ListCaches
   end
 
   def nil_or_next_opponent_avatar(next_opponent)
-    next_opponent ? extract_url(next_opponent.avatar) : nil
+    return unless next_opponent
+
+    extract_variant_url(
+      next_opponent.avatar.variant(resize_to_limit: [26, 26])
+    )
   end
 end
