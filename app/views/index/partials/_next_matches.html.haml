@@ -16,7 +16,8 @@
         .col-4
           .team
             .image
-              = image_tag(match[:team_avatar])
+              %img{"data-src-url" => match[:team_avatar], class: "swiper-lazy"}
+              .swiper-lazy-preloader.swiper-lazy-preloader-black.custom-spinner
             %span.name=format_short_name(match[:team_name])
         .col-4
           .time 
@@ -27,7 +28,8 @@
         .col-4
           .team
             .image
-              = image_tag(match[:opponent_avatar])
+              %img{"data-src-url" => match[:opponent_avatar], class: "swiper-lazy"}
+              .swiper-lazy-preloader.swiper-lazy-preloader-black.custom-spinner
             %span.name=format_short_name(match[:opponent_name])
     .place
       .row

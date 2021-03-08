@@ -11,7 +11,8 @@
         .col-4
           .team
             .image
-              = image_tag(match.team.avatar)
+              %img{"data-src-url" => url_for(match.team.avatar), class: "swiper-lazy"}
+              .swiper-lazy-preloader.swiper-lazy-preloader-black.custom-spinner
             %span.name=format_short_name(match.team.name)
         .col-4
           .score
@@ -22,7 +23,8 @@
         .col-4
           .team
             .image
-              = image_tag(match.opponent.avatar)
+              %img{"data-src-url" => url_for(match.opponent.avatar), class: "swiper-lazy"}
+              .swiper-lazy-preloader.swiper-lazy-preloader-black.custom-spinner
             %span.name=format_short_name(match.opponent.name)
     .place
       .row
