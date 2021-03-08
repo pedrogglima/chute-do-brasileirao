@@ -10,6 +10,6 @@
 
   - if devise_mapping.omniauthable? 
     - resource_class.omniauth_providers.each do |provider| 
-      = link_to "Entrar com #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), class: "link-block", method: :post
+      = link_to "Entrar com #{provider_name(provider)}", omniauth_authorize_path(resource_name, provider), class: "link-block", method: :post
     
 
