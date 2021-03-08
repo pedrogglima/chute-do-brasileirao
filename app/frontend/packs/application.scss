@@ -18,6 +18,12 @@ $text-gray: #999;
 $success-color: #28a745;
 $danger-color: #dc3545;
 
+$google-color: #db4437;
+
+html {
+  height: 100%; /* set footer on bottom for scrolled height */
+}
+
 body {
   min-height: 100%; /* set footer on bottom for scrolled height */
   padding: 0;
@@ -438,4 +444,12 @@ footer {
     text-align: center;
     color: $text-normal-color;
   }
+}
+
+/* methods aux */
+
+.btn-google {
+  color: white;
+  background-color: $google-color;
+  border-color: $google-color;
 }
