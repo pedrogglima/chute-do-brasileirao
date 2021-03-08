@@ -409,6 +409,12 @@ main {
         height: 1rem;
       }
     }
+
+    .custom-spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-left: -12px; // centralize spinner with text below
+    }
   }
 }
 
