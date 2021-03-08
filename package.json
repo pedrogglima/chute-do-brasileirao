@@ -13,7 +13,10 @@
     "expose-loader": "^0.7.5",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.0",
-    "stimulus-carousel": "^2.0.0"
+    "stimulus-carousel": "2.0.0"
+  },
+  "monkeyPatchesComments": {
+    "stimulus-carousel": "monkey-patch stimulus-carousel on version 2.0.0 - see app/frontend/controllers/carousel_pagy_controller.js for details"
   },
   "version": "0.1.0",
   "devDependencies": {
