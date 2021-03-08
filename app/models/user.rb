@@ -18,7 +18,7 @@ class User < ApplicationRecord
          :recoverable,
          :validatable, :trackable,
          :omniauthable,
-         omniauth_providers: %i[twitter]
+         omniauth_providers: %i[twitter google_oauth2]
 
   # scopes
   #
@@ -28,17 +28,20 @@ class User < ApplicationRecord
     where('reset_password_sent_at > ?', Time.now - 4 * 3600)
       .find_by!(reset_password_token: token)
   }
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.first_name = auth.info.name
-      # user.username = auth.info.nickname
-      # user.image = auth.info.image
 
-      # If you are using confirmable and the provider(s) you use validate emails
-      # user.skip_confirmation!
+  def self.from_omniauth(provider:, uid:, email:, name:)
+    user = find_or_create_by(email: email) do |new_user|
+      new_user.provider = provider
+      new_user.uid = uid
+      new_user.email = email
+      new_user.password = Devise.friendly_token[0, 20]
+      new_user.first_name = name
     end
+
+    # If user already exist the find_or_create_by block won't be call
+    user.update(provider: provider, uid: uid) unless user.uid == uid
+
+    user
   end
 
   # public methods

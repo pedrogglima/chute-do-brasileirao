@@ -7,14 +7,32 @@ module Users
 
     # You should also create an action method in this controller like this:
     def twitter
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      @user = User.from_omniauth(from_provider_params)
 
       if @user.persisted?
+        sign_out_all_scopes
+
         sign_in_and_redirect @user, event: :authentication
         flash_message_success
       else
         session['devise.twitter_data'] =
-          request.env['omniauth.auth'].except('extra')
+          auth.except('extra')
+        redirect_to new_user_registration_url
+      end
+    end
+
+    def google_oauth2
+      @user = User.from_omniauth(from_provider_params)
+
+      if @user.persisted?
+        sign_out_all_scopes
+
+        sign_in_and_redirect @user, event: :authentication
+
+        flash_message_success
+      else
+        session['devise.google_oauth2_data'] =
+          auth.except('extra')
         redirect_to new_user_registration_url
       end
     end
@@ -40,6 +58,19 @@ module Users
     # end
 
     private
+
+    def from_provider_params
+      @from_provider_params ||= {
+        provider: auth.provider,
+        uid: auth.uid,
+        email: auth.info.email,
+        name: auth.info.name
+      }
+    end
+
+    def auth
+      @auth ||= request.env['omniauth.auth']
+    end
 
     def flash_message_success
       return unless is_navigational_format?
