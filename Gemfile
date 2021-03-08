@@ -40,7 +40,9 @@ gem('image_processing', '~> 1.2')
 gem 'devise', github: 'heartcombo/devise', branch: 'master'
 # Auth with Twitter, etc
 gem 'omniauth', '~> 2.0', '>= 2.0.3'
+gem 'omniauth-google-oauth2', '~> 0.8.1'
 gem 'omniauth-twitter', '~> 1.4'
+
 # Needed for Oauth2
 gem 'omniauth-rails_csrf_protection', '~> 1.0.0'
 # Pagination
