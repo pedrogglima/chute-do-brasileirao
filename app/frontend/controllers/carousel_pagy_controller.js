@@ -3,12 +3,12 @@ import { handlerErrorXhr, errorMessage } from "../lib/request";
 const Swiper = require("../lib/carousel_pagy.js");
 
 /*
-  - This controller offers pagination for the stimulus-carousel package (using swiperjs behind - https://swiperjs.com/swiper-api). Here you will find the module for pagination, for loading the loading bar and the defaults settings for the swiperjs. 
+  - This controller offers pagination for the stimulus-carousel package (stimulus-carousel is just a wrap for Swiperjs https://swiperjs.com/swiper-api). Here you will find the modules for pagination, for loading the loading bar and the defaults settings for the swiperjs. 
   - Each carousel has one istance of this controller.
-  - The loading bar (spinner-border-wrapper, spinner-border, ...) html is not part of the swiperjs. It was added to work if this project. 
+  - The loading bar (spinner-border-wrapper, spinner-border, ...) html is not part of the Swiperjs. It was added to work if this project. 
   - You can load the carousel on the following way:
   
-  div.swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel-pagy", url: products_url, filled: "false", fetching: "false", size: 10 } }
+  div.swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel-pagy", url: products_url, filled: "false", fetching: "false", page: 1, size: 10, last: 10 } }
     div.swiper-wrapper
       = render partial: @products
         div.swiper-pagination
@@ -18,6 +18,7 @@ const Swiper = require("../lib/carousel_pagy.js");
 
   - The following datasets are required. 
     - url is used to fetch data
+    - page is the current page.
     - filled is used to check if all pages were loaded. 
     - fetchting is used to control the state of the loading bar. 
     - size is used to calculate if should or should not fetch more pagy. This 
@@ -54,7 +55,7 @@ export default class extends Carousel {
     }
   }
 
-  /* Add async function on the event activeIndexChange: each item swaping on the carousel trigger the event.
+  /* Add async function on the event activeIndexChange: for each item swapped this event is trigged.
      The func only fetches more pages in the following cases
       - if the state filled is false 
       - if the state fetching is false
@@ -83,7 +84,7 @@ export default class extends Carousel {
   }
 
   // this method is responsible for show or not the loading bar
-  // it uses the async event reachEnd, that happens when the last page is reached.
+  // it uses the async event reachEnd: happens when the last page is reached.
   initLoading(self) {
     self.swiper.on("reachEnd", function (e) {
       const swiper = new Swiper(e);
@@ -94,6 +95,10 @@ export default class extends Carousel {
       }
     });
   }
+
+  // ================
+  // Auxiliar methods
+  // ================
 
   fetchPage(self, swiper) {
     const dataset = swiper.dataset;
@@ -119,10 +124,6 @@ export default class extends Carousel {
         dataset.fetching = "false";
       });
   }
-
-  // ================
-  // Auxiliar methods
-  // ================
 
   handleError(error, swiper) {
     console.error(error);
