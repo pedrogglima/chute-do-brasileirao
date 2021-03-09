@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'base_caches'
+
 class ListCaches < BaseCaches
-  attr_reader :list, :from, :to
+  attr_reader :from, :to
 
   def initialize(key, from = 0, to = -1)
-    @key = "#{key}_list"
+    @key = key
     @from = from
     @to = to
 

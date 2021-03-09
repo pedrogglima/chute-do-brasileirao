@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-class ListPagyCaches < BaseCaches
-  attr_reader :pagy, :key_pagy
+require_relative 'base_caches'
 
-  def initialize(key = 'list', from = 0, to = -1)
-    @key = "#{key}_list"
-    @key_pagy = "#{key}_pagy"
+class ListPagyCaches < BaseCaches
+  attr_reader :from, :to
+  
+  def initialize(key, key_pagy, from, to)
+    @key = key
+    @key_pagy = key_pagy
     @from = from
     @to = to
 

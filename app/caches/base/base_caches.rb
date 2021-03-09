@@ -2,7 +2,6 @@
 
 class BaseCaches
   include Rails.application.routes.url_helpers
-  attr_reader :key
 
   protected
 
