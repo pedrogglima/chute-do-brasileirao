@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
+require_relative 'base/list_pagy_caches'
+
 class NextMatchesCaches < ListPagyCaches
-  def initialize(key = 'next_matches', from = 0, to = -1)
-    super
+  KEY = 'next_matches_list'
+  KEY_PAGY = 'next_matches_list_pagy'
+
+  def initialize(from = 0, to = -1)
+    super(KEY, KEY_PAGY, from, to)
   end
 
   private

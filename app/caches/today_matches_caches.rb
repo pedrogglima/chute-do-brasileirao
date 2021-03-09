@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require_relative 'base/list_caches'
+
 class TodayMatchesCaches < ListCaches
-  def initialize(key = 'today_matches', from = 0, to = -1)
-    super
+  KEY = 'today_matches_list'
+
+  def initialize(from = 0, to = -1)
+    super(KEY, from, to)
   end
 
   private
