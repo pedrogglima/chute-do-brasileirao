@@ -12,23 +12,17 @@ class User < ApplicationRecord
   validates :last_name, length: { maximum: 100 }
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :rememberable
+  # :confirmable, :lockable, :timeoutable, :rememberable, :recoverable
+
   devise :database_authenticatable,
          :registerable,
-         :recoverable,
-         :validatable, :trackable,
+         :validatable,
+         :trackable,
          :omniauthable,
          omniauth_providers: %i[twitter google_oauth2]
 
   # scopes
   #
-  # used on reset password functionality
-  #
-  scope :with_active_reset_password, lambda { |token|
-    where('reset_password_sent_at > ?', Time.now - 4 * 3600)
-      .find_by!(reset_password_token: token)
-  }
-
   def self.from_omniauth(provider:, uid:, email:, name:)
     user = find_or_create_by(email: email) do |new_user|
       new_user.provider = provider
