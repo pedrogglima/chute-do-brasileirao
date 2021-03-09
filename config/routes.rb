@@ -58,15 +58,11 @@ Rails.application.routes.draw do
                class_name: 'User',
                controllers: {
                  sessions: 'users/sessions',
-                 registrations: 'users/registrations',
-                 passwords: 'users/passwords',
                  omniauth_callbacks: 'users/omniauth_callbacks'
                },
                path_names: {
                  sign_in: 'entrar',
-                 sign_out: 'sair',
-                 sign_up: 'cadastrar-se',
-                 confirmation: 'verificacao-email'
+                 sign_out: 'sair'
                }
   end
 
