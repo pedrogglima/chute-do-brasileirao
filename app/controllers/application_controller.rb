@@ -4,13 +4,11 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   include Pundit
 
-  # rubocop:disable Layout/LineLength
-  #
-  # Define the championship instance used to query rankings, matches, etc, displayed to the user. In other words, users have only access to associations of the current championship.
-  #
-  # rubocop:enable Layout/LineLength
-  #
   def current_championship
     @current_championship = GlobalSetting.singleton.championship
+  end
+
+  def unauthorize
+    raise ActionController::RoutingError, 'Unauthorize access'
   end
 end
