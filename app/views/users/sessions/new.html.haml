@@ -1,23 +1,15 @@
 = flash_message_row
 
 .row
-  .col-md-8
+  .col-md-2
+  .col-md-4
     .card
       .card-header.header-custom
         %span Entrar
       .card-body
-        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-          = render "layouts/shared/error_messages", resource: resource
+        - resource_class.omniauth_providers.each do |provider|
+          = provider_links(omniauth_authorize_path(resource_name, provider), provider)
+  .col-md-2
 
-          .form-group
-            = f.label :email, "Email"
-            = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
-
-          .form-group
-            = f.label :password, "Senha"
-            = f.password_field :password, autocomplete: "current-password", class: "form-control"
-          
-          = f.submit "Entrar", class: "btn btn-success btn-sm btn-block" 
-          = render "users/shared/links"
   = sidebar
 
