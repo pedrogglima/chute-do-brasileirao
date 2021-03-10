@@ -2,8 +2,8 @@
 
 require_relative 'partials/list_caches'
 
-class RankingsCaches < ListCaches
-  KEY = 'rankings_list'
+class TopRankingsCaches < ListCaches
+  KEY = 'top_rankings_list'
 
   def initialize
     super(KEY)

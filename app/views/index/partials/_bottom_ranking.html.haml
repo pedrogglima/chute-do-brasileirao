@@ -1,0 +1,6 @@
+%li
+  %span.danger="#{ranking.posicao}º"
+  %span - 
+  %span=image_tag(extract_variant_url(ranking.team.avatar.variant(resize_to_limit: [26, 26])))
+  %span=ranking.team.name
+  %span.font-weight-bold="(#{ranking.pontos})"

@@ -11,7 +11,7 @@
         .col-4
           .team
             .image
-              = image_tag(match.team.avatar) 
+              = image_tag(extract_blob_url(match.team.avatar))
             %span.name=format_short_name(match.team.name)
         .col-4
           .time 
@@ -19,7 +19,7 @@
         .col-4
           .team
             .image
-              = image_tag(match.opponent.avatar)
+              = image_tag(extract_blob_url(match.opponent.avatar))
             %span.name=format_short_name(match.opponent.name)
     .place
       .row

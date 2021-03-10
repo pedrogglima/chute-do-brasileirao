@@ -6,7 +6,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render partial: 'index/partials/_next_matches',
+        render partial: 'index/partials/next_match',
                collection: @next_matches,
                as: :match,
                cached: true
@@ -19,7 +19,7 @@ class MatchesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        render partial: 'index/partials/_previous_matches',
+        render partial: 'index/partials/previous_match',
                collection: @previous_matches,
                as: :match,
                cached: true

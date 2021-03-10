@@ -23,6 +23,7 @@
               %th Recentes
               %th Próx
           %tbody
-            = render partial: 'rankings/partials/ranking', collection: @rankings, cached: false
+            = render_from_partials_cache(@rankings)
+          
       
   = sidebar

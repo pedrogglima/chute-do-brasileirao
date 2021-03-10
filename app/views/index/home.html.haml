@@ -13,7 +13,7 @@
       - else
         .component-today-matches
           .row
-            = render partial: 'index/partials/today_matches', collection: @today_matches, as: :match, cached: false
+            = render_from_partials_cache(@today_matches)
     
     %section.mb-5
       %h1.title Próximos Jogos
@@ -25,7 +25,7 @@
       - else        
         .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel-pagy", url: next_matches_url, filled: "false", fetching: "false", size: @next_matches_pagy[:items], page: @next_matches_pagy[:page], last: @next_matches_pagy[:last] } }
           .swiper-wrapper
-            = render partial: 'index/partials/next_matches', collection: @next_matches, as: :match, cached: false
+            = render_from_partials_cache(@next_matches)
           .swiper-pagination
           .spinner-border-wrapper.d-none{ data: { "carousel-pagy": { target: "loading" } } }
             .spinner-border.spinner-small
@@ -37,7 +37,7 @@
         
         .swiper-container.swiper-container-initialized.swiper-container-horizontal{ data: { controller: "carousel-pagy", url: previous_matches_url, filled: "false", fetching: "false", size: @previous_matches_pagy[:items], page: @previous_matches_pagy[:page], last: @previous_matches_pagy[:last] } }
           .swiper-wrapper
-            = render partial: 'index/partials/previous_matches', collection: @previous_matches, as: :match, cached: false
+            = render_from_partials_cache(@previous_matches)
           .swiper-pagination
           .spinner-border-wrapper.d-none{ data: { "carousel-pagy": { target: "loading" } } }
             .spinner-border.spinner-small

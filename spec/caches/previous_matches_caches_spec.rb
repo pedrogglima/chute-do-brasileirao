@@ -37,33 +37,42 @@ RSpec.describe(PreviousMatchesCaches, type: :cache) do
       it { expect(key_page).to eq('previous_matches_list_pagy') }
     end
 
-    describe 'initialize' do
-      subject { PreviousMatchesCaches.new }
-
-      context 'whithout argument' do
-        it { expect(subject.from).to eq(0) }
-        it { expect(subject.to).to eq(-1) }
+    describe 'set/get' do
+      let(:retrived_pagy) do
+        {
+          'count' => 150,
+          'items' => 15,
+          'last' => 10,
+          'page' => 1,
+          'pages' => 10
+        }
       end
-    end
-
-    describe 'cache' do
-      subject { PreviousMatchesCaches.new }
-
-      context 'when cache is not' do
-        # TODO
+      before do
+        create_match
+        subject.set(
+          query_previous_matches,
+          create_pagy,
+          'index/partials/previous_match',
+          'match'
+        )
       end
 
-      context 'when cache is empty' do
-        it { expect(subject.cached?).to eq(false) }
+      it { expect(subject.get).to be_an(Array) }
+      it { expect(subject.get.length).to eq(2) }
+      it 'expect first instance from return be pagy' do
+        pagy, resources = subject.get
+        expect(pagy).to eq(retrived_pagy)
       end
-    end
 
-    describe 'set' do
-      # TODO
-    end
+      it 'expect second instance from return to be array' do
+        pagy, resources = subject.get
+        expect(resources).to be_an(Array)
+      end
 
-    describe 'get' do
-      # TODO
+      it 'expect second instance from return to be array of resouces' do
+        pagy, resources = subject.get
+        expect(resources[0]).to be_an(String)
+      end
     end
   end
 end

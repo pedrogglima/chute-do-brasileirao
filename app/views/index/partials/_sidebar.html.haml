@@ -10,24 +10,12 @@
     \#Zona Libertadores
   .card-list
     %ul
-      - @top_rankings.each do |ranking|
-        %li
-          %span.success="#{ranking[:posicao]}º"
-          %span - 
-          %span=image_tag(ranking[:team_avatar])
-          %span=ranking[:team_name]
-          %span.font-weight-bold="(#{ranking[:pontos]})"
+      = render_from_partials_cache(@top_rankings)
 
 .card.sidebar
   .card-header.header-custom
     \#Zona Rebaixados
   .card-list
     %ul
-      - @bottom_rankings.each do |ranking|
-        %li
-          %span.danger="#{ranking[:posicao]}º"
-          %span - 
-          %span=image_tag(ranking[:team_avatar])
-          %span=ranking[:team_name]
-          %span.font-weight-bold="(#{ranking[:pontos]})"
+      = render_from_partials_cache(@bottom_rankings)
       

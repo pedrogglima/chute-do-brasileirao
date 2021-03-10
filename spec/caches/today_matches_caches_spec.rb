@@ -25,37 +25,7 @@ RSpec.describe(TodayMatchesCaches, type: :cache) do
       it { expect(key).to eq('today_matches_list') }
     end
 
-    describe 'initialize' do
-      subject { TodayMatchesCaches.new }
-
-      context 'whithout argument' do
-        it { expect(subject.from).to eq(0) }
-        it { expect(subject.to).to eq(-1) }
-      end
-    end
-
-    describe 'cache' do
-      subject { TodayMatchesCaches.new }
-
-      context 'when cache is not' do
-        before do
-          create_today_matches
-          subject.set(query_today_matches)
-        end
-
-        it { expect(subject.cached?).to eq(true) }
-      end
-
-      context 'when cache is empty' do
-        it { expect(subject.cached?).to eq(false) }
-      end
-    end
-
-    describe 'set' do
-      # TODO, compare with private method to_json
-    end
-
-    describe 'get' do
+    describe 'set/get' do
       let(:create_3_today_matches) do
         3.times do
           create(:match, date: Time.current, championship: current_championship)
@@ -64,12 +34,15 @@ RSpec.describe(TodayMatchesCaches, type: :cache) do
 
       before do
         create_3_today_matches
-        subject.set(query_today_matches)
+        subject.set(
+          query_today_matches,
+          'index/partials/today_match',
+          'match'
+        )
       end
       it { expect(subject.get).to be_an(Array) }
       it { expect(subject.get.length).to eq(3) }
-      it { expect(subject.get[0]).to be_an(Hash) }
-      it { expect(subject.get[0][:id]).to be_an(Integer) }
+      it { expect(subject.get[0]).to be_an(String) }
     end
   end
 end
