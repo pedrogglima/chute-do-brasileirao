@@ -11,12 +11,12 @@ class ListPagyCaches < BaseCaches
   end
 
   def get(from = 0, to = -1)
-    [fetch_pagy, fetch_list(from, to)]
+    [get_pagy, get_list(from, to)]
   end
 
   def set(resources, pagy, partial_path, partial_resource_as, expire = 3600)
-    load_list(resources, partial_path, partial_resource_as)
-    load_pagy(pagy)
+    set_list(resources, partial_path, partial_resource_as)
+    set_pagy(pagy)
 
     expire_resources(expire) if expire
   end
@@ -35,18 +35,18 @@ class ListPagyCaches < BaseCaches
 
   private
 
-  def fetch_list(from, to)
+  def get_list(from, to)
     redis.lrange(@key, from, to)
   end
 
-  def fetch_pagy
+  def get_pagy # rubocop:disable Naming/AccessorMethodName
     res = redis.get(@key_pagy)
     return unless res
 
     JSON.parse(res).with_indifferent_access
   end
 
-  def load_list(resources, partial_path, partial_resource_as = 'resources')
+  def set_list(resources, partial_path, partial_resource_as = 'resources')
     resources.each do |resource|
       redis.rpush(
         @key,
@@ -55,7 +55,7 @@ class ListPagyCaches < BaseCaches
     end
   end
 
-  def load_pagy(val)
+  def set_pagy(val) # rubocop:disable Naming/AccessorMethodName
     redis.set(@key_pagy, pagy_to_json(val))
   end
 
