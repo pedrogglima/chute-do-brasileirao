@@ -4,9 +4,6 @@ FactoryBot.define do
   factory :global_setting do
     association :championship
     singleton_guard { 0 }
-    cbf_url do
-      'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
-    end
     days_of_scraping_after_finished { 3 }
 
     initialize_with do

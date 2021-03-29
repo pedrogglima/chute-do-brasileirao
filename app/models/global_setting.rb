@@ -14,10 +14,6 @@ class GlobalSetting < ApplicationRecord
             numericality: { only_integer: true },
             inclusion: [0]
 
-  # e.g 'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
-  validates :cbf_url,
-            presence: true
-
   # period to scrap after championship finished
   validates :days_of_scraping_after_finished,
             presence: true,
@@ -28,12 +24,6 @@ class GlobalSetting < ApplicationRecord
   #
   def self.singleton
     first_or_create!(singleton_guard: 0)
-  end
-
-  # public methods
-  #
-  def current_championship_url
-    "#{cbf_url}/#{championship.year}"
   end
 
   def continuing_scraping?

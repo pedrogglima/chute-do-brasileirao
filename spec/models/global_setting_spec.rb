@@ -16,33 +16,11 @@ RSpec.describe(GlobalSetting, type: :model) do
     it { should validate_uniqueness_of(:singleton_guard) }
     it { should validate_numericality_of(:singleton_guard) }
     it { should validate_inclusion_of(:singleton_guard).in_array([0]) }
-
-    it { should validate_presence_of(:cbf_url) }
-
     it { should validate_presence_of(:days_of_scraping_after_finished) }
     it { should validate_numericality_of(:days_of_scraping_after_finished) }
     it do
       should validate_inclusion_of(:days_of_scraping_after_finished)
         .in_range(1..100)
-    end
-  end
-
-  describe 'current_championship_url' do
-    before do
-      setting.cbf_url =
-        'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
-
-      championship.year = 2020
-    end
-
-    it do
-      expect(
-        setting.current_championship_url
-      ).to(
-        eq(
-          'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a/2020'
-        )
-      )
     end
   end
 

@@ -13,7 +13,6 @@ namespace :scrap_cbf do
     p '-----------------------------------------------------'
   end
 
-  # update the app with new data extract from the GlobalSetting.cbf_url
   task update: :environment do
     cbf = ScrapCbf.new({ year: 2020 })
 

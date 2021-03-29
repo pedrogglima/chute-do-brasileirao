@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_210012) do
+ActiveRecord::Schema.define(version: 2021_03_29_211114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 2021_03_29_210012) do
     t.integer "singleton_guard", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "cbf_url"
     t.integer "days_of_scraping_after_finished", default: 3, null: false
     t.index ["championship_id"], name: "index_global_settings_on_championship_id"
     t.index ["singleton_guard"], name: "index_global_settings_on_singleton_guard", unique: true
