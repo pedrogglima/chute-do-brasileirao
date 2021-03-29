@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_173814) do
+ActiveRecord::Schema.define(version: 2021_03_29_203217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,19 +118,19 @@ ActiveRecord::Schema.define(version: 2021_03_02_173814) do
     t.bigint "championship_id", null: false
     t.bigint "team_id", null: false
     t.bigint "next_opponent_id"
-    t.integer "posicao", null: false
-    t.integer "pontos"
-    t.integer "jogos"
-    t.integer "vitorias"
-    t.integer "empates"
-    t.integer "derrotas"
-    t.integer "gols_pro"
-    t.integer "gols_contra"
-    t.integer "saldo_de_gols"
-    t.integer "cartoes_amarelos"
-    t.integer "cartoes_vermelhos"
-    t.integer "aproveitamento"
-    t.string "recentes"
+    t.integer "position", null: false
+    t.integer "points"
+    t.integer "played"
+    t.integer "won"
+    t.integer "drawn"
+    t.integer "lost"
+    t.integer "goals_for"
+    t.integer "goals_against"
+    t.integer "goal_difference"
+    t.integer "yellow_card"
+    t.integer "red_card"
+    t.integer "advantages"
+    t.string "form"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "[:championship_id, :position]_id"

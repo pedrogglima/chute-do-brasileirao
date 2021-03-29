@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 json.call(
   ranking,
   :id,
-  :posicao,
-  :pontos
+  :position,
+  :points
 )
 
 json.team do

@@ -1,18 +1,18 @@
 %tr
   %td
-    =style_posicao(ranking.posicao)
+    =style_position(ranking.position)
     %span -
     %span.team-avatar=image_tag(extract_variant_url(ranking.team.avatar.variant(resize_to_limit: [26, 26])))
-  %td.font-weight-bold=ranking.pontos
-  %td.d-none.d-lg-table-cell=ranking.jogos
-  %td.d-none.d-lg-table-cell=ranking.vitorias
-  %td.d-none.d-lg-table-cell=ranking.empates
-  %td.d-none.d-lg-table-cell=ranking.derrotas
-  %td.d-none.d-lg-table-cell=ranking.gols_pro
-  %td.d-none.d-lg-table-cell=ranking.gols_contra
-  %td.d-none.d-lg-table-cell=ranking.saldo_de_gols
-  %td.d-none.d-lg-table-cell=ranking.cartoes_amarelos
-  %td.d-none.d-lg-table-cell=ranking.cartoes_vermelhos
-  %td.d-none.d-lg-table-cell=ranking.aproveitamento
-  %td=style_recentes(ranking.recentes)
+  %td.font-weight-bold=ranking.points
+  %td.d-none.d-lg-table-cell=ranking.played
+  %td.d-none.d-lg-table-cell=ranking.won
+  %td.d-none.d-lg-table-cell=ranking.drawn
+  %td.d-none.d-lg-table-cell=ranking.lost
+  %td.d-none.d-lg-table-cell=ranking.goals_for
+  %td.d-none.d-lg-table-cell=ranking.goals_against
+  %td.d-none.d-lg-table-cell=ranking.goal_difference
+  %td.d-none.d-lg-table-cell=ranking.yellow_card
+  %td.d-none.d-lg-table-cell=ranking.red_card
+  %td.d-none.d-lg-table-cell=ranking.advantages
+  %td=style_form(ranking.form)
   %td.team-avatar=""

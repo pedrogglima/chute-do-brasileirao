@@ -153,7 +153,7 @@ class IndexController < ApplicationController
     Ranking.team_with_avatar
            .next_opponent_with_avatar
            .where(championship_id: current_championship.id)
-           .order(posicao: :asc)
+           .order(position: :asc)
            .limit(6)
   end
 
@@ -161,7 +161,7 @@ class IndexController < ApplicationController
     Ranking.team_with_avatar
            .next_opponent_with_avatar
            .where(championship_id: current_championship.id)
-           .order(posicao: :desc)
+           .order(position: :desc)
            .limit(4)
   end
 end

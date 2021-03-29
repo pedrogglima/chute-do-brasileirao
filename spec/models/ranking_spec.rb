@@ -12,21 +12,20 @@ RSpec.describe(Ranking, type: :model) do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:posicao) }
-    it { should validate_numericality_of(:posicao) }
-    it { should validate_inclusion_of(:posicao).in_range(1..20) }
-    it { should validate_presence_of(:pontos) }
-    it { should validate_presence_of(:jogos) }
-    it { should validate_presence_of(:vitorias) }
-    it { should validate_presence_of(:empates) }
-    it { should validate_presence_of(:derrotas) }
-    it { should validate_presence_of(:gols_pro) }
-    it { should validate_presence_of(:gols_contra) }
-    it { should validate_presence_of(:saldo_de_gols) }
-    it { should validate_presence_of(:cartoes_amarelos) }
-    it { should validate_presence_of(:cartoes_vermelhos) }
-    it { should validate_presence_of(:aproveitamento) }
-    it { should validate_presence_of(:recentes) }
+    it { should validate_presence_of(:position) }
+    it { should validate_numericality_of(:position) }
+    it { should validate_inclusion_of(:position).in_range(1..20) }
+    it { should validate_presence_of(:points) }
+    it { should validate_presence_of(:played) }
+    it { should validate_presence_of(:won) }
+    it { should validate_presence_of(:drawn) }
+    it { should validate_presence_of(:lost) }
+    it { should validate_presence_of(:goals_for) }
+    it { should validate_presence_of(:goals_against) }
+    it { should validate_presence_of(:goal_difference) }
+    it { should validate_presence_of(:yellow_card) }
+    it { should validate_presence_of(:red_card) }
+    it { should validate_presence_of(:advantages) }
   end
 
   describe 'attributes' do

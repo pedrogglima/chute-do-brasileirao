@@ -1,20 +1,21 @@
 # frozen_string_literal: true
+
 json.call(
   ranking,
   :id,
-  :posicao,
-  :pontos,
-  :jogos,
-  :vitorias,
-  :empates,
-  :derrotas,
-  :gols_pro,
-  :gols_contra,
-  :saldo_de_gols,
-  :cartoes_amarelos,
-  :cartoes_vermelhos,
-  :aproveitamento,
-  :recentes
+  :position,
+  :points,
+  :played,
+  :won,
+  :drawn,
+  :lost,
+  :goals_for,
+  :goals_against,
+  :goal_difference,
+  :yellow_card,
+  :red_card,
+  :advantages,
+  :form
 )
 
 json.team do

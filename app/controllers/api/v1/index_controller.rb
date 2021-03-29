@@ -44,14 +44,14 @@ module Api
         Ranking.team_with_avatar
                .top_rank
                .where(championship_id: current_championship.id)
-               .order(posicao: :asc)
+               .order(position: :asc)
       end
 
       def bottom_rankings_query
         Ranking.team_with_avatar
                .bottom_rank
                .where(championship_id: current_championship.id)
-               .order(posicao: :desc)
+               .order(position: :desc)
       end
     end
   end

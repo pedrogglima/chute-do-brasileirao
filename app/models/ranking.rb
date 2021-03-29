@@ -12,22 +12,21 @@ class Ranking < ApplicationRecord
 
   # validations
   #
-  validates :posicao,
+  validates :position,
             presence: true,
             numericality: { only_integer: true },
             inclusion: 1..20
-  validates :pontos, presence: true
-  validates :jogos, presence: true
-  validates :vitorias, presence: true
-  validates :empates, presence: true
-  validates :derrotas, presence: true
-  validates :gols_pro, presence: true
-  validates :gols_contra, presence: true
-  validates :saldo_de_gols, presence: true
-  validates :cartoes_amarelos, presence: true
-  validates :cartoes_vermelhos, presence: true
-  validates :aproveitamento, presence: true
-  validates :recentes, presence: true
+  validates :points, presence: true
+  validates :played, presence: true
+  validates :won, presence: true
+  validates :drawn, presence: true
+  validates :lost, presence: true
+  validates :goals_for, presence: true
+  validates :goals_against, presence: true
+  validates :goal_difference, presence: true
+  validates :yellow_card, presence: true
+  validates :red_card, presence: true
+  validates :advantages, presence: true
 
   # scopes
   #

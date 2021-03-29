@@ -8,7 +8,7 @@ module Api
                            .team_with_avatar
                            .next_opponent_with_avatar
                            .where(championship_id: current_championship.id)
-                           .order(posicao: :asc)
+                           .order(position: :asc)
       end
     end
   end

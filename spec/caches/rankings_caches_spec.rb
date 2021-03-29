@@ -17,7 +17,7 @@ RSpec.describe(RankingsCaches, type: :cache) do
            .team_with_avatar
            .next_opponent_with_avatar
            .where(championship_id: current_championship.id)
-           .order(posicao: :asc)
+           .order(position: :asc)
   end
 
   mock_redis_setup do
@@ -28,7 +28,7 @@ RSpec.describe(RankingsCaches, type: :cache) do
     describe 'set/get' do
       let(:create_rankings) do
         20.times do |i|
-          create(:ranking, posicao: (i + 1), championship: current_championship)
+          create(:ranking, position: (i + 1), championship: current_championship)
         end
       end
 

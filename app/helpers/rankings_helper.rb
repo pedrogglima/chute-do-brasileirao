@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
 module RankingsHelper
-  def style_posicao(posicao)
-    case posicao
+  def style_position(position)
+    case position
     when 1..6
-      span("#{posicao}º", 'badge badge-success')
+      span("#{position}º", 'badge badge-success')
     when 6..16
-      span("#{posicao}º", 'badge badge-secondary')
+      span("#{position}º", 'badge badge-secondary')
     when 17..20
-      span("#{posicao}º", 'badge badge-danger')
+      span("#{position}º", 'badge badge-danger')
     else
-      "#{posicao}º"
+      "#{position}º"
     end
   end
 
-  def style_recentes(string)
+  def style_form(string)
     output = ''
     string.each_char do |char|
       res = select_span(char)
