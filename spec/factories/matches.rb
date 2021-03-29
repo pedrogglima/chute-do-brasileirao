@@ -30,9 +30,10 @@ FactoryBot.define do
         format: :default
       )
     end
-    number_of_changes { 'Alterações: 1' }
+    updates { 'Alterações: 1' }
     team_score { 1 }
     opponent_score { 1 }
     place { 'Estadio - Cidadade - Estado' }
+    start_at { '18h00' }
   end
 end

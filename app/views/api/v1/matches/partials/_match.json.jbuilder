@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 json.call(
   match,
   :id,
@@ -7,7 +8,7 @@ json.call(
   :opponent_score,
   :date,
   :place,
-  :number_of_changes
+  :updates
 )
 
 json.championship do
