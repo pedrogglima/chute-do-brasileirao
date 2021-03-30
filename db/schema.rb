@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_211114) do
+ActiveRecord::Schema.define(version: 2021_03_30_194427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,9 @@ ActiveRecord::Schema.define(version: 2021_03_29_211114) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "year", null: false
-    t.bigint "[:league_id, :year]_id"
     t.integer "number_of_matches", default: 380, null: false
-    t.index ["[:league_id, :year]_id"], name: "index_championships_on_[:league_id, :year]_id"
     t.index ["league_id"], name: "index_championships_on_league_id"
+    t.index ["year"], name: "index_championships_on_year"
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -133,10 +132,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_211114) do
     t.string "form"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "[:championship_id, :position]_id"
-    t.bigint "[:championship_id, :id_match]_id"
-    t.index ["[:championship_id, :id_match]_id"], name: "index_rankings_on_[:championship_id, :id_match]_id"
-    t.index ["[:championship_id, :position]_id"], name: "index_rankings_on_[:championship_id, :position]_id"
+    t.index ["championship_id", "position"], name: "index_rankings_on_championship_id_and_position", unique: true
     t.index ["championship_id"], name: "index_rankings_on_championship_id"
     t.index ["next_opponent_id"], name: "index_rankings_on_next_opponent_id"
     t.index ["team_id"], name: "index_rankings_on_team_id"
@@ -147,8 +143,7 @@ ActiveRecord::Schema.define(version: 2021_03_29_211114) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "number", null: false
-    t.bigint "[:championship_id, :number]_id"
-    t.index ["[:championship_id, :number]_id"], name: "index_rounds_on_[:championship_id, :number]_id"
+    t.index ["championship_id", "number"], name: "index_rounds_on_championship_id_and_number", unique: true
     t.index ["championship_id"], name: "index_rounds_on_championship_id"
   end
 
