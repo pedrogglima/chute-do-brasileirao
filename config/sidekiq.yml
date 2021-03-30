@@ -6,6 +6,6 @@
 :schedule:
   scrap_cbf:
     cron: "0 0 * * * * America/Sao_Paulo"
-    class: ScraperWorker
+    class: ScrapCbfWorker
     queue: low
     enabled: true
