@@ -2,30 +2,32 @@
 
 require 'rails_helper'
 
-RSpec.describe(RankingsCaches, type: :cache) do
+RSpec.describe(RankingsCache, type: :cache) do
   let(:global_setting) { create(:global_setting) }
   let(:current_championship) { global_setting.championship }
 
-  let(:key) { RankingsCaches::KEY }
-
-  let(:create_ranking) do
-    create(:ranking, championship: current_championship)
-  end
-
-  let(:query_rankings) do
-    Ranking.all
-           .team_with_avatar
-           .next_opponent_with_avatar
-           .where(championship_id: current_championship.id)
-           .order(position: :asc)
-  end
+  subject { RankingsCache }
 
   mock_redis_setup do
     describe 'constants' do
+      let(:key) { RankingsCache::KEY }
+
       it { expect(key).to eq('rankings_list') }
     end
 
     describe 'set/get' do
+      let(:create_ranking) do
+        create(:ranking, championship: current_championship)
+      end
+
+      let(:query_rankings) do
+        Ranking.all
+               .team_with_avatar
+               .next_opponent_with_avatar
+               .where(championship_id: current_championship.id)
+               .order(position: :asc)
+      end
+
       let(:create_rankings) do
         20.times do |i|
           create(:ranking, position: (i + 1), championship: current_championship)

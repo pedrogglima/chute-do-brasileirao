@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../base/base_caches'
+require 'base_cache'
 
-class ListPagyCaches < BaseCaches
-  attr_reader :from, :to
+class ListPagyCache < BaseCache
+  attr_reader :key, :key_pagy
 
   def initialize(key, key_pagy)
     @key = key
@@ -21,6 +21,10 @@ class ListPagyCaches < BaseCaches
     expire_resources(expire) if expire
   end
 
+  def del
+    redis.del key, key_pagy
+  end
+
   protected
 
   def pagy_to_json(pagy)
@@ -36,11 +40,11 @@ class ListPagyCaches < BaseCaches
   private
 
   def get_list(from, to)
-    redis.lrange(@key, from, to)
+    redis.lrange(key, from, to)
   end
 
   def get_pagy # rubocop:disable Naming/AccessorMethodName
-    res = redis.get(@key_pagy)
+    res = redis.get(key_pagy)
     return unless res
 
     JSON.parse(res).with_indifferent_access
@@ -49,18 +53,18 @@ class ListPagyCaches < BaseCaches
   def set_list(resources, partial_path, partial_resource_as = 'resources')
     resources.each do |resource|
       redis.rpush(
-        @key,
+        key,
         stringify_partial(resource, partial_path, partial_resource_as)
       )
     end
   end
 
   def set_pagy(val) # rubocop:disable Naming/AccessorMethodName
-    redis.set(@key_pagy, pagy_to_json(val))
+    redis.set(key_pagy, pagy_to_json(val))
   end
 
   def expire_resources(expire)
-    redis.expire(@key, expire)
-    redis.expire(@key_pagy, expire)
+    redis.expire(key, expire)
+    redis.expire(key_pagy, expire)
   end
 end

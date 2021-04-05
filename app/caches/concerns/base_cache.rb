@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-class BaseCaches
+# Base class for classes that encapsulate Redis logic for caching
+#
+class BaseCache
   protected
 
   def stringify_partial(resource, partial, partial_resource_as)

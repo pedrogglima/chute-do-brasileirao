@@ -1,6 +1,29 @@
-# Caches
+# Cache
 
-- Classes found here are used to encapsulate logic for Redis DB calls.
-- The classes cache partials view
-- On the folder base and partials you will find the parents/base classes.
-- Every class (not include parent/base classes) must declare a constant with the key used on Redis. That means that each class can only have one instance (one key) saved on Redis. This make easier to control (retrieve, delete, etc) the data out of the class instance scope.
+Classes found on folder concerns offer encapsulation, with some adaptions, for Redis DB calls.
+Classes found on folder concerns that inherit from BaseCache must agree with module Cacheable.
+Classes outside concerns define the object that will be cached.
+
+Note: classes outside folder concerns must
+
+- declare constant KEY to allow only one instance exist on Redis DB.
+- extend concerns/Cacheable and implement the method cache, which must returns a object that respond to Cacheable API.
+
+Exemple:
+
+    require_relative 'concerns/list_cacheable'
+    require_relative 'concerns/handle_logic_for_redis_calls_cache'
+
+    class ObjectCache
+      # Offers a interface for the common methods #get, #set, #del
+      # expects #cache be implemented
+      extend ListCacheable
+
+      KEY = 'object_cache'
+
+      class << self
+        def cache
+          @cache ||= HandleLogicForRedisCalls.new(KEY)
+        end
+      end
+    end

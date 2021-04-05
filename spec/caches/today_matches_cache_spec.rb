@@ -2,30 +2,32 @@
 
 require 'rails_helper'
 
-RSpec.describe(TodayMatchesCaches, type: :cache) do
+RSpec.describe(TodayMatchesCache, type: :cache) do
   let(:global_setting) { create(:global_setting) }
   let(:current_championship) { global_setting.championship }
 
-  let(:key) { TodayMatchesCaches::KEY }
-
-  let(:create_today_matches) do
-    create(:match, date: Time.current, championship: current_championship)
-  end
-
-  let(:query_today_matches) do
-    Match.team_with_avatar
-         .opponent_with_avatar
-         .today_matches
-         .where(championship_id: current_championship.id)
-         .order(date: :asc)
-  end
+  subject { TodayMatchesCache }
 
   mock_redis_setup do
     describe 'constants' do
+      let(:key) { TodayMatchesCache::KEY }
+
       it { expect(key).to eq('today_matches_list') }
     end
 
     describe 'set/get' do
+      let(:create_today_matches) do
+        create(:match, date: Time.current, championship: current_championship)
+      end
+
+      let(:query_today_matches) do
+        Match.team_with_avatar
+             .opponent_with_avatar
+             .today_matches
+             .where(championship_id: current_championship.id)
+             .order(date: :asc)
+      end
+
       let(:create_3_today_matches) do
         3.times do
           create(:match, date: Time.current, championship: current_championship)
