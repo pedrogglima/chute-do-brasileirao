@@ -4,9 +4,14 @@ require 'scrap_cbf'
 require 'scrap_cbf_record'
 
 namespace :scrap_cbf do
-  # :environment load the dependencies Nokogiri, Open-uri and ScrapPage
+  namespace :config do
+    task validate!: :environment do
+      ScrapCbfRecord::Config.instance.validate!
+    end
+  end
+
   task :print do
-    cbf = ScrapCbf.new({ year: 2020 })
+    cbf = ScrapCbf.new({ year: 2021 })
 
     p '------------ CBF PRINTED PAGE IN JSON ---------------'
     cbf.print
@@ -14,7 +19,7 @@ namespace :scrap_cbf do
   end
 
   task update: :environment do
-    cbf = ScrapCbf.new({ year: 2020 })
+    cbf = ScrapCbf.new({ year: 2021 })
 
     ScrapCbfRecord::ActiveRecord.save(cbf.to_h)
   end
