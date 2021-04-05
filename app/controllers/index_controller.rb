@@ -24,99 +24,79 @@ class IndexController < ApplicationController
   private
 
   def load_from_cache_today_matches
-    today_matches = today_matches_cache.get
+    today_matches = TodayMatchesCache.get
 
     return today_matches unless today_matches.empty?
 
-    today_matches_cache.set(
+    TodayMatchesCache.set(
       today_matches_query,
       'index/partials/today_match',
       'match'
     )
 
-    today_matches_cache.get
+    TodayMatchesCache.get
   end
 
   def load_from_cache_next_matches
-    pagy, next_matches = next_matches_cache.get
+    pagy, next_matches = NextMatchesCache.get
 
     return [pagy, next_matches] unless pagy.nil? || next_matches.empty?
 
     pagy_resources, next_matches_resources = next_matches_query
 
-    next_matches_cache.set(
+    NextMatchesCache.set(
       next_matches_resources,
       pagy_resources,
       'index/partials/next_match',
       'match'
     )
 
-    next_matches_cache.get
+    NextMatchesCache.get
   end
 
   def load_from_cache_previous_matches
-    pagy, previous_matches = previous_matches_cache.get
+    pagy, previous_matches = PreviousMatchesCache.get
 
     return [pagy, previous_matches] unless pagy.nil? || previous_matches.empty?
 
     pagy_resources, previous_matches_resources = previous_matches_query
 
-    previous_matches_cache.set(
+    PreviousMatchesCache.set(
       previous_matches_resources,
       pagy_resources,
       'index/partials/previous_match',
       'match'
     )
 
-    previous_matches_cache.get
+    PreviousMatchesCache.get
   end
 
   def load_from_cache_top_rankings
-    top_rankings = top_rankings_cache.get
+    top_rankings = TopRankingsCache.get
 
     return top_rankings unless top_rankings.empty?
 
-    top_rankings_cache.set(
+    TopRankingsCache.set(
       top_rankings_query,
       'index/partials/top_ranking',
       'ranking'
     )
 
-    top_rankings_cache.get
+    TopRankingsCache.get
   end
 
   def load_from_cache_bottom_rankings
-    bottom_rankings = bottom_rankings_cache.get
+    bottom_rankings = BottomRankingsCache.get
 
     return bottom_rankings unless bottom_rankings.empty?
 
-    bottom_rankings_cache.set(
+    BottomRankingsCache.set_reverse(
       bottom_rankings_query,
       'index/partials/bottom_ranking',
       'ranking'
     )
 
-    bottom_rankings_cache.get
-  end
-
-  def today_matches_cache
-    @today_matches_cache ||= TodayMatchesCaches.new
-  end
-
-  def next_matches_cache
-    @next_matches_cache ||= NextMatchesCaches.new
-  end
-
-  def previous_matches_cache
-    @previous_matches_cache ||= PreviousMatchesCaches.new
-  end
-
-  def top_rankings_cache
-    @top_rankings_cache ||= TopRankingsCaches.new
-  end
-
-  def bottom_rankings_cache
-    @bottom_rankings_cache ||= BottomRankingsCaches.new
+    BottomRankingsCache.get
   end
 
   def today_matches_query

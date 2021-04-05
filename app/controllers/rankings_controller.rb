@@ -2,19 +2,17 @@
 
 class RankingsController < ApplicationController
   def index
-    @rankings_cache = RankingsCaches.new
-
-    @rankings = @rankings_cache.get
+    @rankings = RankingsCache.get
 
     return @rankings unless @rankings.empty?
 
-    @rankings_cache.set(
+    RankingsCache.set(
       resources,
       'rankings/partials/ranking',
       'ranking'
     )
 
-    @rankings = @rankings_cache.get
+    @rankings = RankingsCache.get
   end
 
   private
