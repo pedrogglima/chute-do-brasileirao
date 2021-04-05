@@ -10,6 +10,29 @@ GIT
       responders
       warden (~> 1.2.3)
 
+GIT
+  remote: https://github.com/pedrogglima/scrap-cbf-record.git
+  revision: 4e20b8c13e50dbeee5823e109bddea9339e6c72f
+  ref: 4e20b8c
+  branch: master
+  specs:
+    scrap_cbf_record (0.1.0)
+      activesupport (>= 5.0.0, <= 6.1.0)
+      json (~> 2.2, >= 2.2.0)
+      yaml (~> 0.1.1)
+
+GIT
+  remote: https://github.com/pedrogglima/scrap-cbf.git
+  revision: 5f20dd668319a8ef9b884fcae6b2862e56c94aae
+  ref: 5f20dd6
+  branch: master
+  specs:
+    scrap_cbf (0.1.0)
+      activesupport (>= 5.0.0, <= 6.1.0)
+      forwardable (~> 1.2.0)
+      json (~> 2.2, >= 2.2.0)
+      nokogiri (~> 1.5, >= 1.5.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -119,6 +142,7 @@ GEM
       ruby2_keywords
     faraday-net_http (1.0.1)
     ffi (1.14.2)
+    forwardable (1.2.0)
     fugit (1.4.2)
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
@@ -148,6 +172,7 @@ GEM
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
+    json (2.5.1)
     jwt (2.2.2)
     listen (3.4.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -368,6 +393,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yaml (0.1.1)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -410,6 +436,8 @@ DEPENDENCIES
   rspec-sidekiq (~> 3.1.0)
   rubocop
   sass-rails (>= 6)
+  scrap_cbf!
+  scrap_cbf_record!
   shoulda-matchers (~> 4.4.1)
   sidekiq (~> 6.0.7)
   sidekiq-scheduler (~> 3.0.1)

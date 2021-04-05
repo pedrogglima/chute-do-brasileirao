@@ -60,6 +60,19 @@ gem('pundit', '~> 2.1.0')
 # Reduces boot times through caching; required in config/boot.rb
 gem('bootsnap', '>= 1.4.4', require: false)
 
+gem(
+  'scrap_cbf',
+  github: 'pedrogglima/scrap-cbf',
+  branch: 'master',
+  ref: '5f20dd6'
+)
+gem(
+  'scrap_cbf_record',
+  github: 'pedrogglima/scrap-cbf-record',
+  branch: 'master',
+  ref: '4e20b8c'
+)
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
