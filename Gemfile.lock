@@ -10,29 +10,6 @@ GIT
       responders
       warden (~> 1.2.3)
 
-GIT
-  remote: https://github.com/pedrogglima/scrap-cbf-record.git
-  revision: 4e20b8c13e50dbeee5823e109bddea9339e6c72f
-  ref: 4e20b8c
-  branch: master
-  specs:
-    scrap_cbf_record (0.1.0)
-      activesupport (>= 5.0.0, <= 6.1.0)
-      json (~> 2.2, >= 2.2.0)
-      yaml (~> 0.1.1)
-
-GIT
-  remote: https://github.com/pedrogglima/scrap-cbf.git
-  revision: 5f20dd668319a8ef9b884fcae6b2862e56c94aae
-  ref: 5f20dd6
-  branch: master
-  specs:
-    scrap_cbf (0.1.0)
-      activesupport (>= 5.0.0, <= 6.1.0)
-      forwardable (~> 1.2.0)
-      json (~> 2.2, >= 2.2.0)
-      nokogiri (~> 1.5, >= 1.5.9)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -342,6 +319,15 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    scrap_cbf (0.1.0)
+      activesupport (>= 5.0.0, <= 6.1.0)
+      forwardable (~> 1.2.0)
+      json (~> 2.2, >= 2.2.0)
+      nokogiri (~> 1.5, >= 1.5.9)
+    scrap_cbf_record (0.1.0)
+      activesupport (>= 5.0.0, <= 6.1.0)
+      json (~> 2.2, >= 2.2.0)
+      yaml (~> 0.1.1)
     semantic_range (2.3.1)
     sexp_processor (4.15.2)
     shoulda-matchers (4.4.1)
@@ -436,8 +422,8 @@ DEPENDENCIES
   rspec-sidekiq (~> 3.1.0)
   rubocop
   sass-rails (>= 6)
-  scrap_cbf!
-  scrap_cbf_record!
+  scrap_cbf
+  scrap_cbf_record
   shoulda-matchers (~> 4.4.1)
   sidekiq (~> 6.0.7)
   sidekiq-scheduler (~> 3.0.1)
