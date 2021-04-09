@@ -63,7 +63,7 @@ I created a gem [ScrapCbf](https://github.com/pedrogglima/scrap-cbf) to encapsul
 
 ![Overview architecture](./images/overview_architecture.jpg "Overview architecture")
 
-As you can see on the image, we have two serves. On server A we build a monolith Ruby on Rails app where users can have access to html pages and the API. Still on server A, I'm using two databases: a RDS (Postgres DB) for saving the scrap data, and a no-sql, in-memory database (Redis DB) for caching the queries. I'm also using a background processing (Sidekiq) for two reason: first, for scheduling the scraping process and update the database with it; Second, for each new Team saved on the database I need to download and resize the team's image flag and, later, save them on the project's storage (Amazon S3).
+As you can see on the image, we have two serves. On server A we build a monolith Ruby on Rails app where users can have access to html pages and the API. Still on server A, I'm using two databases: a RDMS (Postgres) for saving the scrap data, and a no-sql, in-memory database (Redis) for caching the queries. I'm also using a background processing (Sidekiq) for two reason: first, for scheduling the scraping process and update the database with it; Second, for each new Team saved on the database I need to download and resize the team's image flag and, later, save them on the project's storage (Amazon S3).
 
 The server B is used only to scrap the CBF official page for data from time to time. I'm not using any database for server B, hence, after scraping and formatting the data, server B must publishes it to the Message broker queue (RabbitMQ). Server A, listening on the same queue, acknowledges and consumes the data, attempting to save the data on the relational database.
 
@@ -73,7 +73,7 @@ _Note: this is the architecture for the project [chute-do-brasileirao-rabbitmq](
 
 ### 3.3. Databases & the entity-relationship model
 
-The dataset doesn't change frequently, usually every 24 hours, and it is relative small: it shouldn't use more than 100kb of Redis DB's memory for one championship. Even if we saved 10 years of data (10 championships), we would still use a relative small size of memory (~ 1mb). So, if the project's data was only consisted of scraped data, and if we didn't care about analysing the relationship between entities (e.g how many championships team Z participated, or how many matches team Z already played with team Y), using only Redis DB to store data would be a good choice for the project.
+The dataset doesn't change frequently, usually every 24 hours, and it is relative small: it shouldn't use more than 100kb of Redis memory for one championship. Even if we saved 10 years of data (10 championships), we would still use a relative small size of memory (~ 1mb). So, if the project's data was only consisted of scraped data, and if we didn't care about analysing the relationship between entities (e.g how many championships team Z participated, or how many matches team Z already played with team Y), using only Redis to store data would be a good choice for the project.
 
 However, the project has others entries of data such as the ones added by the users, and these data have relations with the scraped data. Also, because of the nature of the app (analysing statistics of bets, winnings, etc), data consistency and a tool for querying data between relations is required by the project. Hence, we use a relational database to save the data and a no-sql, in memory database for performance reasons to solve the problem.
 
@@ -96,7 +96,7 @@ There aren't much to say here, the image says by itself. So I will only describe
 
 ### 3.3. Tools, Libraries and 3º Services
 
-- **Tools**: Ruby on Rails, StimulusJs, Bootstrap, Sidekiq, Nginx, Redis DB, Postgres DB, RabbitMQ, Docker, Swarm, Git.
+- **Tools**: Ruby on Rails, StimulusJs, Bootstrap, Sidekiq, Nginx, Redis, Postgres, RabbitMQ, Docker, Swarm, Git.
 
 - **Libraries**: (main gems) JWT, Devise, Omniauth-Twitter, Pundit, Haml, Faker, Rspec-rails, Shoulda-matchers, Factory_bot, etc.; (main packages) Bootstrap, Stimulus-carousel, Fontawesome.
 
