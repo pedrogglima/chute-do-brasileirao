@@ -29,7 +29,7 @@
 
 _Note: First of all, this is more a personal portfolio than a open source project._
 
-Chute do Brasileirão is a webpage where you can follow the Campeonato Brasileirio de Futebol rankings (also knonw as standings), next matches, previous matches, matches score and more. You can also make a guess on the score for the matches of the day.
+[Chute do Brasileirão](https://chutedobrasileirao.com.br/) is a webpage where you can follow the Campeonato Brasileirio de Futebol rankings (also knonw as standings), next matches, previous matches, matches score and more. You can also make a guess on the score for the matches of the day.
 
 The image below is the app's frontpage. In the main panel we can see informations about the championship's matches as such: today, next and previous matches, when and where they will happen, and the score from previous matches. On the sidebar we have information about the first six and the last four teams on the ranking.
 
