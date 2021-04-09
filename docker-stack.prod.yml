@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.3
     env_file:
       - .env/production
     depends_on:
@@ -15,7 +15,7 @@ services:
         window: 60s
 
   web:
-    image: pedrogglima/chute-do-brasileirao:web_1.0.0_prod_v1.0.1
+    image: pedrogglima/chute-do-brasileirao:web_1.0.0_prod_v1.0.2
     env_file:
       - .env/production
     depends_on:
@@ -34,7 +34,7 @@ services:
         window: 60s
 
   sidekiq:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.3
     command: bundle exec sidekiq -C config/sidekiq.yml
     env_file:
       - .env/production
@@ -75,7 +75,7 @@ services:
         window: 60s
 
   db-migrator:
-    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.1
+    image: pedrogglima/chute-do-brasileirao:app_1.0.0_prod_v1.0.3
     depends_on:
       - database
     command: ["bin/rails", "db:reset"]
