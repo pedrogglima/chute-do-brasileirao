@@ -8,12 +8,11 @@ league = League.create!(name: 'Campeonato Brasileiro', division: division)
 
 championship = Championship.create!(
   league: league,
-  year: 2020,
+  year: 2021,
   number_of_participants: 20
 )
 
 GlobalSetting.create!(
   singleton_guard: 0,
-  championship_id: championship.id,
-  cbf_url: 'https://www.cbf.com.br/futebol-brasileiro/competicoes/campeonato-brasileiro-serie-a'
+  championship_id: championship.id
 )

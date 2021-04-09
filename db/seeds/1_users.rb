@@ -6,5 +6,5 @@ User.create!(
   password_confirmation: '123456',
   first_name: 'John',
   last_name: 'Abramh',
-  admin: true
+  admin: false
 )
